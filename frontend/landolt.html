@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Optiplus — AI Vision Pre-Screen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --accent: #0ea5e9;
+      --bg: #f5f7fb;
+      --bg-card: #ffffff;
+      --bg-card-alt: #f8fafc;
+      --text: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --border-light: #f1f5f9;
+      --success: #16a34a;
+      --success-light: #22c55e;
+      --danger: #dc2626;
+      --danger-light: #ef4444;
+      --warning: #f59e0b;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.07);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --radius-xl: 18px;
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(ellipse at 20% 10%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(14, 165, 233, 0.03) 0%, transparent 50%);
+    }
+
+    /* ======== Layout ======== */
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      height: 56px;
+      flex-shrink: 0;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.2);
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 8px rgba(37, 99, 235, 0.15);
+      }
+
+      50% {
+        box-shadow: 0 0 18px rgba(37, 99, 235, 0.3);
+      }
+    }
+
+    .brand h1 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .brand p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-header {
+      padding: 7px 14px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-primary-sm {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+    }
+
+    .btn-primary-sm:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* Language Selector */
+    .lang-select {
+      padding: 7px 12px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: var(--bg-card-alt);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      padding-right: 28px;
+    }
+
+    .lang-select:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .lang-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .main {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      gap: 16px;
+      padding: 16px;
+    }
+
+    /* ======== Left Column ======== */
+    .left-col {
+      width: 32%;
+      min-width: 310px;
+      max-width: 410px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    /* Webcam */
+    .webcam-card {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .webcam-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+    }
+
+    .webcam-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(-1);
+      display: block;
+    }
+
+    .webcam-wrap canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .live-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.25;
+      }
+    }
+
+    .status-pill {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      font-size: 11px;
+      font-weight: 600;
+      color: #22c55e;
+    }
+
+    .status-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    /* Action Buttons */
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-action {
+      padding: 12px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #fff;
+      transition: all 0.2s;
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, var(--success), var(--success-light));
+      box-shadow: 0 3px 10px rgba(22, 163, 74, 0.25);
+    }
+
+    .btn-no {
+      background: linear-gradient(135deg, var(--danger), var(--danger-light));
+      box-shadow: 0 3px 10px rgba(220, 38, 38, 0.25);
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .btn-action:active {
+      transform: scale(0.97);
+    }
+
+    /* AI Assistant */
+    .assistant-panel {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+    }
+
+    .assistant-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .assistant-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .assistant-header-text h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .assistant-header-text p {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .assistant-status {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--success);
+    }
+
+    .assistant-status .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    .assistant-messages {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .assistant-messages::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .assistant-messages::-webkit-scrollbar-thumb {
+      background: rgba(37, 99, 235, 0.15);
+      border-radius: 10px;
+    }
+
+    .msg-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      animation: msgIn 0.35s ease-out both;
+    }
+
+    @keyframes msgIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .msg-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .msg-bubble {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 14px;
+      border-radius: 18px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      background: linear-gradient(135deg, #f0f5ff, #eef2ff);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    }
+
+    .empty-state {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    /* ======== Right Column ======== */
+    .right-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    /* Optotype */
+    .optotype-area {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .optotype-area::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center, rgba(37, 99, 235, 0.02) 0%, transparent 65%);
+    }
+
+    .optotype-area canvas {
+      position: relative;
+      z-index: 1;
+      max-width: 95%;
+      height: auto;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08));
+    }
+
+    .distance-overlay {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dist-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .dist-status .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: .8;
+    }
+
+    .dist-status.good {
+      background: var(--success);
+    }
+
+    .dist-status.close {
+      background: var(--warning);
+    }
+
+    .dist-status.far {
+      background: var(--danger);
+    }
+
+    .dist-cm {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .optotype-label {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .progress-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .progress-top span:first-child {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .progress-top span:last-child {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .progress-track {
+      height: 6px;
+      background: var(--border-light);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 10px;
+      position: relative;
+      transition: width 0.5s ease;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .stat-box {
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-light);
+      text-align: center;
+    }
+
+    .stat-box .label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .stat-box .value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Results Card */
+    .result-card {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+      z-index: 20;
+      border-radius: var(--radius-xl);
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(37, 99, 235, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 40px rgba(37, 99, 235, 0.06);
+      animation: slideUp 0.5s ease-out both;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .result-card h3 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .result-card h3 .check {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .result-text {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .result-text strong {
+      color: var(--text);
+    }
+
+    .rec-box {
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(14, 165, 233, 0.06);
+      border-left: 4px solid var(--accent);
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-result {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-result.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+    }
+
+    .btn-result.secondary {
+      background: var(--bg-card-alt);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-result:hover {
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    .footer {
+      flex-shrink: 0;
+      padding: 8px 20px;
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-light);
+      background: var(--bg-card);
+    }
+
+    /* Hidden util */
+    [hidden] {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">👁</div>
+        <div>
+          <h1>Optiplus</h1>
+          <p>Landolt C Vision Pre-Screen</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <select id="langSelect" class="lang-select">
+          <option value="en-IN">🇬🇧 English</option>
+          <option value="hi-IN">🇮🇳 हिन्दी</option>
+          <option value="te-IN">🇮🇳 తెలుగు</option>
+          <option value="ta-IN">🇮🇳 தமிழ்</option>
+          <option value="bn-IN">🇮🇳 বাংলা</option>
+          <option value="mr-IN">🇮🇳 मराठी</option>
+        </select>
+        <button id="restartBtn" class="btn-header btn-outline">↻ Restart</button>
+        <button id="downloadBtn" class="btn-header btn-primary-sm">📄 Report</button>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <div class="main">
+      <!-- Left Column -->
+      <div class="left-col">
+        <!-- Webcam -->
+        <div class="webcam-card">
+          <div class="webcam-wrap">
+            <video id="video" autoplay muted playsinline></video>
+            <canvas id="overlay"></canvas>
+            <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+            <div class="status-pill"><span class="dot"></span><span id="statusText">Initializing</span></div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-row">
+          <button id="yesBtn" class="btn-action btn-yes"><span>✓</span> Yes (Nod)</button>
+          <button id="noBtn" class="btn-action btn-no"><span>✗</span> No (Shake)</button>
+        </div>
+
+        <!-- AI Assistant -->
+        <div class="assistant-panel">
+          <div class="assistant-header">
+            <div class="assistant-avatar">🤖</div>
+            <div class="assistant-header-text">
+              <h3>AI Assistant</h3>
+              <p>Vision screening guide</p>
+            </div>
+            <div class="assistant-status"><span class="dot"></span>Active</div>
+          </div>
+          <div class="assistant-messages" id="messagesContainer">
+            <div class="empty-state" id="emptyState">Waiting for camera…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="right-col">
+        <!-- Optotype Display -->
+        <div class="optotype-area">
+          <div class="distance-overlay" id="distOverlay" hidden>
+            <div class="dist-status far" id="distStatus"><span class="dot"></span><span id="distLabel">Out of
+                Range</span></div>
+            <div class="dist-cm" id="distCm">— cm</div>
+          </div>
+          <canvas id="optotypeCanvas" width="800" height="320" aria-label="Optotype Display"></canvas>
+          <div class="optotype-label" id="optLabel">Preparing Assessment…</div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+          <div class="progress-card">
+            <div class="progress-top">
+              <span>Progress</span>
+              <span id="progressPct">0%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="progressFill" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="label">State</div>
+              <div class="value" id="stateText">Ready</div>
+            </div>
+            <div class="stat-box">
+              <div class="label">Line</div>
+              <div class="value"><span id="currentLine">—</span> / 8</div>
+            </div>
+            <div class="stat-box">
+              <div class="label">Attempt</div>
+              <div class="value" id="attemptText">—</div>
+            </div>
+            <div class="stat-box">
+              <div class="label">Countdown</div>
+              <div class="value" id="countdownText">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Card (hidden until test complete) -->
+        <div class="result-card" id="resultCard" hidden>
+          <h3><span class="check">✓</span> Assessment Complete</h3>
+          <div class="result-text" id="resultSummary"></div>
+          <div class="rec-box" id="recommendation"></div>
+          <div class="result-actions">
+            <button class="btn-result primary" id="dlResultBtn">📄 Download Report</button>
+            <button class="btn-result secondary" id="gotoResults">View Detailed Results →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      ⚕ Screening tool only — not a substitute for professional diagnosis. Consult a licensed optometrist for clinical
+      examination.
+    </footer>
+  </div>
+
+  <!-- jsPDF -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+  <script type="module">
+    /* ====== MediaPipe import ====== */
+    import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
+    const { FaceLandmarker, FilesetResolver } = vision;
+    const { jsPDF } = window.jspdf;
+
+    /* ====== Configuration (unchanged) ====== */
+    const REAL_IPD_CM = 6.3;
+    const CALIB_DIST_CM = 35;
+    const TARGET_DIST_CM = 100;
+    const START_TOLERANCE_CM = 5;
+    const STAND_STILL_SECONDS = 3;
+    const SPEAK_DEBOUNCE = 2600;
+    const PROMPT_RETRY = 3200;
+    const LETTER_DELAY_AFTER_GESTURE = 2000;
+    const gestureCooldown = 1100;
+    let VERTICAL_THRESH = 0.045;
+    let HORIZONTAL_THRESH = 0.045;
+    const NOISE_REJECT = 0.01;
+    const SNELLEN_DEN = [200, 100, 70, 50, 40, 30, 25, 20];
+    const TEST_DIST_M = 1.0;
+    const BUFFER_LEN = 20;
+
+    /* ====== Language System ====== */
+    const langSelect = document.getElementById('langSelect');
+    const savedLang = localStorage.getItem('optiplus_lang') || new URLSearchParams(window.location.search).get('lang') || 'en-IN';
+    langSelect.value = savedLang;
+    let currentLang = savedLang;
+
+    const LANG_CODES = {
+      'en-IN': 'en-IN', 'hi-IN': 'hi-IN', 'te-IN': 'te-IN',
+      'ta-IN': 'ta-IN', 'bn-IN': 'bn-IN', 'mr-IN': 'mr-IN'
+    };
+
+    const T = {
+      'en-IN': {
+        restart: 'Restarted. Please bring your face close briefly for calibration, then step back to one meter.',
+        modelLoading: 'Loading face detection model…',
+        modelLoaded: 'Model loaded. Please bring your face closer briefly for calibration — about thirty to forty centimeters — then step back to one meter and hold still.',
+        calibDone: 'Calibration complete. Now step back to one meter and hold still when you hear confirmation.',
+        holdStill: 'Good position. Please hold still for three seconds to begin the test.',
+        holdStillAgain: 'Please hold still at one meter to begin.',
+        testStart: 'Perfect position. Starting the test now.',
+        canYouSee: 'Can you see the gap of the ring? Nod if yes. Shake if no.',
+        reprompt: 'Please nod if you can see the gap. If not, shake your head or press the buttons.',
+        yesRecorded: 'Recorded yes. Proceeding to the next smaller optotype.',
+        noRecorded: 'Recorded no. I will show the same optotype one more time.',
+        noAgain: 'Recorded no again. Ending test and computing result.',
+        yesShort: 'Recorded yes.',
+        noShort: 'Recorded no.',
+        complete: 'Your screening is complete. Please review the result and consider a clinical eye examination.',
+        cameraFail: 'Unable to access camera. Please allow camera permission and refresh.',
+        moveBack: 'Move back a little.',
+        moveBackSlightly: 'Move back slightly.',
+        moveFwd: 'You are too far, move forward a bit.',
+        moveFwdSlightly: 'Move forward slightly.',
+        cameraOff: 'Camera is off. Please enable your camera to start the eye test. You can use the buttons above to allow camera access.',
+        cameraRetry: 'Camera could not be accessed. Please check your browser permissions and try again. I will keep guiding you with voice.',
+        normalVision: 'Vision appears within normal limits. Routine check recommended.',
+        consultDoctor: 'Approximate screening only. Please consult an optometrist for a full refraction.',
+      },
+      'hi-IN': {
+        restart: 'Punah aarambh kiya gaya. Kripya calibration ke liye apna chehra kareeb laayen, phir ek meter peeche hat jaayen.',
+        modelLoading: 'Chehra pahchaan model load ho raha hai.',
+        modelLoaded: 'Model load ho gaya. Calibration ke liye apna chehra tees se chaalees centimeter kareeb laayen, phir ek meter peeche hatkar sthir rahen.',
+        calibDone: 'Calibration poora hua. Ab ek meter peeche hatkar sthir rahen.',
+        holdStill: 'Achchi sthiti. Kripya teen second sthir rahen.',
+        holdStillAgain: 'Kripya ek meter par sthir rahen.',
+        testStart: 'Sahi sthiti. Pariksha ab shuru ho rahi hai.',
+        canYouSee: 'Kya aap ring ka gap dekh sakte hain? Haan ke liye sir hilaayen. Nahin ke liye sir ghumaayen.',
+        reprompt: 'Kripya gap dikhe to sir hilaayen. Nahin to button dabaayen.',
+        yesRecorded: 'Haan darj kiya. Agle chhote optotype par ja rahe hain.',
+        noRecorded: 'Nahin darj kiya. Wahi optotype phir se dikhaunga.',
+        noAgain: 'Phir se nahin. Pariksha samaapt kar rahe hain.',
+        yesShort: 'Haan darj kiya.',
+        noShort: 'Nahin darj kiya.',
+        complete: 'Aapki screening poori ho gayi. Kripya parinaam dekhen aur netra chikitsak se milen.',
+        cameraFail: 'Camera access nahin ho pa raha. Kripya anumati dein aur refresh karein.',
+        moveBack: 'Thoda peeche haten.',
+        moveBackSlightly: 'Zara sa peeche haten.',
+        moveFwd: 'Aap bahut door hain, thoda aage aayein.',
+        moveFwdSlightly: 'Zara sa aage aayein.',
+        cameraOff: 'Camera band hai. Kripya aankhon ki jaanch ke liye camera chalu karein.',
+        cameraRetry: 'Camera access nahin hua. Browser permissions check karein.',
+        normalVision: 'Drishti saamaanya seema mein lag rahi hai.',
+        consultDoctor: 'Yeh sirf screening hai. Poori jaanch ke liye netra chikitsak se milen.'
+      },
+      'te-IN': {
+        restart: 'Punah prarambhinchabadindi. Dayachesi calibration kosam mee mukham daggaraku teesukuraandi, taruvata oka meter venakki vellandi.',
+        modelLoading: 'Mukha gurthimpu model load avutondi.',
+        modelLoaded: 'Model load ayyindi. Calibration kosam mee mukham muppai nundi nalabhai centimeter daggara unchandi, taruvata oka meter venakki velli sthiranga undandi.',
+        calibDone: 'Calibration poorthayyindi. Ippudu oka meter venakki velli sthiranga undandi.',
+        holdStill: 'Manchi sthaanam. Dayachesi moodu seconds sthiranga undandi.',
+        holdStillAgain: 'Dayachesi oka meter dooramlo sthiranga undandi.',
+        testStart: 'Sariyana sthaanam. Pariksha ippudu prarambhamavutundi.',
+        canYouSee: 'Meeru ring yokka gap choodagalaraa? Avunu aite tala oopandi. Kaadu aite tala addanga oopandi.',
+        reprompt: 'Gap kanipiste tala oopandi. Leka pothe button nokkandi.',
+        yesRecorded: 'Avunu namodu chesam. Taruvata chinna optotype ki velthunnam.',
+        noRecorded: 'Kaadu namodu chesam. Ade optotype marosari chupistanu.',
+        noAgain: 'Malli kaadu. Pariksha mugustondi.',
+        yesShort: 'Avunu namodu.',
+        noShort: 'Kaadu namodu.',
+        complete: 'Mee screening poorthayyindi. Dayachesi phalitam chusi netra vaidyarini sampradinchandi.',
+        cameraFail: 'Camera access kaaledu. Dayachesi anumati ichchi refresh cheyandi.',
+        moveBack: 'Konchem venakki vellandi.',
+        moveBackSlightly: 'Koddiga venakki vellandi.',
+        moveFwd: 'Meeru chala dooramlo unnaru, konchem munduku randi.',
+        moveFwdSlightly: 'Koddiga munduku randi.',
+        cameraOff: 'Camera off lo undi. Dayachesi eye test kosam camera on cheyandi.',
+        cameraRetry: 'Camera access kaaledu. Browser permissions check cheyandi.',
+        normalVision: 'Drishti saadharana parimitullo undi.',
+        consultDoctor: 'Idi screening matrame. Poornanga pariksha kosam netra vaidyarini sampradinchandi.'
+      },
+      'ta-IN': {
+        restart: 'Meendum thodangappattadhu. Dayavuseydhu calibration-kkaaga ungal mugathai arugil kondu vandhu, pinbu oru meter pinnaal nirkavum.',
+        modelLoading: 'Mugam aridhal model load aagikondirukiradhu.',
+        modelLoaded: 'Model load aagivittadhu. Calibration-kkaaga muppadhu mudhal naappadhu centimeter arugil nirkavum, pinbu oru meter pinnaal nindru amaidhiyaaga irungal.',
+        calibDone: 'Calibration mudindhadhu. Ippoludhu oru meter pinnaal nindru amaidhiyaaga irungal.',
+        holdStill: 'Nalla nilai. Dayavuseydhu moondru vinadi amaidhiyaaga irungal.',
+        holdStillAgain: 'Dayavuseydhu oru meter thoorathil amaidhiyaaga irungal.',
+        testStart: 'Sariyana nilai. Parisodhanai ippoludhu thodangugiradhu.',
+        canYouSee: 'Neengal ring-il irukkum idaiyai paarkireergalaa? Aam endraal thalai aattavum. Illai endraal thalai asaivavum.',
+        reprompt: 'Idai therindhaal thalai aattavum. Illai endraal button-ai azhuthavum.',
+        yesRecorded: 'Aam padhivu seiyappattadhu. Adutha siria optotype-kku selgiroam.',
+        noRecorded: 'Illai padhivu seiyappattadhu. Adhe optotype-ai meendum kaattugiren.',
+        noAgain: 'Meendum illai. Parisodhanai mudikkapadugiradhu.',
+        yesShort: 'Aam padhivu.',
+        noShort: 'Illai padhivu.',
+        complete: 'Ungal screening mudindhadhu. Dayavuseydhu mudivugalai paarthu kan maruththuvarei sandhikkavum.',
+        cameraFail: 'Camera access kidaikkavillai. Dayavuseydhu anumatthi koduthu refresh seiyavum.',
+        moveBack: 'Konjam pinnaal nirkavum.',
+        moveBackSlightly: 'Siriya alavu pinnaal nirkavum.',
+        moveFwd: 'Neengal migavum dhooram irukkireergal, konjam munnaal varavum.',
+        moveFwdSlightly: 'Siriya alavu munnaal varavum.',
+        cameraOff: 'Camera off-aaga irukkiradhu. Dayavuseydhu eye test-kkaaga camera on seiyavum.',
+        cameraRetry: 'Camera access illai. Browser permissions-ai saripaarththavum.',
+        normalVision: 'Ungal paarvai saadharana varambukalil ulladhu.',
+        consultDoctor: 'Idhu oru screening mattume. Muzhu parisoathanaikku kan maruththuvarei sandhikkavum.'
+      },
+      'bn-IN': {
+        restart: 'Punoray shuru kora holo. Calibration-er jonno mukh kachhe anun, tarpor ek meter pichhone danan.',
+        modelLoading: 'Mukher shonaktikoron model load hocche.',
+        modelLoaded: 'Model load hoyeche. Calibration-er jonno tirish theke challish centimeter kachhe danan, tarpor ek meter pichhone sthir thakun.',
+        calibDone: 'Calibration shesh hoyeche. Ekhon ek meter pichhone sthir thakun.',
+        holdStill: 'Bhalo obosthan. Tin second sthir thakun.',
+        holdStillAgain: 'Ek meter dhoore sthir thakun.',
+        testStart: 'Shothik obosthan. Porikkha ekhon shuru hocche.',
+        canYouSee: 'Apni ki ring-er gap dekhte pachchen? Haan hole matha noran. Na hole matha ghuran.',
+        reprompt: 'Gap dekha gele matha noran. Na hole button chapun.',
+        yesRecorded: 'Haan dhora hoyeche. Porer chhoto optotype-e jacchi.',
+        noRecorded: 'Na dhora hoyeche. Ekoi optotype abar dekhanor hobe.',
+        noAgain: 'Abar na. Porikkha bondho kora hocche.',
+        yesShort: 'Haan dhora hoyeche.',
+        noShort: 'Na dhora hoyeche.',
+        complete: 'Apnar screening shesh hoyeche. Doya kore folafol dekhen ebong chokher daktar-er shathe jogajog korun.',
+        cameraFail: 'Camera access pawa jacche na. Doya kore permission din ebong refresh korun.',
+        moveBack: 'Ektu pichhone danan.',
+        moveBackSlightly: 'Ektu aro pichhone danan.',
+        moveFwd: 'Apni onek dhoore, ektu samne asun.',
+        moveFwdSlightly: 'Ektu samne asun.',
+        cameraOff: 'Camera bondho ache. Eye test-er jonno camera chalu korun.',
+        cameraRetry: 'Camera access pawa jayni. Browser permission check korun.',
+        normalVision: 'Drishti shadharon simar moddhe ache.',
+        consultDoctor: 'Eta shudhu screening. Purno porikkhar jonno chokher daktar-er kache jan.'
+      },
+      'mr-IN': {
+        restart: 'Punha suru kele aahe. Calibration sathi tumcha chehra javal anaa, mag ek meter mage jaa.',
+        modelLoading: 'Chehra olakh model load hot aahe.',
+        modelLoaded: 'Model load zala aahe. Calibration sathi tis te chalis centimeter javal raha, mag ek meter mage sthir ubhe raha.',
+        calibDone: 'Calibration sampale aahe. Ata ek meter mage sthir ubhe raha.',
+        holdStill: 'Chhan sthiti. Krupaya teen second sthir raha.',
+        holdStillAgain: 'Ek meter antaravar sthir raha.',
+        testStart: 'Yogya sthiti. Chachani ata suru hot aahe.',
+        canYouSee: 'Tumhala ring madhil gap disato ka? Ho asel tar maan halva. Nahi asel tar maan halva.',
+        reprompt: 'Gap disla tar maan halva. Nahi tar button daba.',
+        yesRecorded: 'Ho nondi zali. Pudhil lahan optotype kade jat aahot.',
+        noRecorded: 'Nahi nondi zali. Toch optotype punha dakhavnar.',
+        noAgain: 'Punha nahi. Chachani thambavli jate.',
+        yesShort: 'Ho nondi.',
+        noShort: 'Nahi nondi.',
+        complete: 'Tumchi screening sampali aahe. Krupaya parinam paha ani netra chikitsakanna bhet dya.',
+        cameraFail: 'Camera access milala nahi. Krupaya parvangi dya ani refresh kara.',
+        moveBack: 'Thoda mage jaa.',
+        moveBackSlightly: 'Thoda adhik mage jaa.',
+        moveFwd: 'Tumhi khup door aahat, thoda pudhe yaa.',
+        moveFwdSlightly: 'Thoda pudhe yaa.',
+        cameraOff: 'Camera band aahe. Eye test sathi camera chalu kara.',
+        cameraRetry: 'Camera access milala nahi. Browser permission tapasa.',
+        normalVision: 'Drishti sadharan maryadet aahe.',
+        consultDoctor: 'Hi fakt screening aahe. Purn tapasnisathi netra chikitsakanna bhet dya.'
+      }
+    };
+
+   function t(key) { return (T[currentLang] && T[currentLang][key]) || T['en-IN'][key] || key; }
+
+    langSelect.addEventListener('change', () => {
+      currentLang = langSelect.value;
+      localStorage.setItem('optiplus_lang', currentLang);
+    });
+
+    /* ====== DOM ====== */
+    const video = document.getElementById('video');
+    const overlay = document.getElementById('overlay');
+    const ctxOverlay = overlay.getContext('2d');
+    const optoCanvas = document.getElementById('optotypeCanvas');
+    const optoCtx = optoCanvas.getContext('2d');
+    const messagesContainer = document.getElementById('messagesContainer');
+    const emptyState = document.getElementById('emptyState');
+    const progressFill = document.getElementById('progressFill');
+    const progressPct = document.getElementById('progressPct');
+    const stateText = document.getElementById('stateText');
+    const countdownText = document.getElementById('countdownText');
+    const currentLineEl = document.getElementById('currentLine');
+    const attemptText = document.getElementById('attemptText');
+    const statusText = document.getElementById('statusText');
+    const distOverlay = document.getElementById('distOverlay');
+    const distStatus = document.getElementById('distStatus');
+    const distLabel = document.getElementById('distLabel');
+    const distCm = document.getElementById('distCm');
+    const optLabel = document.getElementById('optLabel');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resultCard = document.getElementById('resultCard');
+    const resultSummary = document.getElementById('resultSummary');
+    const recommendation = document.getElementById('recommendation');
+
+    /* ====== State ====== */
+    let faceLandmarker = null;
+    let focalLength = null;
+    let distanceReady = false;
+    let standStillTimer = null;
+    let standStillStart = null;
+    let snellenRunning = false;
+    let currentLine = 0;
+    let answers = [];
+    let lastSpeak = '', lastSpeakAt = 0;
+    let noseBuf = [], lastGestureTime = 0, lastNodTime = 0;
+    let nodCooldown = false;
+
+    /* ====== Snellen math (unchanged) ====== */
+    function angleForDen(den) { const fiveArcMin = (5 / 60) * (Math.PI / 180); return fiveArcMin * (den / 20); }
+    function linearHeightMeters(den) { const ang = angleForDen(den); return 2 * TEST_DIST_M * Math.tan(ang / 2); }
+    const lineHeightsMeters = SNELLEN_DEN.map(d => linearHeightMeters(d));
+
+    /* ====== Helpers ====== */
+    function addMessage(msg) {
+      if (emptyState) emptyState.remove();
+      const row = document.createElement('div');
+      row.className = 'msg-row';
+      row.innerHTML = `<div class="msg-avatar">👁</div><div class="msg-bubble">${msg}</div>`;
+      messagesContainer.appendChild(row);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function speak(msg, opts = {}) {
+      const now = Date.now();
+      if (msg === lastSpeak && (now - lastSpeakAt) < SPEAK_DEBOUNCE) return;
+      lastSpeak = msg; lastSpeakAt = now;
+      addMessage(msg);
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(msg);
+      u.rate = opts.rate || 0.9;
+      u.pitch = opts.pitch || 1.0;
+      u.lang = LANG_CODES[currentLang] || 'en-US';
+      speechSynthesis.speak(u);
+      /*fetch('/speak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: msg,
+          lang: currentLang
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.audio_url) {
+            const audio = new Audio(data.audio_url);
+            audio.play();
+          } else {
+            console.error("Speech synthesis error:", data.error);
+          }
+        });*/
+    }
+
+    function computePixelSizes(containerHeightPx) {
+      const maxMeters = Math.max(...lineHeightsMeters);
+      const targetFraction = 0.44;
+      const scale = (containerHeightPx * targetFraction) / maxMeters;
+      return lineHeightsMeters.map(hm => Math.round(hm * scale));
+    }
+
+    /* ====== Landolt C drawing (unchanged) ====== */
+    function drawLandoltC(sizePx, gapDir) {
+      const cw = optoCanvas.width, ch = optoCanvas.height;
+      optoCtx.clearRect(0, 0, cw, ch);
+      optoCtx.save();
+      optoCtx.translate(cw / 2, ch / 2);
+      const outerR = sizePx / 2;
+      const thickness = Math.max(4, Math.round(sizePx / 5));
+      const gapAngle = Math.PI / 6;
+      const dirAngle = [0, Math.PI / 2, Math.PI, -Math.PI / 2][gapDir];
+      optoCtx.beginPath();
+      optoCtx.arc(0, 0, outerR - thickness / 2, dirAngle + gapAngle / 2, dirAngle + 2 * Math.PI - gapAngle / 2, false);
+      optoCtx.lineWidth = thickness;
+      optoCtx.strokeStyle = '#1e3a5f';
+      optoCtx.lineCap = 'butt';
+      optoCtx.stroke();
+      optoCtx.restore();
+    }
+
+    /* ====== Distance (unchanged) ====== */
+    function calibrateFocal(eyePx, knownDistCm = CALIB_DIST_CM) {
+      focalLength = (eyePx * knownDistCm) / REAL_IPD_CM;
+    }
+    function estimateDistanceCm(eyePx) { if (!focalLength || eyePx <= 0) return null; return (REAL_IPD_CM * focalLength) / eyePx; }
+
+    /* ====== Gesture detection (unchanged) ====== */
+    function pushNose(x, y) {
+      noseBuf.push({ x, y, t: performance.now() });
+      if (noseBuf.length > BUFFER_LEN) noseBuf.shift();
+    }
+    function detectGesture() {
+      if (noseBuf.length < 4) return 'none';
+      const first = noseBuf[0], last = noseBuf[noseBuf.length - 1];
+      const dx = last.x - first.x, dy = last.y - first.y;
+      if (Math.abs(dx) < NOISE_REJECT && Math.abs(dy) < NOISE_REJECT) return 'none';
+      if (Math.abs(dy) > VERTICAL_THRESH && Math.abs(dy) > Math.abs(dx)) return 'yes';
+      if (Math.abs(dx) > HORIZONTAL_THRESH && Math.abs(dx) > Math.abs(dy)) return 'no';
+      return 'none';
+    }
+    function acceptGestureOnce() {
+      const now = performance.now();
+      if (nodCooldown && (now - lastNodTime < 1200)) return false;
+      nodCooldown = true; lastNodTime = now;
+      setTimeout(() => { nodCooldown = false; }, 1200);
+      return true;
+    }
+
+    /* ====== Test flow (unchanged) ====== */
+    function resetAll() {
+      focalLength = null; distanceReady = false; snellenRunning = false;
+      standStillStart = null; clearTimeout(standStillTimer); standStillTimer = null;
+      countdownText.innerText = '—';
+      currentLine = 0; answers = SNELLEN_DEN.map(() => []);
+      resultCard.hidden = true;
+      distOverlay.hidden = true;
+      stateText.innerText = 'Calibrating';
+      statusText.innerText = 'Calibrating';
+      optLabel.innerText = '';
+      attemptText.innerText = '—';
+      messagesContainer.innerHTML = '';
+      speak(t('restarted'));
+      showOptotype(); updateProgress();
+    }
+
+    let currentGapDir = 0;
+    function showOptotype() {
+      const ch = optoCanvas.clientHeight || optoCanvas.height;
+      const pxSizes = computePixelSizes(ch);
+      const sizePx = pxSizes[currentLine] || Math.round(ch * 0.25);
+      currentGapDir = Math.floor(Math.random() * 4);
+      drawLandoltC(sizePx, currentGapDir);
+      currentLineEl.innerText = (currentLine + 1);
+      attemptText.innerText = (answers[currentLine]?.length || 0) + 1;
+    }
+
+    function recordAttempt(isYes) {
+      answers[currentLine].push(!!isYes);
+      attemptText.innerText = answers[currentLine].length;
+      if (isYes) {
+        speak(t('yesNext'));
+        currentLine++;
+        if (currentLine >= SNELLEN_DEN.length) { finishTest(); return; }
+        setTimeout(() => { showOptotype(); updateProgress(); askOptotype(); }, LETTER_DELAY_AFTER_GESTURE);
+      } else {
+        const attempts = answers[currentLine].length;
+        if (attempts === 1) {
+          speak(t('noRepeat'));
+          setTimeout(() => { showOptotype(); askOptotype(); }, LETTER_DELAY_AFTER_GESTURE);
+        } else {
+          speak(t('noEnd'));
+          setTimeout(() => finishTest(), 700);
+        }
+      }
+      updateProgress();
+    }
+
+    function askOptotype() {
+      speak(t('canYouSee'));
+      const snap = answers[currentLine]?.length || 0;
+      setTimeout(() => {
+        if ((answers[currentLine]?.length || 0) === snap && snellenRunning) {
+          speak(t('reprompt'));
+        }
+      }, PROMPT_RETRY);
+    }
+
+    /* ====== Acuity mapping (unchanged) ====== */
+    function mapLineToAcuityAndPower(lineIdx) {
+      const mapping = [
+        { acuity: 'Less than 20/200', power: 'Likely > -4.00 D or severe loss' },
+        { acuity: '20/100', power: '-3.00 to -4.00 D' },
+        { acuity: '20/70', power: '-2.00 to -3.00 D' },
+        { acuity: '20/50', power: '-1.50 to -2.50 D' },
+        { acuity: '20/40', power: '-1.00 to -2.00 D' },
+        { acuity: '20/30', power: '-0.75 to -1.50 D' },
+        { acuity: '20/25', power: '-0.50 to -1.00 D' },
+        { acuity: '20/20', power: '-0.25 to +0.50 D' }
+      ];
+      return mapping[Math.max(0, Math.min(7, lineIdx))];
+    }
+
+    function finishTest() {
+      snellenRunning = false;
+      stateText.innerText = 'Done';
+      statusText.innerText = 'Complete';
+      optLabel.innerText = '';
+      let best = currentLine - 1;
+      for (let i = currentLine; i >= 0; i--) {
+        if (answers[i] && answers[i].some(v => v === true)) { best = i; break; }
+      }
+      if (best < 0) best = 0;
+      const res = mapLineToAcuityAndPower(best);
+      resultSummary.innerHTML = `<strong>Estimated acuity:</strong> ${res.acuity}<br/><strong>Approx refractive range:</strong> ${res.power}`;
+      recommendation.innerText = res.acuity === '20/20' ? t('normalVision') : t('consultDoctor');
+      resultCard.hidden = false;
+      speak(t('complete'));
+      sessionStorage.setItem("visionResult", JSON.stringify({ acuity: res.acuity, power: res.power, lines: currentLine }));
+    }
+
+    /* ====== MediaPipe init & loop ====== */
+    async function init() {
+      try {
+        const s = await navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 }, audio: false });
+        video.srcObject = s;
+        await video.play();
+        overlay.width = video.videoWidth;
+        overlay.height = video.videoHeight;
+        optoCanvas.width = Math.min(900, Math.floor(document.querySelector('.optotype-area').clientWidth * 0.95));
+        optoCanvas.height = Math.max(260, Math.floor(optoCanvas.width * 0.38));
+      } catch (e) {
+        speak(t('cameraFail'));
+        console.error(e);
+        return;
+      }
+
+      addMessage(t('modelLoading'));
+      stateText.innerText = 'Loading';
+      statusText.innerText = 'Loading Model';
+
+      const visionFileset = await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm');
+      faceLandmarker = await FaceLandmarker.createFromOptions(visionFileset, {
+        baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task' },
+        runningMode: 'VIDEO', numFaces: 1
+      });
+
+      speak(t('modelLoaded'));
+      resetAll();
+      requestAnimationFrame(loop);
+    }
+
+    function beginStandStillCountdown() {
+      if (standStillTimer) return;
+      standStillStart = performance.now();
+      let secondsLeft = STAND_STILL_SECONDS;
+      countdownText.innerText = `${secondsLeft}s`;
+      stateText.innerText = 'Hold Still';
+      statusText.innerText = 'Hold Still';
+      const tick = () => {
+        const elapsed = (performance.now() - standStillStart) / 1000;
+        const rem = Math.max(0, STAND_STILL_SECONDS - Math.floor(elapsed));
+        countdownText.innerText = `${rem}s`;
+        if (elapsed >= STAND_STILL_SECONDS) {
+          clearTimeout(standStillTimer); standStillTimer = null;
+          countdownText.innerText = '—';
+          speak(t('startingTest'));
+          distanceReady = true; snellenRunning = true;
+          stateText.innerText = 'Testing';
+          statusText.innerText = 'Testing';
+          optLabel.innerText = '';
+          showOptotype(); askOptotype();
+          return;
+        }
+        standStillTimer = setTimeout(tick, 250);
+      };
+      tick();
+    }
+
+    function updateDistanceUI(distCmVal) {
+      distOverlay.hidden = false;
+      distCm.innerText = `${Math.round(distCmVal)} cm`;
+      const diff = Math.abs(distCmVal - TARGET_DIST_CM);
+      distStatus.classList.remove('good', 'close', 'far');
+      if (diff <= START_TOLERANCE_CM) {
+        distStatus.classList.add('good'); distLabel.innerText = 'Optimal';
+      } else if (diff <= 20) {
+        distStatus.classList.add('close'); distLabel.innerText = 'Adjusting';
+      } else {
+        distStatus.classList.add('far'); distLabel.innerText = 'Out of Range';
+      }
+    }
+
+    async function loop() {
+      if (!faceLandmarker) { requestAnimationFrame(loop); return; }
+      try {
+        const now = performance.now();
+        const res = faceLandmarker.detectForVideo(video, now);
+        ctxOverlay.clearRect(0, 0, overlay.width, overlay.height);
+
+        if (res && res.faceLandmarks && res.faceLandmarks.length > 0) {
+          const fl = res.faceLandmarks[0];
+          const leftEye = fl[33] || fl[130] || fl[133];
+          const rightEye = fl[263] || fl[362] || fl[243];
+          const nose = fl[1] || fl[4] || fl[2];
+
+          const eyePx = Math.hypot((leftEye.x - rightEye.x) * video.videoWidth, (leftEye.y - rightEye.y) * video.videoHeight);
+
+          if (!focalLength && eyePx > 55) {
+            calibrateFocal(eyePx, CALIB_DIST_CM);
+            speak(t('calibDone'));
+          }
+
+          let distCmVal = null;
+          if (focalLength) {
+            distCmVal = estimateDistanceCm(eyePx);
+            if (distCmVal) updateDistanceUI(distCmVal);
+          }
+
+          if (!distanceReady && focalLength && !snellenRunning) {
+            if (distCmVal && Math.abs(distCmVal - TARGET_DIST_CM) <= START_TOLERANCE_CM) {
+              if (!standStillTimer) {
+                speak(t('holdStill'));
+                beginStandStillCountdown();
+              }
+            } else {
+              if (standStillTimer) {
+                clearTimeout(standStillTimer); standStillTimer = null;
+                countdownText.innerText = '—';
+                speak(t('holdStillAgain'));
+              }
+              if (distCmVal) {
+                if (distCmVal < TARGET_DIST_CM - 40) speak(t('moveBack'));
+                else if (distCmVal < TARGET_DIST_CM - 10) speak(t('moveBackSlightly'));
+                else if (distCmVal > TARGET_DIST_CM + 40) speak(t('tooFar'));
+                else if (distCmVal > TARGET_DIST_CM + 10) speak(t('moveForward'));
+              }
+            }
+          }
+
+          pushNose(nose.x, nose.y);
+
+          if (snellenRunning) {
+            const nowt = performance.now();
+            if (nowt - lastGestureTime > gestureCooldown) {
+              const g = detectGesture();
+              if (g !== 'none') {
+                lastGestureTime = nowt;
+                if (acceptGestureOnce()) {
+                  if (g === 'yes') { speak(t('recordedYes')); recordAttempt(true); }
+                  else { speak(t('recordedNo')); recordAttempt(false); }
+                }
+              }
+            }
+          }
+
+          ctxOverlay.beginPath();
+          ctxOverlay.fillStyle = 'rgba(37,99,235,0.2)';
+          ctxOverlay.arc(nose.x * overlay.width, nose.y * overlay.height, 5, 0, Math.PI * 2);
+          ctxOverlay.fill();
+        }
+        updateProgress();
+      } catch (err) { console.error(err); }
+      requestAnimationFrame(loop);
+    }
+
+    /* ====== UI events ====== */
+    yesBtn.addEventListener('click', () => { if (snellenRunning) { recordAttempt(true); speak(t('recordedYes')); } });
+    noBtn.addEventListener('click', () => { if (snellenRunning) { recordAttempt(false); speak(t('recordedNo')); } });
+    restartBtn.addEventListener('click', resetAll);
+    /* document.getElementById('restartResult').addEventListener('click', resetAll); */
+    document.getElementById("gotoResults").addEventListener("click", () => {
+      window.location.href = "results.html"; // change URL if needed
+    });
+
+    function doDownload() {
+      const doc = new jsPDF();
+      doc.setFontSize(16); doc.text('Optiplus — Vision Pre-Screen Report', 14, 20);
+      doc.setFontSize(11); doc.text(`Date: ${new Date().toLocaleString()}`, 14, 30);
+      doc.text(resultSummary.innerText || 'No result', 14, 42, { maxWidth: 180 });
+      doc.setFontSize(9);
+      doc.text('This is a screening tool only — not a substitute for professional diagnosis.', 14, 60);
+      doc.save('optiplus_vision_report.pdf');
+    }
+    downloadBtn.addEventListener('click', doDownload);
+    document.getElementById('dlResultBtn').addEventListener('click', doDownload);
+
+    function updateProgress() {
+      const total = SNELLEN_DEN.length;
+      const pct = Math.round((currentLine / total) * 100);
+      progressFill.style.width = pct + '%';
+      progressPct.innerText = pct + '%';
+    }
+
+    /* ====== Start ====== */
+    init();
+  </script>
+</body>
+
+</html>

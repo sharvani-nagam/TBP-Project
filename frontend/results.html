@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Test Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 50%, #F3E8FF 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #E5E7EB;
+            padding: 1.5rem 0;
+            padding-top: 70px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-icon {
+            background: #DBEAFE;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+        }
+
+        .header-icon i {
+            color: #2563EB;
+            font-size: 2rem;
+        }
+
+        .header h1 {
+            color: #1F2937;
+            font-size: 1.875rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .results-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #3B82F6;
+        }
+
+        .diagnosis-header {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .diagnosis-icon {
+            background: #DBEAFE;
+            padding: 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .diagnosis-icon i {
+            color: #2563EB;
+            font-size: 1.5rem;
+        }
+
+        .diagnosis-title h2 {
+            color: #1F2937;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .diagnosis-title p {
+            color: #6B7280;
+        }
+
+        .severity {
+            color: #EA580C;
+            font-weight: 600;
+        }
+
+        .results-summary {
+            background: linear-gradient(135deg, #EFF6FF 0%, #F3E8FF 100%);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-summary h3 {
+            color: #111827;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .result-item {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-item p:first-child {
+            color: #6B7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-item p:last-child {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .power-value {
+            color: #2563EB;
+        }
+
+        .acuity-value {
+            color: #7C3AED;
+        }
+
+        .understanding-card {
+            background: #FFFBEB;
+            border-left: 4px solid #F59E0B;
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 1rem;
+        }
+
+        .understanding-card h3 {
+            color: #78350F;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .understanding-card p {
+            color: #374151;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(124, 58, 237, 0.4);
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s;
+        }
+
+        .section-header:hover {
+            background: #F9FAFB;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        .section-title h3 {
+            color: #1F2937;
+            font-size: 1.25rem;
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .section-content.active {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .section-body {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .food-item {
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+            background: #F0FDF4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .food-icon {
+            font-size: 2rem;
+        }
+
+        .food-item h4 {
+            color: #1F2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .food-item p {
+            color: #4B5563;
+            font-size: 0.875rem;
+        }
+
+        .lifestyle-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .lifestyle-item {
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+            background: #EFF6FF;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .lifestyle-item i {
+            color: #2563EB;
+            margin-top: 0.125rem;
+        }
+
+        .lifestyle-item h4 {
+            color: #1F2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .lifestyle-item p {
+            color: #4B5563;
+            font-size: 0.875rem;
+        }
+
+        .exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .exercise-item {
+            background: #F5F3FF;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exercise-item h4 {
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .exercise-item p {
+            color: #4B5563;
+            font-size: 0.875rem;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .video-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #FEF2F2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .video-item:hover {
+            background: #FEE2E2;
+        }
+
+        .video-thumbnail {
+            font-size: 2.5rem;
+        }
+
+        .video-item h4 {
+            color: #1F2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .video-item p {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .footer-cta {
+            background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer-cta h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-cta p {
+            color: #DBEAFE;
+            margin-bottom: 1rem;
+        }
+
+        .footer-cta button {
+            background: white;
+            color: #2563EB;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .footer-cta button:hover {
+            background: #EFF6FF;
+        }
+
+        @media (max-width: 768px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2ecc71;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #2ecc71;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            left: 0;
+            background: #fff;
+            min-width: 200px;
+            border-radius: 8px;
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .dropdown a:hover {
+            background: #f5f5f5;
+            color: #2ecc71;
+            padding-left: 25px;
+        }
+
+        nav ul li:hover .dropdown {
+            display: block;
+        }
+
+        .menu-btn {
+            display: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Optiplus.</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#about">About Us ▾</a>
+                <div class="dropdown">
+                    <a href="faq.html">FAQ</a>
+                    <a href="docter2.html">Our Doctors</a>
+                    <a href="#footer">Contact Us</a>
+                    <a href="#guide">Guide / Help</a>
+                </div>
+            </li>
+            <li>
+                <a href="#features">Features ▾</a>
+                <div class="dropdown">
+                    <a href="#eye-test">Eye Test</a>
+                    <a href="#results">Results</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="#appoint">Make Appointments</a>
+                </div>
+            </li>
+        </ul>
+        <div class="menu-btn">☰</div>
+    </nav>
+    <div class="header">
+        <div class="header-content">
+            <div class="header-icon">
+                <i class="fas fa-eye"></i>
+            </div>
+            <h1>Your Eye Test Results</h1>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- 🔹 RESULT CARD -->
+        <div class="results-card">
+
+            <div class="diagnosis-header">
+                <div class="diagnosis-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="diagnosis-title">
+                    <h2 id="diagnosisText">Diagnosis</h2>
+                    <p>Severity: <span class="severity" id="severityText"></span></p>
+                </div>
+            </div>
+
+            <div class="results-summary">
+                <h3><i class="fas fa-eye"></i> Test Results Summary</h3>
+
+                <div class="results-grid">
+                    <div class="result-item">
+                        <p>Approximate Refractive Power</p>
+                        <p class="power-value" id="powerValue"></p>
+                    </div>
+                    <div class="result-item">
+                        <p>Visual Acuity</p>
+                        <p class="acuity-value" id="acuityValue"></p>
+                    </div>
+                    <div class="result-item">
+                        <p>Test Distance</p>
+                        <p id="distanceValue">100 cm</p>
+                    </div>
+                    <div class="result-item">
+                        <p>Lines Completed</p>
+                        <p id="linesValue"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🔹 UNDERSTANDING SECTION -->
+            <div class="understanding-card">
+                <h3><i class="fas fa-book-open"></i> Understanding Your Condition</h3>
+                <p id="explanationText"></p>
+            </div>
+        </div>
+
+
+        <div class="action-buttons">
+            <a href="shop.html" class="btn btn-primary">
+                <i class="fas fa-shopping-bag"></i>
+                Shop Prescription Lenses
+            </a>
+            <a href="index.html" class="btn btn-secondary">
+                <i class="fas fa-calendar"></i>
+                Book Eye Exam Appointment
+            </a>
+        </div>
+
+        <div class="section-card">
+            <div class="section-header" onclick="toggleSection('foods')">
+                <div class="section-title">
+                    <i class="fas fa-apple-alt" style="color: #16A34A;"></i>
+                    <h3>Recommended Foods for Eye Health</h3>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="section-content" id="foods">
+                <div class="section-body">
+                    <div class="food-grid">
+                        <div class="food-item">
+                            <span class="food-icon">🥕</span>
+                            <div>
+                                <h4>Carrots & Sweet Potatoes</h4>
+                                <p>Rich in Vitamin A for retinal health</p>
+                            </div>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-icon">🥬</span>
+                            <div>
+                                <h4>Leafy Greens</h4>
+                                <p>Lutein and zeaxanthin protect against eye damage</p>
+                            </div>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-icon">🐟</span>
+                            <div>
+                                <h4>Fish (Salmon, Tuna)</h4>
+                                <p>Omega-3 fatty acids reduce dry eye symptoms</p>
+                            </div>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-icon">🥚</span>
+                            <div>
+                                <h4>Eggs</h4>
+                                <p>Contains lutein, zinc, and vitamin E</p>
+                            </div>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-icon">🍊</span>
+                            <div>
+                                <h4>Citrus Fruits</h4>
+                                <p>Vitamin C supports blood vessel health in eyes</p>
+                            </div>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-icon">🌰</span>
+                            <div>
+                                <h4>Nuts & Seeds</h4>
+                                <p>Vitamin E protects against age-related damage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-header" onclick="toggleSection('lifestyle')">
+                <div class="section-title">
+                    <i class="fas fa-heart" style="color: #2563EB;"></i>
+                    <h3>Lifestyle Improvements</h3>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="section-content" id="lifestyle">
+                <div class="section-body">
+                    <div class="lifestyle-list">
+                        <div class="lifestyle-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Follow the 20-20-20 rule</h4>
+                                <p>Every 20 minutes, look at something 20 feet away for 20 seconds</p>
+                            </div>
+                        </div>
+                        <div class="lifestyle-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Reduce screen time</h4>
+                                <p>Limit continuous screen use to prevent digital eye strain</p>
+                            </div>
+                        </div>
+                        <div class="lifestyle-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Proper lighting</h4>
+                                <p>Avoid glare and ensure adequate lighting when reading or working</p>
+                            </div>
+                        </div>
+                        <div class="lifestyle-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Wear sunglasses</h4>
+                                <p>Protect eyes from UV rays with 100% UV protection sunglasses</p>
+                            </div>
+                        </div>
+                        <div class="lifestyle-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Stay hydrated</h4>
+                                <p>Drink 8-10 glasses of water daily to prevent dry eyes</p>
+                            </div>
+                        </div>
+                        <div class="lifestyle-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Get adequate sleep</h4>
+                                <p>7-8 hours of sleep helps eyes recover and stay healthy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-header" onclick="toggleSection('exercises')">
+                <div class="section-title">
+                    <i class="fas fa-dumbbell" style="color: #7C3AED;"></i>
+                    <h3>Eye Exercises</h3>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="section-content" id="exercises">
+                <div class="section-body">
+                    <p style="color: #6B7280; font-size: 0.875rem; margin-bottom: 1rem;">Perform these exercises daily
+                        to reduce eye strain and improve focus:</p>
+                    <div class="exercise-list">
+                        <div class="exercise-item">
+                            <h4>1. Focus Change</h4>
+                            <p>Hold finger 10 inches away, focus on it, then focus on something 20 feet away. Repeat 10
+                                times.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>2. Figure Eight</h4>
+                            <p>Imagine a large 8 on the floor 10 feet away. Trace it with your eyes slowly for 30
+                                seconds each direction.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>3. Palming</h4>
+                            <p>Rub hands together, place warm palms over closed eyes. Relax for 3 minutes in darkness.
+                            </p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>4. Near and Far Focus</h4>
+                            <p>Hold thumb 10 inches away, focus for 15 seconds, then focus on something 20 feet away for
+                                15 seconds. Repeat 5 times.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>5. Eye Rolling</h4>
+                            <p>Slowly roll eyes in clockwise direction 10 times, then counter-clockwise 10 times.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-header" onclick="toggleSection('videos')">
+                <div class="section-title">
+                    <i class="fas fa-video" style="color: #DC2626;"></i>
+                    <h3>Educational Videos</h3>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="section-content" id="videos">
+                <div class="section-body">
+                    <div class="video-grid">
+                        <a href="#" class="video-item">
+                            <span class="video-thumbnail">📹</span>
+                            <div>
+                                <h4>Daily Eye Exercise Routine</h4>
+                                <p>10 min</p>
+                            </div>
+                        </a>
+                        <a href="#" class="video-item">
+                            <span class="video-thumbnail">📚</span>
+                            <div>
+                                <h4>Understanding Myopia</h4>
+                                <p>8 min</p>
+                            </div>
+                        </a>
+                        <a href="#" class="video-item">
+                            <span class="video-thumbnail">💻</span>
+                            <div>
+                                <h4>Proper Screen Ergonomics</h4>
+                                <p>6 min</p>
+                            </div>
+                        </a>
+                        <a href="#" class="video-item">
+                            <span class="video-thumbnail">🧘</span>
+                            <div>
+                                <h4>Eye Yoga for Relaxation</h4>
+                                <p>12 min</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-cta">
+            <h3>Need Professional Guidance?</h3>
+            <p>These results are preliminary. Book an appointment with our optometrist for a comprehensive eye
+                examination.</p>
+            <button onclick="window.location.href='index.html'">Schedule Appointment Now</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId);
+            const header = content.previousElementSibling;
+            const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+
+            content.classList.toggle('active');
+
+            if (content.classList.contains('active')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        /* 🔥 MAIN LOGIC */
+        document.addEventListener("DOMContentLoaded", () => {
+
+            function extractDiopter(powerStr) {
+                const match = powerStr.match(/-?\d+(\.\d+)?/);
+                return match ? parseFloat(match[0]) : 0;
+            }
+
+            const data = JSON.parse(sessionStorage.getItem("visionResult"));
+            if (!data) {
+                alert("Please take the eye test first.");
+                window.location.href = "landolt.html";
+                return;
+            }
+
+            const r = JSON.parse(sessionStorage.getItem("visionResult"));
+
+            const diopter = extractDiopter(r.power);
+            const acuity = r.acuity;
+            const power = diopter;
+
+            const { diagnosis, severity } = analyzeVision(diopter);
+
+            document.getElementById("diagnosisText").innerText =
+                `Diagnosis: ${diagnosis}`;
+
+            document.getElementById("severityText").innerText = severity;
+            document.getElementById("powerValue").innerText = `${diopter} D`;
+            document.getElementById("acuityValue").innerText = r.acuity;
+            document.getElementById("linesValue").innerText = `${r.lines} / 8` || "8 / 8";
+
+            /* 🔹 Severity Color */
+            const sev = document.getElementById("severityText");
+            if (diopter <= -1.0) sev.style.color = "#DC2626";
+            else if (diopter <= -0.25) sev.style.color = "#EA580C";
+            else sev.style.color = "#16A34A";
+
+            function analyzeVision(diopter) {
+                let diagnosis, severity;
+
+                if (diopter >= -0.25) {
+                    diagnosis = "Normal Distance Vision";
+                    severity = "None";
+                }
+                else {
+                    diagnosis = "Myopia (Nearsightedness)";
+
+                    if (diopter >= -0.50) severity = "Very Mild";
+                    else if (diopter >= -1.50) severity = "Mild";
+                    else if (diopter >= -3.00) severity = "Moderate";
+                    else severity = "High";
+                }
+
+                return { diagnosis, severity };
+            }
+
+
+            /* 🔹 Explanation */
+            const exp = document.getElementById("explanationText");
+
+            if (power >= -0.25) {
+
+                // 🔹 NORMAL VISION
+                exp.innerHTML = `
+    Your vision test indicates <strong>${acuity} visual acuity</strong>, which means you are able to see distant
+    objects clearly at the standard expected level without difficulty. The refractive measurement shows
+    <strong>no clinically significant refractive error</strong>, indicating that light entering your eyes is being
+    properly focused on the retina.
+
+    This result suggests <strong>normal vision</strong>, and corrective lenses are not required at this time.
+    Maintaining good visual habits such as limiting excessive screen time, following the 20-20-20 rule,
+    ensuring proper lighting, and having periodic eye check-ups will help preserve long-term eye health.
+    `;
+
+            }
+            else if (power < -0.25 && power >= -0.50) {
+
+                // 🔹 VERY MILD / BORDERLINE MYOPIA
+                exp.innerHTML = `
+    Your vision test indicates <strong>${acuity} visual acuity</strong>, which means you can see distant objects
+    clearly at the standard expected level. However, the refractive measurement of
+    <strong>${power} diopters</strong> suggests a <strong>very mild myopic tendency (borderline nearsightedness)</strong>.
+
+    This level of myopia is generally <strong>not considered clinically significant</strong> and often does not
+    require corrective lenses unless you experience symptoms such as eye strain, headaches, or difficulty
+    focusing on distant objects during activities like driving, classroom learning, or prolonged digital
+    screen usage.
+
+    Regular eye examinations are recommended to monitor any progression and to rule out subtle issues
+    such as astigmatism or digital eye strain.
+    `;
+
+            }
+            else if (power < -0.50 && power >= -1.50) {
+
+                // 🔹 MILD MYOPIA
+                exp.innerHTML = `
+    Your vision assessment shows a refractive power of <strong>${power} diopters</strong>, indicating
+    <strong>mild myopia (nearsightedness)</strong>. This means that distant objects may appear slightly blurred,
+    while near vision generally remains clear.
+
+    Individuals with mild myopia may notice difficulty seeing classroom boards, road signs, or distant
+    text, especially under low-light conditions or after prolonged screen use. Corrective lenses such as
+    glasses or contact lenses can significantly improve distance clarity and reduce visual strain.
+
+    Adopting healthy visual habits, performing regular eye exercises, and scheduling routine eye
+    examinations can help manage symptoms and monitor progression.
+    `;
+
+            }
+            else if (power < -1.50 && power >= -3.00) {
+
+                // 🔹 MODERATE MYOPIA
+                exp.innerHTML = `
+    Your eye test results indicate a refractive error of <strong>${power} diopters</strong>, consistent with
+    <strong>moderate myopia</strong>. At this level, distant objects typically appear noticeably blurred without
+    corrective lenses.
+
+    Moderate myopia can interfere with daily activities such as driving, reading presentations from a
+    distance, or recognizing faces from afar. Wearing properly prescribed glasses or contact lenses is
+    strongly recommended to achieve clear vision and prevent eye strain.
+
+    Regular follow-up with an optometrist is important to monitor changes in refractive power and to
+    ensure optimal visual comfort and eye health.
+    `;
+
+            }
+            else {
+
+                // 🔹 HIGH MYOPIA
+                exp.innerHTML = `
+    Your test results show a refractive power of <strong>${power} diopters</strong>, indicating
+    <strong>high myopia</strong>. This condition causes significant difficulty in seeing distant objects clearly
+    without corrective lenses.
+
+    High myopia is associated with a higher risk of certain eye health conditions, including retinal
+    thinning, retinal detachment, and other structural changes in the eye. It is essential to use
+    properly prescribed corrective lenses and undergo comprehensive eye examinations regularly.
+
+    Consultation with an eye care professional is strongly advised to evaluate overall eye health and
+    discuss long-term vision management options.
+    `;
+            }
+
+
+            // Get user email from LocalStorage (the person logged in)
+            const user = JSON.parse(localStorage.getItem("optiplusUser"));
+
+            if (user && user.email) {
+                const resultToSave = {
+                    email: user.email,
+                    diagnosis: diagnosis, // your calculated variable
+                    severity: severity,   // your calculated variable
+                    power: `${diopter} D`,
+                    acuity: acuity
+                };
+
+                // Send the test results to the database automatically
+                fetch('/save_test_result', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(resultToSave)
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

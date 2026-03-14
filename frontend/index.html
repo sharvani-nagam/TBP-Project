@@ -1,0 +1,4055 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optiplus - Expert Eye Care Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* ==================== NAVBAR ==================== */
+    nav {
+      width: 100%;
+      padding: 10px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 5px y-offset 20px rgba(253, 226, 226, 0);
+    }
+
+    nav .logo {
+      font-size: 32px;
+      font-weight: 700;
+      color: blue;
+      cursor: pointer;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+      cursor: pointer;
+    }
+
+    nav ul li a {
+      color: #333;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: blue;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 30px;
+      left: 0;
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      min-width: 180px;
+      box-shadow: 0 5px y-offset 20px rgba(253, 226, 226, 0);
+    }
+
+    nav ul li:hover>.dropdown {
+      display: block;
+    }
+
+    .dropdown::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 0;
+      height: 10px;
+      width: 100%;
+    }
+
+
+    .dropdown a {
+      display: block;
+      padding: 8px 0;
+      font-size: 14px;
+      color: #333;
+      transition: all 0.3s;
+    }
+
+    .dropdown a:hover {
+      background: #f5f5f5;
+      color: blue;
+      padding-left: 10px;
+    }
+
+    .login-btn {
+      padding: 10px 24px;
+      background-color: blue;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background-color: blue;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(50, 0, 100, 0.3);
+    }
+
+    .menu-btn {
+      display: none;
+      cursor: pointer;
+      font-size: 28px;
+      color: black;
+      font-weight: bold;
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 100px 60px 60px;
+      /* background-image: url("https://wordpress.zozothemes.com/optiplus/wp-content/uploads/sites/29/2024/09/blog-4-1-768x456.webp"); */
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: #ffffff;
+      z-index: 1;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .hero-text h4 {
+      color: #333;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero-text h1 {
+      font-size: 65px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: blue;
+      margin-bottom: 25px;
+    }
+
+    .hero-text p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #333;
+      margin-bottom: 35px;
+      max-width: 500px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background-color: blue;
+      border-radius: 30px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(105, 117, 253, 0.4);
+    }
+
+    .cta-btn:hover {
+      background-color: #0036B1;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(105, 117, 253, 0.4);
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    #specs {
+      width: 100%;
+      max-width: 550px;
+      height: auto;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease forwards;
+      animation-delay: 0.3s;
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ==================== PROCESS SECTION ==================== */
+    .process-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px 60px;
+      background: linear-gradient(135deg, blue 0%, #001a33 100%);
+      color: white;
+      overflow: hidden;
+      gap: 80px;
+    }
+
+    .ring-group {
+      position: absolute;
+      left: -200px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .ring {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+    }
+
+    .ring1 {
+      width: 600px;
+      height: 600px;
+    }
+
+    .ring2 {
+      width: 750px;
+      height: 750px;
+      top: -75px;
+      left: -75px;
+    }
+
+    .ring3 {
+      width: 900px;
+      height: 900px;
+      top: -150px;
+      left: -150px;
+    }
+
+    .process-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 80px;
+    }
+
+    .left-side {
+      flex: 1;
+      max-width: 500px;
+      z-index: 10;
+    }
+
+    .sub-title {
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: blue;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .main-heading {
+      font-size: 52px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .main-description {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 35px;
+    }
+
+    .learn-btn {
+      display: inline-block;
+      background: blue;
+      padding: 14px 35px;
+      border-radius: 28px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .learn-btn:hover {
+      background: blue;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 45px;
+    }
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 3px solid blue;
+      object-fit: cover;
+    }
+
+    .rating-info {
+      margin-left: 10px;
+    }
+
+    .stars {
+      color: #ffc54d;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .rating-text {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .right-side {
+      flex: 1;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    .point {
+      position: relative;
+      padding-left: 80px;
+      transition: transform 0.3s ease;
+    }
+
+    .point:hover {
+      transform: translateX(10px);
+    }
+
+    .big-number {
+      position: absolute;
+      left: 0;
+      top: -20px;
+      font-size: 90px;
+      opacity: 0.3;
+      font-weight: 700;
+      pointer-events: none;
+      color: blue;
+    }
+
+    .point h3 {
+      font-size: 26px;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .point p {
+      opacity: 0.75;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ==================== SERVICES SECTION ==================== */
+    .services-section {
+      padding: 100px 60px;
+      position: relative;
+      background: white;
+    }
+
+    .top-semicircle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      border: 3px solid rgba(186, 191, 254, 0.4);
+      border-bottom: none;
+      border-radius: 300px 300px 0 0;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-label {
+      color: blue;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-size: 48px;
+      font-weight: 700;
+      color: black;
+      line-height: 1.3;
+    }
+
+    .services-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .cards-column {
+      flex: 0 0 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .cards-column.left {
+      align-items: flex-end;
+    }
+
+    .cards-column.right {
+      align-items: flex-start;
+    }
+
+    .main-image-container {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .main-image {
+      max-width: 450px;
+      height: auto;
+      border-radius: 20px;
+      display: block;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-card {
+      width: 100%;
+      background: black;
+      border-radius: 20px;
+      padding: 40px 50px;
+      box-shadow: 0 5px 25px rgba(105, 117, 253, 0.4);
+      transition: all 0.4s ease;
+      opacity: 1;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(105, 117, 253, 0.4);
+    }
+
+    .service-card.hidden {
+      opacity: 0;
+      height: 0;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .card-icon {
+      width: 65px;
+      height: 65px;
+      background: blue;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      font-size: 30px;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: blue;
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+
+    .card-description {
+      color: white;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .read-more {
+      color: blue;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: gap 0.3s ease;
+    }
+
+    .read-more:hover {
+      gap: 14px;
+    }
+
+    .arrow-container {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    .arrow-btn {
+      width: 50px;
+      height: 50px;
+      background: blue;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: white;
+    }
+
+    .arrow-btn:hover {
+      background: #0036B1;
+      transform: scale(1.1);
+    }
+
+    .arrow-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    /* ==================== APPOINTMENT SECTION ==================== */
+    .appointment-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .testimonial-side {
+      position: relative;
+      background: url("https://wordpress.zozothemes.com/optiplus/wp-content/uploads/sites/29/2024/09/blog-4-1-768x456.webp") center/cover;
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+    }
+
+    .testimonial-side::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+          rgba(0, 0, 0, 0.85),
+          rgba(0, 0, 0, 0.65));
+      z-index: 1;
+    }
+
+    .testimonial-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+    }
+
+    .quote-icon {
+      font-size: 80px;
+      color: #80c99d;
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 30px;
+    }
+
+    .testimonial-slider {
+      position: relative;
+      min-height: 280px;
+    }
+
+    .testimonial-slide {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+
+    .testimonial-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .testimonial-text {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .author-image {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid #80c99d;
+      object-fit: cover;
+    }
+
+    .author-info h3 {
+      font-size: 22px;
+      color: #80c99d;
+      margin-bottom: 5px;
+    }
+
+    .author-info p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: #80c99d;
+      width: 40px;
+      border-radius: 6px;
+    }
+
+    .form-side {
+      background: #1a1a1a;
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-container {
+      max-width: 550px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .form-header {
+      margin-bottom: 40px;
+    }
+
+    .form-header h2 {
+      font-size: 48px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .form-header p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .appointment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: white;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    /*.form-input::placeholder,
+      .form-select::placeholder,
+      .form-textarea::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }*/
+    .form-input::placeholder,
+    .form-select::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ADD THIS NEW RULE for modal form inputs */
+    .modal-right .form-input::placeholder {
+      color: #999;
+    }
+
+    .modal-right .form-input {
+      color: #333;
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+    }
+
+    .modal-right .form-input:focus {
+      border-color: blue;
+      background: #ffffff;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: #80c99d;
+    }
+
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 20px center;
+      padding-right: 45px;
+    }
+
+    .form-select option {
+      background: #1a1a1a;
+      color: white;
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .form-input[type="date"] {
+      color-scheme: dark;
+    }
+
+    .submit-btn {
+      padding: 18px 40px;
+      background: #80c99d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: #6bb588;
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(128, 201, 157, 0.4);
+    }
+
+    /* ==================== GLASSES SIZE SECTION ==================== */
+    .glasses-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 100px 60px;
+      background-color: white;
+    }
+
+    .glasses-title {
+      color: #80c99d;
+      text-align: center;
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 60px;
+      letter-spacing: 1px;
+    }
+
+    .glasses-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .glasses-section {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .glasses-image {
+      width: 100%;
+      height: auto;
+    }
+
+    .vertical-label {
+      position: absolute;
+      left: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vertical-line {
+      width: 2px;
+      height: 96px;
+      background-color: #90baa3;
+    }
+
+    .vertical-text {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .bottom-label {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .content-section {
+      max-width: 600px;
+    }
+
+    .content-section h1 {
+      font-size: 36px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+      color: #1a1a1a;
+      line-height: 1.2;
+    }
+
+    .description {
+      color: #666;
+      margin-bottom: 32px;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .size-info {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 16px;
+    }
+
+    .size-info strong {
+      font-weight: 600;
+      color: #90baa3;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .size-input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .size-input:focus {
+      border-color: #90baa3;
+    }
+
+    .calculate-btn,
+    .shop-btn {
+      padding: 14px 32px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .calculate-btn {
+      background-color: #1a1a1a;
+      color: white;
+    }
+
+    .calculate-btn:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+
+    .shop-btn {
+      width: 100%;
+      background-color: white;
+      color: #1a1a1a;
+      border: 2px solid #1a1a1a;
+      margin-bottom: 16px;
+    }
+
+    .shop-btn:hover {
+      background-color: #1a1a1a;
+      color: white;
+    }
+
+    .recalculate-btn {
+      background: none;
+      border: none;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: underline;
+      cursor: pointer;
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+
+    .recalculate-btn:hover {
+      text-decoration: none;
+      color: #90baa3;
+    }
+
+    .result-section {
+      display: none;
+    }
+
+    .result-section.active {
+      display: block;
+    }
+
+    .input-section.hidden {
+      display: none;
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      background: rgba(37, 99, 235, .08);
+      color: var(--primary);
+      margin-bottom: 16px
+    }
+
+    .section-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      color: var(--text)
+    }
+
+    .section-subtitle {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--text-secondary);
+      max-width: 680px;
+      line-height: 1.7
+    }
+
+    /* Hero Section 1 */
+    .info-section {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 100%)
+    }
+
+    .info-section .section-subtitle {
+      margin: 0 auto 48px
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto 48px
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      text-align: left;
+      transition: transform .3s, box-shadow .3s
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(37, 99, 235, .08)
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      background: rgba(37, 99, 235, .07)
+    }
+
+    .card-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .feature-card h3 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text)
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65
+    }
+
+    /* Callout */
+    .callout {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 28px 36px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 700;
+      position: relative;
+      overflow: hidden
+    }
+
+    .callout::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .18), transparent);
+      animation: shimmer 3s infinite
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%)
+      }
+
+      100% {
+        transform: translateX(100%)
+      }
+    }
+
+    /* Section 2 */
+    .steps-section {
+      max-width: 900px;
+      margin: 0 auto
+    }
+
+    .steps-section .section-subtitle {
+      margin-bottom: 48px
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 40px
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      border-radius: 4px
+    }
+
+    .step-card {
+      display: flex;
+      gap: 24px;
+      position: relative
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 3px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Manrope', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      flex-shrink: 0;
+      z-index: 1;
+      box-shadow: 0 0 0 6px var(--bg), 0 0 20px rgba(37, 99, 235, .12);
+      animation: pulseNum 3s ease-in-out infinite
+    }
+
+    @keyframes pulseNum {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 6px var(--bg), 0 0 12px rgba(37, 99, 235, .1)
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px var(--bg), 0 0 24px rgba(37, 99, 235, .22)
+      }
+    }
+
+    .step-body {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: transform .3s, box-shadow .3s
+    }
+
+    .step-body:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .06)
+    }
+
+    .step-body h3 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text)
+    }
+
+    .step-body p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 16px
+    }
+
+    /* Illustration placeholder */
+    .illust {
+      width: 100%;
+      height: 140px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #eef3ff, #dbeafe);
+      border: 1px dashed rgba(37, 99, 235, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600
+    }
+
+    .illust svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: .7
+    }
+
+    /* Reassurance */
+    .reassurance {
+      text-align: center;
+      margin-top: 56px;
+      padding: 20px 28px;
+      border-radius: var(--radius);
+      background: rgba(14, 165, 233, .06);
+      border-left: 4px solid var(--accent);
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      background: var(--bg-card)
+    }
+
+    /* Fade-in animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    /* ==================== FOOTER ==================== */
+    /* ==================== FOOTER ==================== */
+    .footer {
+      background: linear-gradient(135deg, #0a1f1a 0%, #000000 100%);
+      color: #fff;
+      padding: 80px 60px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle,
+          rgba(46, 204, 113, 0.15) 0%,
+          transparent 70%);
+      border-radius: 50%;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-section h1 {
+      font-size: 48px;
+      font-weight: 300;
+      margin-bottom: 30px;
+      letter-spacing: -1px;
+      color: white;
+    }
+
+    .logo-section p {
+      color: #b8b8b8;
+      line-height: 1.8;
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .contact-item h3 {
+      color: #888;
+      font-size: 13px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .contact-item a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+
+    .contact-item a:hover {
+      color: blue;
+    }
+
+    .footer-section h2 {
+      font-size: 20px;
+      margin-bottom: 25px;
+      font-weight: 500;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .footer-section h2::before {
+      content: "●";
+      position: absolute;
+      left: 0;
+      color: blue;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 15px;
+    }
+
+    .footer-section ul li a {
+      color: #d0d0d0;
+      text-decoration: none;
+      font-size: 15px;
+      transition: all 0.3s;
+      display: inline-block;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .footer-section ul li a::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: blue;
+      font-size: 18px;
+      transition: transform 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: blue;
+      padding-left: 25px;
+    }
+
+    .footer-section ul li a:hover::before {
+      transform: translateX(3px);
+    }
+
+    .newsletter-section p {
+      color: #b8b8b8;
+      line-height: 1.7;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 15px 20px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .newsletter-form input::placeholder {
+      color: #666;
+    }
+
+    .newsletter-form button {
+      background: blue;
+      border: none;
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .newsletter-form button:hover {
+      background: #27ae60;
+    }
+
+    .newsletter-form button::after {
+      content: "✉";
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 60px auto 0;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .footer-bottom a {
+      color: #4da3ff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-bottom a:hover {
+      color: #27ae60;
+    }
+
+    /* ==================== SCROLL TO TOP ==================== */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: blue;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 999;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      background: blue;
+      transform: translateY(-5px);
+    }
+
+    .scroll-top::before {
+      content: "↑";
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 1200px) {
+      .hero-content {
+        gap: 40px;
+      }
+
+      .hero-text h1 {
+        font-size: 56px;
+      }
+
+      .main-heading {
+        font-size: 42px;
+      }
+
+      .services-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cards-column {
+        max-width: 500px;
+        width: 100%;
+      }
+
+      .cards-column.left,
+      .cards-column.right {
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      nav {
+        padding: 20px 40px;
+      }
+
+      nav ul {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: #ffffff;
+        width: 70%;
+        max-width: 280px;
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 20px;
+        border-radius: 10px;
+        display: none;
+        box-shadow: 0 10px 40px rgba(253, 226, 226, 0);
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero {
+        padding: 120px 40px 60px;
+      }
+
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-text {
+        max-width: 100%;
+      }
+
+      .hero-text h1 {
+        font-size: 48px;
+      }
+
+      .hero-image {
+        width: 100%;
+      }
+
+      #specs {
+        max-width: 450px;
+      }
+
+      .process-container {
+        padding: 80px 40px;
+      }
+
+      .process-content {
+        flex-direction: column;
+        gap: 60px;
+      }
+
+      .left-side,
+      .right-side {
+        max-width: 100%;
+      }
+
+      .services-section {
+        padding: 80px 40px;
+      }
+
+      .appointment-section {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonial-side,
+      .form-side {
+        min-height: 60vh;
+        padding: 60px 40px;
+      }
+
+      .glasses-container {
+        padding: 80px 40px;
+      }
+
+      .glasses-grid {
+        gap: 60px;
+      }
+
+      .footer {
+        padding: 60px 40px 20px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 25px;
+      }
+
+      nav .logo {
+        font-size: 26px;
+      }
+
+      .hero {
+        padding: 100px 25px 40px;
+        min-height: auto;
+      }
+
+      .hero-text h4 {
+        font-size: 12px;
+      }
+
+      .hero-text h1 {
+        font-size: 38px;
+        line-height: 1.2;
+      }
+
+      .hero-text p {
+        font-size: 14px;
+      }
+
+      .cta-btn {
+        padding: 14px 32px;
+        font-size: 14px;
+      }
+
+      #specs {
+        max-width: 350px;
+      }
+
+      .process-container {
+        padding: 60px 25px;
+      }
+
+      .main-heading {
+        font-size: 36px;
+      }
+
+      .point {
+        padding-left: 60px;
+      }
+
+      .big-number {
+        font-size: 70px;
+      }
+
+      .services-section {
+        padding: 60px 25px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .top-semicircle {
+        width: 400px;
+        height: 200px;
+      }
+
+      .main-image {
+        max-width: 100%;
+      }
+
+      .service-card {
+        padding: 30px 25px;
+      }
+
+      .arrow-btn {
+        width: 45px;
+        height: 45px;
+      }
+
+      .testimonial-side,
+      .form-side {
+        padding: 50px 25px;
+      }
+
+      .quote-icon {
+        font-size: 60px;
+      }
+
+      .testimonial-text {
+        font-size: 16px;
+      }
+
+      .form-header h2 {
+        font-size: 36px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .glasses-container {
+        padding: 60px 25px;
+      }
+
+      .glasses-title {
+        font-size: 32px;
+        margin-bottom: 40px;
+      }
+
+      .glasses-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .content-section h1 {
+        font-size: 28px;
+        text-align: center;
+      }
+
+      .description {
+        text-align: center;
+      }
+
+      .input-group {
+        flex-direction: column;
+      }
+
+      .calculate-btn {
+        width: 100%;
+      }
+
+      .vertical-label {
+        left: 0;
+      }
+
+      .bottom-label {
+        bottom: 15px;
+        font-size: 12px;
+      }
+
+      .footer {
+        padding: 50px 25px 20px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .logo-section h1 {
+        font-size: 36px;
+      }
+
+      .scroll-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .scroll-top::before {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 32px;
+      }
+
+      .main-heading {
+        font-size: 28px;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+
+      .form-header h2 {
+        font-size: 28px;
+      }
+
+      .glasses-title {
+        font-size: 26px;
+      }
+
+      .content-section h1 {
+        font-size: 24px;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        padding: 14px 16px;
+        font-size: 13px;
+      }
+
+      .submit-btn {
+        padding: 16px 30px;
+        font-size: 12px;
+      }
+
+      /* Make dropdown appear ABOVE everything on mobile */
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        /* KEY FIX */
+        left: 0;
+        margin-top: 8px;
+        /* small buffer */
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        min-width: 180px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Ensure the full nav menu is above hero section */
+      nav ul li {
+        position: relative;
+      }
+
+      /* The hero section was overlapping the menu */
+      .hero,
+      .hero-content,
+      .hero-text {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Fix overlapping on mobile */
+      @media (max-width: 1024px) {
+        .dropdown {
+          position: relative;
+        }
+
+        nav {
+          position: relative;
+        }
+
+        nav ul li {
+          position: relative;
+        }
+      }
+    }
+
+    /* ==================== DROPDOWN FIX ==================== */
+
+    /* Ensure nav has highest z-index */
+    nav {
+      z-index: 10000 !important;
+      position: fixed;
+    }
+
+    /* Dropdown improvements for all screen sizes */
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 30px;
+      left: 0;
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      min-width: 180px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      z-index: 10001 !important;
+    }
+
+    /* Desktop hover behavior */
+    @media (min-width: 1025px) {
+      nav ul li:hover .dropdown {
+        display: block;
+      }
+    }
+
+    /* Mobile dropdown behavior */
+    @media (max-width: 1024px) {
+      nav ul li {
+        position: relative;
+      }
+
+      .dropdown {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-top: 10px;
+        width: 100%;
+        z-index: 10001 !important;
+      }
+
+      .dropdown.show {
+        display: block;
+      }
+
+      /* Make parent link clickable area larger on mobile */
+      nav ul li>a {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+      }
+
+      /* Ensure dropdown links are fully clickable */
+      .dropdown a {
+        display: block;
+        width: 100%;
+        padding: 10px 15px;
+        color: #333;
+        position: relative;
+        z-index: 10002;
+        pointer-events: auto;
+      }
+    }
+
+    /* Ensure hero and other sections don't overlap nav */
+    .hero,
+    .hero::before,
+    .hero-content,
+    .hero-text,
+    .hero-image {
+      z-index: 1 !important;
+    }
+
+    /* Fix for mobile menu */
+    nav ul {
+      z-index: 10000 !important;
+    }
+
+    nav ul.active {
+      display: flex;
+      z-index: 10000 !important;
+    }
+
+    /* Clickable dropdown links - ensure pointer events work */
+    .dropdown a {
+      pointer-events: auto;
+      cursor: pointer;
+      position: relative;
+      z-index: 10002;
+    }
+
+    .dropdown a:active {
+      opacity: 0.7;
+    }
+
+    /*#############################CHANGES################*/
+    /* ==================== ADDITIONAL LOGIN MODAL STYLES ==================== */
+
+    /* User Profile Display in Navbar */
+    .user-profile-nav {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 6px 16px 6px 6px;
+      background: #00339A;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .user-profile-nav:hover {
+      background: #00339A;
+    }
+
+    .user-profile-nav.active {
+      display: flex;
+    }
+
+    .user-profile-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(105, 117, 253, 0.4);
+    }
+
+    .user-profile-initials {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, blue, rgba(105, 117, 253, 0.4));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      border: 2px solid blue;
+    }
+
+    .user-profile-name {
+      color: white;
+      font-size: 15px;
+      font-weight: 500;
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .logout-icon {
+      color: #ff6b6b;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .logout-icon:hover {
+      transform: scale(1.2);
+    }
+
+    /* Profile Image Upload Section */
+    .profile-upload-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .profile-image-preview {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #333;
+      object-fit: cover;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-image-preview:hover {
+      border-color: #333;
+      transform: scale(1.05);
+    }
+
+    .profile-image-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px dashed #e0e0e0;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    .profile-image-placeholder:hover {
+      border-color: blue;
+      background: #f0fff4;
+    }
+
+    .profile-image-placeholder svg {
+      width: 40px;
+      height: 40px;
+      color: #999;
+    }
+
+    .profile-image-placeholder span {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+    }
+
+    .upload-btn-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .upload-btn {
+      padding: 10px 24px;
+      background: blue;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .upload-btn:hover {
+      background: #0036B1;
+      transform: translateY(-2px);
+    }
+
+    .upload-btn-wrapper input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    /* Mobile Responsive Modal */
+    @media (max-width: 768px) {
+      .login-modal {
+        grid-template-columns: 1fr;
+        max-width: 95%;
+        max-height: 85vh;
+      }
+
+      .modal-left {
+        display: none;
+      }
+
+      .modal-right {
+        padding: 40px 25px;
+        max-height: 85vh;
+      }
+
+      .modal-right h3 {
+        font-size: 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .eyesight-inputs {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-image-preview,
+      .profile-image-placeholder {
+        width: 100px;
+        height: 100px;
+      }
+
+      .user-profile-name {
+        display: none;
+      }
+
+      .user-profile-nav {
+        padding: 6px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .modal-right {
+        padding: 30px 20px;
+      }
+
+      .modal-right h3 {
+        font-size: 22px;
+      }
+
+      .form-input,
+      .form-select {
+        padding: 12px 16px;
+        font-size: 13px;
+      }
+
+      .submit-btn {
+        padding: 14px 30px;
+        font-size: 13px;
+      }
+
+      .profile-image-preview,
+      .profile-image-placeholder {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    /* ==================== MODAL OVERLAY & STRUCTURE ==================== */
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 100000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+      animation: fadeIn 0.3s ease;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Login Modal */
+    .login-modal {
+      background: white;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.4s ease;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 35px;
+      height: 35px;
+      background: rgba(0, 0, 0, 0.1);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      color: #333;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .close-modal:hover {
+      background: rgba(0, 0, 0, 0.2);
+      transform: rotate(90deg);
+    }
+
+    /* Modal Left Side - Image */
+    .modal-left {
+      background: linear-gradient(135deg, blue 0%, #27ae60 100%);
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-left::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .modal-image {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .modal-left h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .modal-left p {
+      text-align: center;
+      opacity: 0.9;
+      font-size: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Modal Right Side - Form */
+    .modal-right {
+      padding: 50px 40px;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+
+    .modal-right h3 {
+      font-size: 28px;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+
+    .modal-right .subtitle {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    /* Checkbox Styling */
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: blue;
+    }
+
+    .checkbox-group label {
+      margin: 0;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+    }
+
+    /* Eye Sight Section */
+    .eyesight-section {
+      display: none;
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .eyesight-section.active {
+      display: block;
+    }
+
+    .eyesight-section h4 {
+      font-size: 16px;
+      color: blue;
+      margin-bottom: 15px;
+    }
+
+    .eyesight-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: blue;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .submit-btn:hover {
+      background: #27ae60;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+    }
+
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Mobile Responsive Modal - UPDATED */
+    @media (max-width: 768px) {
+      .modal-overlay {
+        padding: 10px;
+      }
+
+      .login-modal {
+        grid-template-columns: 1fr;
+        max-width: 95%;
+        max-height: 90vh;
+      }
+
+      .modal-left {
+        display: none;
+      }
+
+      .modal-right {
+        padding: 40px 25px;
+        max-height: 85vh;
+      }
+
+      .modal-right h3 {
+        font-size: 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .eyesight-inputs {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-image-preview,
+      .profile-image-placeholder {
+        width: 100px;
+        height: 100px;
+      }
+
+      .user-profile-name {
+        display: none;
+      }
+
+      .user-profile-nav {
+        padding: 6px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .modal-right {
+        padding: 30px 20px;
+      }
+
+      .modal-right h3 {
+        font-size: 22px;
+      }
+
+      .form-input {
+        padding: 12px 16px;
+        font-size: 13px;
+      }
+
+      .submit-btn {
+        padding: 14px 30px;
+        font-size: 13px;
+      }
+
+      .profile-image-preview,
+      .profile-image-placeholder {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    .user-profile-nav {
+      cursor: pointer;
+    }
+
+    .user-profile-nav:hover {
+      background: #00339A;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* ==================== PROCESS SECTION (NAVY) ==================== */
+    .process-container {
+      background: linear-gradient(135deg, blue 0%, #001a33 100%) !important;
+    }
+
+    .sub-title {
+      color: #4da3ff !important;
+    }
+
+    /* Light Hospital Blue */
+    .learn-btn {
+      background: #0056b3 !important;
+    }
+
+    .avatar {
+      border: 3px solid #0056b3 !important;
+    }
+
+    .big-number {
+      color: white !important;
+      opacity: 0.1;
+    }
+
+
+    /* ==================== APPOINTMENT & FOOTER ==================== */
+    .quote-icon,
+    .author-info h3,
+    .dot.active {
+      color: #4da3ff !important;
+    }
+
+    .author-image {
+      border: 3px solid #4da3ff !important;
+    }
+
+    .submit-btn {
+      background: blue !important;
+    }
+
+    .footer {
+      background: linear-gradient(135deg, #001a33 0%, #000000 100%) !important;
+    }
+
+    .footer-section h2::before,
+    .footer-section ul li a::before {
+      color: #4da3ff !important;
+    }
+
+    .newsletter-form button,
+    .scroll-top {
+      background: #0056b3 !important;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --primary:#2563eb;--primary-light:#3b82f6;--primary-dark:#1d4ed8;
+      --accent:#0ea5e9;--bg:#f5f7fb;--bg-card:#ffffff;
+      --text:#1e293b;--text-secondary:#475569;--text-muted:#94a3b8;
+      --border:#e2e8f0;--radius:16px;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+    /* Nav */
+    .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);height:60px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+    .nav-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff}
+    .nav-brand h1{font-family:'Manrope',sans-serif;font-size:15px;font-weight:700}
+    .nav-links{display:flex;gap:6px}
+    .nav-links a{padding:7px 16px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;color:var(--text-secondary);border:1.5px solid transparent;transition:.2s}
+    .nav-links a:hover{border-color:var(--primary);color:var(--primary)}
+    .nav-links a.filled{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;border:none}
+    .nav-links a.filled:hover{opacity:.9}
+
+    /* Sections */
+    section{padding:clamp(48px,8vw,96px) clamp(16px,6vw,80px)}
+    .section-label{display:inline-block;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;background:rgba(37,99,235,.08);color:var(--primary);margin-bottom:16px}
+    .section-title{font-family:'Manrope',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;margin-bottom:14px;color:var(--text)}
+    .section-subtitle{font-size:clamp(15px,1.8vw,18px);color:var(--text-secondary);max-width:680px;line-height:1.7}
+
+    /* Hero Section 1 */
+    .info-section{text-align:center;display:flex;flex-direction:column;align-items:center;background:linear-gradient(180deg,#eef3ff 0%,var(--bg) 100%)}
+    .info-section .section-subtitle{margin:0 auto 48px}
+
+    /* Cards Grid */
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1000px;width:100%;margin:0 auto 48px}
+    .feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 28px;text-align:left;transition:transform .3s,box-shadow .3s}
+    .feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(37,99,235,.08)}
+    .card-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;background:rgba(37,99,235,.07)}
+    .card-icon svg{width:26px;height:26px;stroke:var(--primary);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .feature-card h3{font-family:'Manrope',sans-serif;font-size:17px;font-weight:700;margin-bottom:8px;color:var(--text)}
+    .feature-card p{font-size:14px;color:var(--text-secondary);line-height:1.65}
+
+    /* Callout */
+    .callout{max-width:700px;margin:0 auto;text-align:center;padding:28px 36px;border-radius:var(--radius);background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-family:'Manrope',sans-serif;font-size:clamp(16px,2vw,20px);font-weight:700;position:relative;overflow:hidden}
+    .callout::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);animation:shimmer 3s infinite}
+    @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+    /* Section 2 */
+    .steps-section{max-width:900px;margin:0 auto}
+    .steps-section .section-subtitle{margin-bottom:48px}
+
+    /* Timeline */
+    .timeline{position:relative;display:flex;flex-direction:column;gap:40px}
+    .timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--primary),var(--accent));border-radius:4px}
+    .step-card{display:flex;gap:24px;position:relative}
+    .step-num{width:56px;height:56px;border-radius:50%;background:var(--bg-card);border:3px solid var(--primary);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-size:20px;font-weight:800;color:var(--primary);flex-shrink:0;z-index:1;box-shadow:0 0 0 6px var(--bg),0 0 20px rgba(37,99,235,.12);animation:pulseNum 3s ease-in-out infinite}
+    @keyframes pulseNum{0%,100%{box-shadow:0 0 0 6px var(--bg),0 0 12px rgba(37,99,235,.1)}50%{box-shadow:0 0 0 6px var(--bg),0 0 24px rgba(37,99,235,.22)}}
+    .step-body{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:transform .3s,box-shadow .3s}
+    .step-body:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.06)}
+    .step-body h3{font-family:'Manrope',sans-serif;font-size:17px;font-weight:700;margin-bottom:8px;color:var(--text)}
+    .step-body p{font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:16px}
+
+    /* Illustration placeholder 
+    .illust{width:100%;height:140px;border-radius:12px;background:linear-gradient(135deg,#eef3ff,#dbeafe);border:1px dashed rgba(37,99,235,.2);display:flex;align-items:center;justify-content:center;gap:10px;color:var(--primary);font-size:13px;font-weight:600}
+    .illust svg{width:36px;height:36px;stroke:var(--primary);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.7} */
+    .illust{
+  position: relative;
+  width: 100%;
+  height: 150px; /* consistent visual height */
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(37,99,235,.15);
+  background: #eef3ff;
+}
+
+.illust img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* keeps aspect ratio without distortion */
+  display: block;
+  transition: transform .5s ease;
+}
+
+/* subtle premium hover effect */
+.step-body:hover .illust img{
+  transform: scale(1.05);
+}
+
+/* optional soft gradient overlay for readability */
+.illust::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0) 60%,
+    rgba(0,0,0,0.08)
+  );
+  pointer-events:none;
+}
+
+
+    /* Reassurance */
+    .reassurance{text-align:center;margin-top:56px;padding:20px 28px;border-radius:var(--radius);background:rgba(14,165,233,.06);border-left:4px solid var(--accent);font-size:14px;color:var(--text);font-weight:500;max-width:600px;margin-left:auto;margin-right:auto}
+
+    /* Footer */
+    .footer{text-align:center;padding:20px;font-size:11px;color:var(--text-muted);border-top:1px solid var(--border);background:var(--bg-card)}
+
+    /* Fade-in animation */
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:640px){
+      .timeline::before{left:18px}
+      .step-num{width:40px;height:40px;font-size:16px}
+      .step-card{gap:14px}
+      .nav-links a span{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ==================== NAVBAR ==================== -->
+  <nav>
+    <div class="logo">Optiplus.</div>
+    <ul id="navMenu">
+      <li><a href="#">Home</a></li>
+      <li>
+        <a href="#">About Us ▾</a>
+        <div class="dropdown">
+          <a href="faq.html">FAQ</a>
+          <a href="docter2.html">Our Doctors</a>
+          <a href="#footer">Contact Us</a>
+          <a href="guide">Guide / Help</a>
+        </div>
+      </li>
+      <li>
+        <a href="#">Features ▾</a>
+        <div class="dropdown">
+          <a href="landolt.html">Eye Test</a>
+          <a href="http://127.0.0.1:5000">Disease Classification</a>
+          <a href="results.html">Results</a>
+          <a href="#appoint">Make Appointments</a>
+        </div>
+      </li>
+      <!--<li><a class="login-btn" href="#">Login</a></li>-->
+      <li>
+        <button class="login-btn" id="loginBtn">Login</button>
+        <div class="user-profile-nav" id="userProfileNav">
+          <div id="userImageContainer"></div>
+          <span class="user-profile-name" id="userProfileName">User</span>
+        </div>
+      </li>
+    </ul>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h4>FOCUSED ON EYE HEALTH</h4>
+        <h1>Smarter Vision<br />Checks for<br />Better Eye Care.</h1>
+        <p>
+          Transforming vision screening from reactive care to early awareness. Our platform helps people identify vision
+          risks early, before they affect daily life.
+        </p>
+        <a href="landolt.html" class="cta-btn">Check Eye Sight</a>
+      </div>
+      <div class="hero-image">
+        <img id="specs"
+          src="https://wordpress.zozothemes.com/optiplus/wp-content/uploads/sites/29/2024/12/glass-with-cloth.webp"
+          alt="Premium Eyewear" />
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="info-section">
+    <span class="section-label fade-up">Vision Health</span>
+    <h2 class="section-title fade-up">Why Early Vision Screening Matters</h2>
+    <p class="section-subtitle fade-up">Early screening helps detect potential vision risks before they impact daily
+      life, supporting timely professional care and better long-term outcomes for people of all ages.</p>
+
+    <div class="cards-grid">
+      <div class="feature-card fade-up">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </div>
+        <h3>Early Risk Awareness</h3>
+        <p>Many vision problems develop gradually without obvious symptoms. Regular screening helps identify changes
+          sooner, giving you time to take action before they affect your daily activities.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
+            <path d="M3 12h4l3-9 4 18 3-9h4" />
+          </svg>
+        </div>
+        <h3>Better Treatment Outcomes</h3>
+        <p>When potential issues are caught early, you can seek professional care at the right time. Early intervention
+          often leads to more effective treatment options and better visual outcomes.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        </div>
+        <h3>Accessible Preventive Care</h3>
+        <p>Digital screening tools make basic vision checks easier to access — whether at home, in assisted-living
+          settings, or in community health environments where clinical resources may be limited.</p>
+      </div>
+    </div>
+
+    <div class="callout fade-up">Screen early. Act sooner. Protect your vision.</div>
+  </section>
+
+  <!-- ==================== PROCESS SECTION ==================== -->
+  <section class="process-container">
+    <div class="ring-group">
+      <div class="ring ring1"></div>
+      <div class="ring ring2"></div>
+      <div class="ring ring3"></div>
+    </div>
+
+    <div class="process-content">
+      <div class="left-side">
+        <h5 class="sub-title">OUR PROCESS</h5>
+        <h1 class="main-heading">What's Unique About Our Website</h1>
+        <p class="main-description">
+          Our platform introduces a dual-layer vision screening approach that combines AI-based eye image analysis with
+          functional vision testing to support early risk detection and informed referral decisions.
+        </p>
+        <!--<a href="#" class="learn-btn">LEARN MORE ➜</a>
+
+        <div class="rating-row">
+          <img src="testimonial-2.png" class="avatar" alt="Patient" />
+          <img src="Dr.-Ethan-Carter.png" class="avatar" alt="Doctor" />
+          <img src="Pediatric-Eye-Care.png" class="avatar" alt="Care" />
+          <div class="rating-info">
+            <div class="stars">★★★★★</div>
+            <div class="rating-text">4.45 (768k Reviews)</div>
+          </div>
+        </div>-->
+      </div>
+
+      <div class="right-side">
+        <div class="point">
+          <div class="big-number">01</div>
+          <h3>Dual-Layer Screening</h3>
+          <p>AI image analysis works alongside functional vision testing to improve reliability and reduce screening
+            uncertainty.
+          </p>
+        </div>
+
+        <div class="point">
+          <div class="big-number">02</div>
+          <h3>Intelligent Screening Workflow</h3>
+          <p>Automated guidance, voice assistance, and structured testing ensure consistent and user-friendly screening
+            experiences. Designed for assisted environments like health camps and rural outreach. Focuses on usability,
+            not just accuracy
+          </p>
+        </div>
+
+        <div class="point">
+          <div class="big-number">03</div>
+          <h3>Responsible & Referral-Focused</h3>
+          <p>Designed as a screening tool, the platform provides clear referral recommendations instead of automated
+            medical diagnoses.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+
+  <!-- ==================== SERVICES SECTION ==================== -->
+  <section class="services-section">
+    <div class="top-semicircle"></div>
+
+    <div class="section-header">
+      <div class="section-label">OUR SERVICES</div>
+      <h2 class="section-title">
+        Learn About our Core<br />Features
+      </h2>
+    </div>
+
+    <div class="services-content">
+      <div class="cards-column left">
+        <div class="service-card left-card" data-index="0">
+          <div class="card-icon">👁️</div>
+          <h3 class="card-title">Guided Vision Screening</h3>
+          <p class="card-description">
+            Step-by-step instructions with voice support ensure users can complete tests
+            easily, even with minimal supervision.
+          </p>
+          <a href="#" class="read-more">READ MORE →</a>
+        </div>
+
+        <div class="service-card left-card hidden" data-index="1">
+          <div class="card-icon">🧪</div>
+          <h3 class="card-title">Functional Vision Assessment</h3>
+          <p class="card-description">
+            Interactive visual acuity testing using standardized optotype methods to evaluate real-world visual clarity.
+          </p>
+          <a href="#" class="read-more">READ MORE →</a>
+        </div>
+
+        <div class="service-card left-card hidden" data-index="2">
+          <div class="card-icon">📷</div>
+          <h3 class="card-title">Eye Image Capture & Analysis</h3>
+          <p class="card-description">
+            High-quality image capture enables automated screening for potential eye health risks.
+          </p>
+          <a href="#" class="read-more">READ MORE →</a>
+        </div>
+      </div>
+
+      <div class="main-image-container">
+        <img src="https://wordpress.zozothemes.com/optiplus/wp-content/uploads/sites/29/2024/12/women-with-smile.webp"
+          alt="Happy Patient" class="main-image" />
+      </div>
+
+      <div class="cards-column right">
+        <div class="service-card right-card" data-index="3">
+          <div class="card-icon">📊</div>
+          <h3 class="card-title">Clear Screening Summary</h3>
+          <p class="card-description">
+            Users receive a simple, easy-to-understand report with results and recommended next steps.
+          </p>
+          <a href="#" class="read-more">READ MORE →</a>
+        </div>
+
+        <div class="service-card right-card hidden" data-index="4">
+          <div class="card-icon">🩺</div>
+          <h3 class="card-title">Referral Support</h3>
+          <p class="card-description">
+            Provides guidance on when professional consultation may be needed, supporting timely care decisions.
+          </p>
+          <a href="#" class="read-more">READ MORE →</a>
+        </div>
+
+        <div class="service-card right-card hidden" data-index="5">
+          <div class="card-icon">🌍</div>
+          <h3 class="card-title">Designed for Assisted Environments</h3>
+          <p class="card-description">
+            Optimized for use in clinics, camps, and outreach programs with minimal setup and training.
+          </p>
+          <a href="#" class="read-more">READ MORE →</a>
+        </div>
+
+        <div class="arrow-container">
+          <button class="arrow-btn" onclick="slideCards('left')" aria-label="Previous">
+            <svg viewBox="0 0 24 24">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg>
+          </button>
+          <button class="arrow-btn" onclick="slideCards('right')" aria-label="Next">
+            <svg viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section>
+    <div class="steps-section">
+      <span class="section-label fade-up">Our Process</span>
+      <h2 class="section-title fade-up">How Our Vision Screening Works</h2>
+      <p class="section-subtitle fade-up">Our platform uses two complementary screening approaches — AI-powered image
+        analysis and a functional Landolt C test — to provide a well-rounded view of your visual health.</p>
+
+      <div class="timeline">
+        <!-- Step 1 -->
+        <div class="step-card fade-up">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>Eye Image Screening</h3>
+            <p>Capture an image of your eye through the device camera. The system analyzes visual features to identify
+              potential risk indicators. This is a screening support tool — not a medical diagnosis.</p>
+            <div class="illust">
+  <img src="images/eye-screening.png" alt="Eye screening camera">
+</div>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="step-card fade-up">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>Landolt C Vision Test</h3>
+            <p>Identify the direction of the gap in the Landolt C symbol following guided voice and on-screen
+              instructions. This evaluates visual clarity and functional vision performance at various acuity levels.
+            </p>
+            <div class="illust">
+  <img src="images/tests-visual-acuity-diagram-snellen-250nw-1310198068.webp" alt="Vision test chart"/>
+</div>
+            </div>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="step-card fade-up">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>Screening Summary</h3>
+            <p>After completing both screenings, the platform generates a simple report with your results and
+              personalized recommendations on whether professional consultation may be helpful.</p>
+            <div class="illust">
+  <img src="images/result.png" alt="Medical report"/>
+</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reassurance fade-up">⚕ Designed to assist — not replace — professional eye examinations.</div>
+    </div>
+  </section>
+
+  <!-- ==================== APPOINTMENT SECTION ==================== -->
+  <section id="appoint" class="appointment-section">
+    <div class="testimonial-side">
+      <div class="testimonial-content">
+        <div class="quote-icon">"</div>
+
+        <div class="testimonial-slider">
+          <div class="testimonial-slide active" data-slide="0">
+            <p class="testimonial-text">
+              I had always taken my vision for granted until I started
+              noticing things getting blurry over the years. At first, I
+              thought it was just part of getting older, but I soon realized
+              it was affecting my daily life significantly.
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150" alt="Kennedy"
+                class="author-image" />
+              <div class="author-info">
+                <h3>Kennedy</h3>
+                <p>Chief Doctor</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide" data-slide="1">
+            <p class="testimonial-text">
+              The pediatric optometrist was fantastic with Emily, making her
+              feel comfortable and explaining each test as they went along.
+              After the eye exam, we found out that Emily had nearsightedness.
+              We were given options for glasses.
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150" alt="Sarah"
+                class="author-image" />
+              <div class="author-info">
+                <h3>Sarah Mitchell</h3>
+                <p>Parent</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide" data-slide="2">
+            <p class="testimonial-text">
+              The eye care specialists were kind and patient, making sure I
+              was comfortable with my new glasses. Now, I feel so much more
+              confident. I can see clearly again and it has improved my
+              quality of life tremendously.
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150" alt="Jessica"
+                class="author-image" />
+              <div class="author-info">
+                <h3>Jessica Thompson</h3>
+                <p>Patient</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-dots">
+          <span class="dot active" onclick="goToSlide(0)"></span>
+          <span class="dot" onclick="goToSlide(1)"></span>
+          <span class="dot" onclick="goToSlide(2)"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-side">
+      <div class="form-container">
+        <div class="form-header">
+          <h2>Book An<br />Appointment</h2>
+          <p>
+            Schedule a follow-up consultation based on your screening results and take the next step toward professional
+            eye care.
+          </p>
+        </div>
+
+        <form class="appointment-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" class="form-input" placeholder="First Name" required />
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-input" placeholder="Last Name" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <input type="tel" class="form-input" placeholder="Phone" required />
+            </div>
+            <div class="form-group">
+              <input type="date" class="form-input" placeholder="dd/mm/yyyy" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <select class="form-select" required>
+                <option value="">—Please choose—</option>
+                <option value="general">General Checkup</option>
+                <option value="pediatric">Pediatric Care</option>
+                <option value="emergency">Emergency Care</option>
+                <option value="contact">Contact Lens Fitting</option>
+                <option value="surgery">Surgery Consultation</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-input" placeholder="Subject" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <textarea class="form-textarea" placeholder="Text Your Message" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">APPOINTMENT</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== GLASSES SIZE SECTION ==================== -->
+  <div class="glasses-container">
+    <h1 class="glasses-title">KEEP YOUR EYES HEALTHY</h1>
+    <div class="glasses-grid">
+      <div class="glasses-section">
+        <div class="vertical-label">
+          <div class="vertical-line"></div>
+          <span class="vertical-text">Find your fit</span>
+        </div>
+        <img src="https://neoocular.qodeinteractive.com/wp-content/plugins/neoocular-core/assets/img/glasses.png"
+          alt="Glasses size guide" class="glasses-image" />
+        <div class="bottom-label">Find your fit</div>
+      </div>
+
+      <div class="content-section">
+        <h1>GET PERFECT SIZE:<br />FIND GLASSES NOW</h1>
+
+        <p class="description">
+          Use your screening insights to explore eyewear options that match your vision needs and comfort.
+        </p>
+
+        <div class="input-section" id="inputSection">
+          <div class="input-group">
+            <input type="number" id="sizeInput" class="size-input" placeholder="Enter size in mm" min="1" />
+            <button class="calculate-btn" id="calculateBtn">Calculate</button>
+          </div>
+        </div>
+
+        <div class="result-section" id="resultSection">
+          <p class="size-info">
+            <span id="userSize"></span>mm is closest to our
+            <strong id="calculatedSize"></strong>
+          </p>
+          <button class="shop-btn" id="shopBtn">SHOP THIS SIZE</button>
+          <button class="recalculate-btn" id="recalculateBtn">
+            RECALCULATE SIZE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer id="footer" class="footer">
+    <div class="footer-content">
+      <div class="logo-section">
+        <h1>Optiplus.</h1>
+        <p>
+          Proper eye care is important for preventing vision problems,
+          diagnosing conditions early, and preserving eye health throughout
+          life. Good eye care can help reduce the risk of eye diseases
+        </p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <h3>Call Us</h3>
+            <a href="tel:+5284567592">+(528) 456-7592</a>
+          </div>
+          <div class="contact-item">
+            <h3>Email Us</h3>
+            <a href="mailto:example@optiplus.com">example@optiplus.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h2>Our Services</h2>
+        <ul>
+          <li><a href="#">Investment Advisory</a></li>
+          <li><a href="#">Financial Planning</a></li>
+          <li><a href="#">Corporate Finance</a></li>
+          <li><a href="#">Tax Planning</a></li>
+          <li><a href="#">Risk Management</a></li>
+          <li><a href="#">Account & Audit</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h2>Quicklinks</h2>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Testimonials</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Latest Articles</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Refund & Returns</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section newsletter-section">
+        <h2>Newsletter</h2>
+        <p>
+          Eye exams should be scheduled at least once every two years, or more
+          frequently if there are risk factors such as a family history of eye
+          disease
+        </p>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Email Address" required />
+          <button type="submit"></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © Copyright 2025. All rights reserved <a href="#">Optiplus</a>. Designed
+      for <a href="#">HealthCare</a>
+    </div>
+  </footer>
+  <button class="scroll-top" id="scrollTopBtn"></button>
+
+  <!-- ========================================CHANGES================================-->
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="login-modal">
+      <button class="close-modal" id="closeModal">×</button>
+
+      <!-- Left Side - Image (Hidden on mobile) -->
+      <div class="modal-left">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400" alt="Eye Care"
+          class="modal-image" />
+        <h2>Welcome Back!</h2>
+        <p>
+          Join us for comprehensive eye care and personalized vision solutions
+        </p>
+      </div>
+
+      <!-- Right Side - Form -->
+      <div class="modal-right">
+        <h3>Sign In</h3>
+        <p class="subtitle">Enter your details to access your account</p>
+
+        <!-- Profile Image Upload -->
+        <div class="profile-upload-section">
+          <div id="profileImageContainer">
+            <div class="profile-image-placeholder" id="imagePlaceholder"
+              onclick="document.getElementById('profileImageInput').click()">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+              <span>Click to upload<br />profile photo</span>
+            </div>
+          </div>
+          <div class="upload-btn-wrapper">
+            <button type="button" class="upload-btn">Choose Photo</button>
+            <input type="file" id="profileImageInput" accept="image/*" />
+          </div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" class="form-input" placeholder="Enter your full name" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone *</label>
+              <input type="tel" id="phone" class="form-input" placeholder="Phone number" required />
+            </div>
+
+            <div class="form-group">
+              <label for="age">Age *</label>
+              <input type="number" id="age" class="form-input" placeholder="Your age" min="1" max="120" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" class="form-input" placeholder="your.email@example.com" required />
+          </div>
+
+          <!-- Previous Eye Issues Checkbox -->
+          <div class="checkbox-group">
+            <input type="checkbox" id="hasEyeIssues" />
+            <label for="hasEyeIssues">I have previous eyesight issues</label>
+          </div>
+
+          <!-- Eye Sight Section -->
+          <div class="eyesight-section" id="eyesightSection">
+            <h4>Previous Eyesight Details</h4>
+            <div class="eyesight-inputs">
+              <div class="form-group">
+                <label for="leftEye">Left Eye (OD)</label>
+                <input type="text" id="leftEye" class="form-input" placeholder="e.g., -2.50" />
+              </div>
+              <div class="form-group">
+                <label for="rightEye">Right Eye (OS)</label>
+                <input type="text" id="rightEye" class="form-input" placeholder="e.g., -2.00" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="eyeCondition">Eye Condition/Notes</label>
+              <input type="text" id="eyeCondition" class="form-input" placeholder="e.g., Myopia, Astigmatism" />
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // Toggle Mobile Menu
+    function toggleMenu() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+
+    // Services Slider
+    let currentIndex = 0;
+
+    function slideCards(direction) {
+      const leftCards = document.querySelectorAll(".left-card");
+      const rightCards = document.querySelectorAll(".right-card");
+
+      if (direction === "right") {
+        currentIndex = (currentIndex + 1) % 3;
+      } else {
+        currentIndex = (currentIndex - 1 + 3) % 3;
+      }
+
+      leftCards.forEach((card) => card.classList.add("hidden"));
+      rightCards.forEach((card) => card.classList.add("hidden"));
+
+      leftCards[currentIndex].classList.remove("hidden");
+      rightCards[currentIndex].classList.remove("hidden");
+    }
+
+    // Testimonial Slider
+    let currentSlide = 0;
+    const totalSlides = 3;
+    let autoSlideInterval;
+
+    function goToSlide(index) {
+      document.querySelectorAll(".testimonial-slide").forEach((slide) => {
+        slide.classList.remove("active");
+      });
+
+      document.querySelectorAll(".dot").forEach((dot) => {
+        dot.classList.remove("active");
+      });
+
+      document
+        .querySelector(`[data-slide="${index}"]`)
+        .classList.add("active");
+      document.querySelectorAll(".dot")[index].classList.add("active");
+
+      currentSlide = index;
+
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      goToSlide(currentSlide);
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 5000);
+    }
+
+    // Appointment Form
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert("Appointment request submitted! We will contact you soon.");
+      event.target.reset();
+    }
+
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Glasses Size Calculator
+    const sizeInput = document.getElementById("sizeInput");
+    const calculateBtn = document.getElementById("calculateBtn");
+    const shopBtn = document.getElementById("shopBtn");
+    const recalculateBtn = document.getElementById("recalculateBtn");
+    const inputSection = document.getElementById("inputSection");
+    const resultSection = document.getElementById("resultSection");
+    const userSizeSpan = document.getElementById("userSize");
+    const calculatedSizeSpan = document.getElementById("calculatedSize");
+
+    sizeInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        calculateSize();
+      }
+    });
+
+    calculateBtn.addEventListener("click", calculateSize);
+    shopBtn.addEventListener("click", shopThisSize);
+    recalculateBtn.addEventListener("click", recalculate);
+
+    function calculateSize() {
+      const userSize = parseInt(sizeInput.value);
+
+      if (isNaN(userSize) || userSize <= 0) {
+        alert("Please enter a valid size in mm");
+        return;
+      }
+
+      let calculatedSize = "";
+
+      if (userSize < 42) {
+        calculatedSize = "XXS";
+      } else if (userSize >= 42 && userSize < 45) {
+        calculatedSize = "XS";
+      } else if (userSize >= 45 && userSize < 48) {
+        calculatedSize = "S";
+      } else if (userSize >= 48 && userSize < 51) {
+        calculatedSize = "M";
+      } else if (userSize >= 51 && userSize < 54) {
+        calculatedSize = "L";
+      } else if (userSize >= 54 && userSize < 57) {
+        calculatedSize = "XL";
+      } else {
+        calculatedSize = "XXL";
+      }
+
+      userSizeSpan.textContent = userSize;
+      calculatedSizeSpan.textContent = calculatedSize;
+
+      inputSection.classList.add("hidden");
+      resultSection.classList.add("active");
+    }
+
+    function shopThisSize() {
+      window.location.href = "/lens-page.html";
+    }
+
+    function recalculate() {
+      sizeInput.value = "";
+      inputSection.classList.remove("hidden");
+      resultSection.classList.remove("active");
+    }
+
+    // Scroll to Top Button
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+    window.addEventListener("scroll", function () {
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add("visible");
+      } else {
+        scrollTopBtn.classList.remove("visible");
+      }
+    });
+
+    scrollTopBtn.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
+    // Start testimonial auto-slide on load
+    startAutoSlide();
+
+    // Close mobile menu when clicking outside
+    document.addEventListener("click", function (event) {
+      const nav = document.querySelector("nav");
+      const menu = document.getElementById("navMenu");
+      const menuBtn = document.querySelector(".menu-btn");
+
+      if (!nav.contains(event.target) && menu.classList.contains("active")) {
+        menu.classList.remove("active");
+      }
+    });
+    /* ==================== DROPDOWN MENU FIX ==================== */
+
+    // Toggle dropdown on mobile when clicking parent link
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get all nav items with dropdowns
+      const dropdownParents = document.querySelectorAll(
+        "nav ul li"
+      );
+
+      dropdownParents.forEach((parent) => {
+        const parentLink = parent.querySelector("a");
+        const dropdown = parent.querySelector(".dropdown");
+        if (!dropdown) return;
+
+        if (parentLink && dropdown) {
+          // Prevent default only on mobile
+          parentLink.addEventListener("click", function (e) {
+            if (window.innerWidth <= 1024) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              // Close all other dropdowns
+              document.querySelectorAll(".dropdown").forEach((d) => {
+                if (d !== dropdown) {
+                  d.classList.remove("show");
+                }
+              });
+
+              // Toggle current dropdown
+              dropdown.classList.toggle("show");
+            }
+          });
+        }
+      });
+
+      // Ensure dropdown links work correctly
+      const dropdownLinks = document.querySelectorAll(".dropdown a");
+      dropdownLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.stopPropagation(); // Prevent parent toggle
+
+          // Get href and navigate
+          const href = this.getAttribute("href");
+          if (href && href !== "#" && !href.startsWith("#")) {
+            window.location.href = href;
+          } else if (href && href.startsWith("#")) {
+            // For anchor links, scroll to section
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+              e.preventDefault();
+              targetElement.scrollIntoView({ behavior: "smooth" });
+              // Close mobile menu
+              document.getElementById("navMenu").classList.remove("active");
+              // Close dropdown
+              this.closest(".dropdown").classList.remove("show");
+            }
+          }
+        });
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest("nav")) {
+          document.querySelectorAll(".dropdown").forEach((dropdown) => {
+            dropdown.classList.remove("show");
+          });
+        }
+      });
+
+      // Close dropdowns when resizing to desktop
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 1024) {
+          document.querySelectorAll(".dropdown").forEach((dropdown) => {
+            dropdown.classList.remove("show");
+          });
+        }
+      });
+    });
+
+    // Update existing toggleMenu function to close dropdowns
+    function toggleMenu() {
+      const navMenu = document.getElementById("navMenu");
+      const isActive = navMenu.classList.contains("active");
+
+      navMenu.classList.toggle("active");
+
+      // If closing menu, also close all dropdowns
+      if (isActive) {
+        document.querySelectorAll(".dropdown").forEach((dropdown) => {
+          dropdown.classList.remove("show");
+        });
+      }
+    }
+    // ==================== AUTH MANAGER (INLINE) ====================
+    const AuthManager = {
+      STORAGE_KEY: "optiplusUser",
+
+      saveUser(userData) {
+        try {
+          localStorage.setItem(this.STORAGE_KEY, JSON.stringify(userData));
+          return true;
+        } catch (error) {
+          console.error("Error saving user data:", error);
+          return false;
+        }
+      },
+
+      getUser() {
+        try {
+          const userData = localStorage.getItem(this.STORAGE_KEY);
+          return userData ? JSON.parse(userData) : null;
+        } catch (error) {
+          console.error("Error retrieving user data:", error);
+          return null;
+        }
+      },
+
+      isLoggedIn() {
+        return this.getUser() !== null;
+      },
+
+      logout() {
+        try {
+          localStorage.removeItem(this.STORAGE_KEY);
+          return true;
+        } catch (error) {
+          console.error("Error logging out:", error);
+          return false;
+        }
+      },
+
+      convertImageToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      },
+    };
+
+    // ==================== LOGIN MODAL HANDLER ====================
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginBtn = document.getElementById("loginBtn");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const closeModal = document.getElementById("closeModal");
+      const loginForm = document.getElementById("loginForm");
+      const hasEyeIssuesCheckbox = document.getElementById("hasEyeIssues");
+      const eyesightSection = document.getElementById("eyesightSection");
+      const userProfileNav = document.getElementById("userProfileNav");
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      // Profile Navigation Click Handler
+      if (userProfileNav) {
+        userProfileNav.addEventListener("click", function (e) {
+          // Prevent the logout icon from triggering navigation
+          if (
+            e.target.id !== "logoutBtn" &&
+            !e.target.closest("#logoutBtn")
+          ) {
+            window.location.href = "profile/profile.html";
+          }
+        });
+      }
+      const profileImageInput = document.getElementById("profileImageInput");
+      const profileImageContainer = document.getElementById(
+        "profileImageContainer"
+      );
+
+      let selectedImageBase64 = null;
+
+      // Open Modal
+      if (loginBtn) {
+        loginBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          modalOverlay.classList.add("active");
+        });
+      }
+
+      // Close Modal Function
+      function closeModalFunc() {
+        modalOverlay.classList.remove("active");
+      }
+
+      if (closeModal) {
+        closeModal.addEventListener("click", closeModalFunc);
+      }
+
+      // Close on overlay click
+      modalOverlay.addEventListener("click", function (e) {
+        if (e.target === modalOverlay) {
+          closeModalFunc();
+        }
+      });
+
+      // Prevent modal content clicks from closing
+      const loginModal = document.querySelector(".login-modal");
+      if (loginModal) {
+        loginModal.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+      }
+
+      // Image Upload
+      if (profileImageInput) {
+        profileImageInput.addEventListener("change", async function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            if (!file.type.startsWith("image/")) {
+              alert("Please select an image file");
+              return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+              alert("Image size should be less than 5MB");
+              return;
+            }
+
+            try {
+              selectedImageBase64 = await AuthManager.convertImageToBase64(
+                file
+              );
+              displayProfileImage(selectedImageBase64);
+            } catch (error) {
+              console.error("Error loading image:", error);
+              alert("Error loading image. Please try again.");
+            }
+          }
+        });
+      }
+
+      function displayProfileImage(imageBase64) {
+        profileImageContainer.innerHTML = `
+            <img src="${imageBase64}"
+                 class="profile-image-preview"
+                 alt="Profile"
+                 onclick="document.getElementById('profileImageInput').click()">
+          `;
+      }
+
+      // Toggle Eyesight Section
+      if (hasEyeIssuesCheckbox) {
+        hasEyeIssuesCheckbox.addEventListener("change", function (e) {
+          if (e.target.checked) {
+            eyesightSection.classList.add("active");
+          } else {
+            eyesightSection.classList.remove("active");
+          }
+        });
+      }
+
+      // Form Submission
+      if (loginForm) {
+        loginForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const userData = {
+            fullName: document.getElementById("fullName").value,
+            phone: document.getElementById("phone").value,
+            age: document.getElementById("age").value,
+            email: document.getElementById("email").value,
+            hasEyeIssues: hasEyeIssuesCheckbox.checked,
+            profileImage: selectedImageBase64,
+            loginDate: new Date().toISOString(),
+          };
+
+          if (hasEyeIssuesCheckbox.checked) {
+            userData.eyesight = {
+              leftEye: document.getElementById("leftEye").value,
+              rightEye: document.getElementById("rightEye").value,
+              condition: document.getElementById("eyeCondition").value,
+            };
+          }
+
+          const saved = AuthManager.saveUser(userData);
+
+          if (saved) {
+            updateUserProfile(userData);
+            closeModalFunc();
+
+            loginForm.reset();
+            eyesightSection.classList.remove("active");
+            profileImageContainer.innerHTML = `
+                <div class="profile-image-placeholder" id="imagePlaceholder" onclick="document.getElementById('profileImageInput').click()">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                  <span>Click to upload<br>profile photo</span>
+                </div>
+              `;
+            selectedImageBase64 = null;
+
+            alert("Login successful! Welcome, " + userData.fullName);
+
+            if (userData.hasEyeIssues && userData.eyesight) {
+              setTimeout(function () {
+                const resultsSection = document.getElementById("results");
+                if (resultsSection) {
+                  resultsSection.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  window.location.hash = "#results";
+                }
+              }, 1000);
+            }
+          } else {
+            alert("Error saving data. Please try again.");
+          }
+        });
+      }
+
+
+      // Update User Profile Display
+      function updateUserProfile(userData) {
+        const userImageContainer =
+          document.getElementById("userImageContainer");
+        const userProfileName = document.getElementById("userProfileName");
+
+        if (userData.profileImage) {
+          userImageContainer.innerHTML = `
+              <img src="${userData.profileImage}"
+                   class="user-profile-image"
+                   alt="${userData.fullName}">
+            `;
+        } else {
+          const initials = userData.fullName
+            .split(" ")
+            .map((word) => word[0])
+            .join("")
+            .toUpperCase()
+            .slice(0, 2);
+
+          userImageContainer.innerHTML = `
+              <div class="user-profile-initials">${initials}</div>
+            `;
+        }
+
+        const firstName = userData.fullName.split(" ")[0];
+        userProfileName.textContent = firstName;
+
+        loginBtn.style.display = "none";
+        userProfileNav.classList.add("active");
+      }
+
+      // Auto-login on page load
+      const storedUser = AuthManager.getUser();
+      if (storedUser) {
+        updateUserProfile(storedUser);
+      }
+      // Auto-update profile when returning from profile page
+      window.addEventListener("focus", function () {
+        const storedUser = AuthManager.getUser();
+        if (storedUser) {
+          updateUserProfile(storedUser);
+        }
+      });
+    });
+
+    <!-- BACKEND LOGIN PATCH (SAFE) -->
+    document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+
+      try {
+        const res = await fetch('/api/user', {
+          method: 'POST',
+          body: fd
+        });
+        const j = await res.json();
+
+        if (j.ok) {
+          localStorage.setItem("user_id", j.user_id);
+          alert("Login successful!");
+          document.getElementById("modalOverlay").classList.remove("active");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Network error");
+      }
+    });
+
+
+  </script>
+  <!-- Authentication Scripts 
+    <script src="auth.js"></script>
+    <script src="login-handler.js"></script>-->
+
+  <div id="google_translate_element" style="display:none"></div>
+
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,te,ta,bn,kn,mr',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+
+    function forceTranslate() {
+
+      const fullCode = localStorage.getItem('optiplus_lang');
+
+
+      // if (!fullCode || fullCode.startsWith('en')) {
+      //     console.log("Language is English, no translation needed.");
+      //     return;
+      // }
+
+      // const lang = fullCode.split('-')[0]; 
+
+      if (!fullCode || fullCode.startsWith('en')) {
+        // Check if a translation was active before
+        if (document.cookie.includes('googtrans')) {
+          // 1. Clear the cookies
+          document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + document.domain;
+
+          // 2. REFRESH the page to show original English
+          location.reload();
+        }
+        return;
+      }
+
+      const lang = fullCode.split('-')[0];
+
+      console.log("Attempting to translate to: " + lang);
+
+      // 2. Wait for the Google Dropdown to be injected into the page
+      let attemptCount = 0;
+      const checkInterval = setInterval(() => {
+        const selectEl = document.querySelector('.goog-te-combo');
+
+        if (selectEl) {
+          // 3. Set the value and trigger the change event
+          selectEl.value = lang;
+          selectEl.dispatchEvent(new Event('change'));
+          console.log("Translation Triggered!");
+          clearInterval(checkInterval);
+        }
+
+        // Stop trying after 5 seconds so we don't loop forever
+        attemptCount++;
+        if (attemptCount > 50) clearInterval(checkInterval);
+      }, 100);
+    }
+
+    // Run the force function
+    window.addEventListener('load', forceTranslate);
+  </script>
+
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+      window.gtranslateSettings = {
+        "default_language": "en",
+        "languages": ["en", "hi", "te", "ta", "bn", "kn", "ml", "mr", "gu", "pa"],
+        "wrapper_selector": "#google_translate_element"
+      }
+    </script>
+  <script src="https://scripts.gtranslate.io/widgets/latest/float.js" defer></script>
+</body>
+
+</html>

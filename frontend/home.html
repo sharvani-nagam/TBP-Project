@@ -1,0 +1,517 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENSER | Intelligent Vision</title>
+    <style>
+        :root {
+            --brand-mint: #e0f2f1;
+            --brand-dark: #004d40;
+            --tech-purple: #4f46e5;
+            --deep-bg: #050505;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+
+        body {
+            background-color: var(--deep-bg);
+            background: radial-gradient(circle at 50% -20%, #2e1065 0%, #050505 70%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Ambient Grid Effect from second image */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+        }
+
+        /* Tech-Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            color: #a5b4fc;
+        }
+
+        .badge span {
+            background: #fff;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-weight: 900;
+            font-size: 10px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff 60%, rgba(255,255,255,0.4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            line-height: 1.6;
+        }
+
+        /* The "Core" Central Element */
+        .lenser-core {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            border-radius: 24px;
+            margin: 0 auto 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 50px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Recreating the LENSER logo icon from Image 1 */
+        .logo-svg {
+            width: 80px;
+            fill: var(--brand-dark);
+        }
+
+        /* Connecting Lines Effect from Image 2 */
+        .glow-orb {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.2) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        /* Responsive Start Button */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .start-toggle {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 10px 8px 24px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .start-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #fff;
+        }
+
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: #fff;
+            border-radius: 20px;
+            margin-left: 15px;
+            position: relative;
+        }
+
+        .toggle-switch::after {
+            content: "";
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            background: var(--tech-purple);
+            border-radius: 50%;
+        }
+
+        /* Small icons floating around (Image 2 style) */
+        .float-icon {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .float-icon { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="float-icon" style="top: 20%; left: 15%; animation-delay: 0s;">👁️</div>
+    <div class="float-icon" style="top: 60%; left: 10%; animation-delay: 1s;">🔬</div>
+    <div class="float-icon" style="top: 25%; right: 15%; animation-delay: 2s;">⚡</div>
+    <div class="float-icon" style="top: 65%; right: 10%; animation-delay: 3s;">🤖</div>
+
+    <div class="container">
+        <div class="badge"><span>NEW</span> Intelligent Vision Partner ›</div>
+        
+        <h1>Modern Diagnostics for Ambitious Health.</h1>
+        
+        <p class="subtitle">Smart optical solutions designed to help individuals see clearer, work faster, and live more vibrantly.</p>
+
+        <div class="lenser-core">
+            <div class="glow-orb"></div>
+            <svg class="logo-svg" viewBox="0 0 100 60">
+                <circle cx="50" cy="40" r="15" stroke-width="4" stroke="currentColor" fill="none" />
+                <circle cx="50" cy="40" r="6" fill="currentColor" />
+                <path d="M20 40 Q 50 10 80 40" stroke="currentColor" stroke-width="4" fill="none" />
+                <line x1="50" y1="5" x2="50" y2="15" stroke="currentColor" stroke-width="4" />
+                <line x1="30" y1="12" x2="35" y2="20" stroke="currentColor" stroke-width="4" />
+                <line x1="70" y1="12" x2="65" y2="20" stroke="currentColor" stroke-width="4" />
+            </svg>
+        </div>
+
+        <div class="btn-container">
+            <a href="language_select.html" class="start-toggle">
+                Start Examination
+                <div class="toggle-switch"></div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Subtle move effect on mouse
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) / 50;
+            const moveY = (e.clientY - window.innerHeight / 2) / 50;
+            document.querySelector('.container').style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPTIPLUS | Intelligent Vision</title>
+    <style>
+        :root {
+            --brand-blue: #0000FF;
+            --light-bg: #f0f7ff;
+            --glass-white: rgba(255, 255, 255, 0.8);
+            --text-main: #000033;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+
+        body {
+            background-color: var(--light-bg);
+            /* Soft Blue Gradient instead of Dark Purple */
+            background: radial-gradient(circle at 50% -20%, #ffffff 0%, #e0edff 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            overflow: hidden;
+        }
+
+        /* Light Grid Effect */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(0, 0, 255, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+        }
+
+        /* Tech-Badge in Light Mode */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 255, 0.1);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            color: var(--brand-blue);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .badge span {
+            background: var(--brand-blue);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-weight: 900;
+            font-size: 10px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 70px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        p.subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #5c728a;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* The "Core" Central Element - White with Blue Border */
+        .lenser-core {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            background: #fff;
+            border-radius: 24px;
+            margin: 0 auto 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(0, 0, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 255, 0.1);
+        }
+
+        .logo-svg {
+            width: 85px;
+            /* color: var(--brand-blue); */
+            color: var(--text-main);
+        }
+
+        .brand-text {
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            margin-top: 5px;
+        }
+
+        /* Soft Glow behind the box */
+        .glow-orb {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 0, 255, 0.08) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        /* Toggle Button in Blue/White */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .start-toggle {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            backdrop-filter: blur(10px);
+            padding: 8px 10px 8px 24px;
+            border-radius: 100px;
+            border: 1px solid rgba(0, 0, 255, 0.2);
+            text-decoration: none;
+            color: var(--brand-blue);
+            font-weight: 700;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 255, 0.05);
+        }
+
+        .start-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 0, 255, 0.1);
+            border-color: var(--brand-blue);
+        }
+
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: var(--brand-blue);
+            border-radius: 20px;
+            margin-left: 15px;
+            position: relative;
+        }
+
+        .toggle-switch::after {
+            content: "";
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        /* Floating icons in Light Blue */
+        .float-icon {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            animation: float 6s infinite ease-in-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .start-btn {
+            display: inline-block;
+            background: var(--brand-blue);
+            color: #fff;
+            padding: 16px 48px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 255, 0.2);
+            border: none;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 255, 0.3);
+            background: #0000cc;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .float-icon { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="float-icon" style="top: 20%; left: 15%; animation-delay: 0s;">👁️</div>
+    <div class="float-icon" style="top: 60%; left: 10%; animation-delay: 1s;">🔬</div>
+    <div class="float-icon" style="top: 25%; right: 15%; animation-delay: 2s;">⚡</div>
+    <div class="float-icon" style="top: 65%; right: 10%; animation-delay: 3s;">🤖</div>
+
+    <div class="container">
+        <!-- <div class="badge"><span>NEW</span> Intelligent Vision Partner ›</div> -->
+
+        <div class="lenser-core">
+            <div class="glow-orb"></div>
+            <svg class="logo-svg" viewBox="0 0 100 60">
+                <circle cx="50" cy="40" r="14" stroke-width="4" stroke="currentColor" fill="none" />
+                <circle cx="50" cy="40" r="6" fill="currentColor" />
+                <path d="M22 40 Q 50 12 78 40" stroke="currentColor" stroke-width="4" fill="none" />
+                <line x1="50" y1="6" x2="50" y2="16" stroke="currentColor" stroke-width="4" />
+                <line x1="32" y1="14" x2="37" y2="22" stroke="currentColor" stroke-width="4" />
+                <line x1="68" y1="14" x2="63" y2="22" stroke="currentColor" stroke-width="4" />
+            </svg>
+            <div class="brand-text">OPTIPLUS</div>
+        </div>
+        
+        <h1>Modern Diagnostics for Ambitious Health.</h1>
+        
+        <p class="subtitle">Smarter vision screening that supports care before problems become visible</p>
+
+
+        <!-- <div class="btn-container">
+            <a href="language_select.html" class="start-toggle">
+                Start Examination
+                <div class="toggle-switch"></div>
+            </a>
+        </div> -->
+        <div class="btn-container">
+            <a href="templates/language.html" class="start-btn" >
+                Start 
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) / 60;
+            const moveY = (e.clientY - window.innerHeight / 2) / 60;
+            document.querySelector('.container').style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+
+        // function goNext() {
+        //     if (document.documentElement.requestFullscreen) {
+        //         document.documentElement.requestFullscreen();
+        //     }
+        //     window.location.href = "language.html";
+        // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile - Optiplus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a1f1a 0%, #000000 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .profile-container {
+      background: white;
+      border-radius: 20px;
+      max-width: 800px;
+      width: 100%;
+      padding: 50px 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .profile-header h1 {
+      font-size: 36px;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+
+    .profile-header p {
+      color: #666;
+      font-size: 15px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #2ecc71;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 30px;
+      transition: gap 0.3s ease;
+    }
+
+    .back-btn:hover {
+      gap: 12px;
+    }
+
+    .profile-image-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .profile-image-display {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid #2ecc71;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .profile-initials-display {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 48px;
+      border: 4px solid #2ecc71;
+      margin-bottom: 20px;
+    }
+
+    .change-photo-btn {
+      padding: 10px 24px;
+      background: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .change-photo-btn:hover {
+      background: #27ae60;
+      transform: translateY(-2px);
+    }
+
+    #profileImageInput {
+      display: none;
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    .form-section h2 {
+      font-size: 20px;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      outline: none;
+      color: #333;
+      background: #f8f9fa;
+    }
+
+    .form-input::placeholder {
+      color: #999;
+    }
+
+    .form-input:focus {
+      border-color: #2ecc71;
+      background: #ffffff;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: #2ecc71;
+    }
+
+    .checkbox-group label {
+      margin: 0;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .eyesight-section {
+      display: none;
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .eyesight-section.active {
+      display: block;
+    }
+
+    .eyesight-section h4 {
+      font-size: 16px;
+      color: #2ecc71;
+      margin-bottom: 15px;
+    }
+
+    .eyesight-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .save-btn,
+    .logout-btn {
+      flex: 1;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .save-btn {
+      background: #2ecc71;
+      color: white;
+    }
+
+    .save-btn:hover {
+      background: #27ae60;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+    }
+
+    .logout-btn {
+      background: #ff6b6b;
+      color: white;
+    }
+
+    .logout-btn:hover {
+      background: #e74c3c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .profile-container {
+        padding: 40px 25px;
+      }
+
+      .profile-header h1 {
+        font-size: 28px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .eyesight-inputs {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="profile-container">
+    <a href="../index.html" class="back-btn">← Back to Home</a>
+
+    <div class="profile-header">
+      <h1>My Profile</h1>
+      <p>Update your personal information and eyesight details</p>
+    </div>
+
+    <!-- Profile Image -->
+    <div class="profile-image-section">
+      <div id="profileImageDisplay"></div>
+      <button class="change-photo-btn" onclick="document.getElementById('profileImageInput').click()">
+        Change Photo
+      </button>
+      <input type="file" id="profileImageInput" accept="image/*" />
+    </div>
+
+    <!-- Profile Form -->
+    <form id="profileForm">
+      <!-- Personal Information -->
+      <div class="form-section">
+        <h2>Personal Information</h2>
+
+        <div class="form-group">
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" class="form-input" placeholder="Enter your full name" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone *</label>
+            <input type="tel" id="phone" class="form-input" placeholder="Phone number" required />
+          </div>
+
+          <div class="form-group">
+            <label for="age">Age *</label>
+            <input type="number" id="age" class="form-input" placeholder="Your age" min="1" max="120" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" class="form-input" placeholder="your.email@example.com" required />
+        </div>
+      </div>
+
+      <!-- Eyesight Information -->
+      <div class="form-section">
+        <h2>Eyesight Information</h2>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="hasEyeIssues" />
+          <label for="hasEyeIssues">I have eyesight issues</label>
+        </div>
+
+        <div class="eyesight-section" id="eyesightSection">
+          <h4>Eye Prescription Details</h4>
+          <div class="eyesight-inputs">
+            <div class="form-group">
+              <label for="leftEye">Left Eye (OD)</label>
+              <input type="text" id="leftEye" class="form-input" placeholder="e.g., -2.50" />
+            </div>
+            <div class="form-group">
+              <label for="rightEye">Right Eye (OS)</label>
+              <input type="text" id="rightEye" class="form-input" placeholder="e.g., -2.00" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="eyeCondition">Eye Condition/Notes</label>
+            <input type="text" id="eyeCondition" class="form-input" placeholder="e.g., Myopia, Astigmatism" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button type="submit" class="save-btn">Save Changes</button>
+        <button type="button" class="logout-btn" id="logoutBtn">
+          Logout
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Auth Manager (Same as main page)
+    const AuthManager = {
+      STORAGE_KEY: "optiplusUser",
+
+      saveUser(userData) {
+        try {
+          localStorage.setItem(this.STORAGE_KEY, JSON.stringify(userData));
+          return true;
+        } catch (error) {
+          console.error("Error saving user data:", error);
+          return false;
+        }
+      },
+
+      getUser() {
+        try {
+          const userData = localStorage.getItem(this.STORAGE_KEY);
+          return userData ? JSON.parse(userData) : null;
+        } catch (error) {
+          console.error("Error retrieving user data:", error);
+          return null;
+        }
+      },
+
+      logout() {
+        try {
+          localStorage.removeItem(this.STORAGE_KEY);
+          return true;
+        } catch (error) {
+          console.error("Error logging out:", error);
+          return false;
+        }
+      },
+
+      convertImageToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      },
+    };
+
+    // Page Initialization
+    document.addEventListener("DOMContentLoaded", function () {
+      const userData = AuthManager.getUser();
+
+      // Redirect if not logged in
+      if (!userData) {
+        alert("Please login first");
+        window.location.href = "../index.html";
+        return;
+      }
+
+      // Load user data into form
+      loadUserData(userData);
+
+      // Event Listeners
+      document
+        .getElementById("profileImageInput")
+        .addEventListener("change", handleImageUpload);
+      document
+        .getElementById("hasEyeIssues")
+        .addEventListener("change", toggleEyesightSection);
+      document
+        .getElementById("profileForm")
+        .addEventListener("submit", handleFormSubmit);
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", handleLogout);
+    });
+
+    function loadUserData(userData) {
+      // Personal Information
+      document.getElementById("fullName").value = userData.fullName || "";
+      document.getElementById("phone").value = userData.phone || "";
+      document.getElementById("age").value = userData.age || "";
+      document.getElementById("email").value = userData.email || "";
+
+      // Profile Image
+      const profileImageDisplay = document.getElementById(
+        "profileImageDisplay"
+      );
+      if (userData.profileImage) {
+        profileImageDisplay.innerHTML = `
+          <img src="${userData.profileImage}" class="profile-image-display" alt="Profile">
+        `;
+      } else {
+        const initials = userData.fullName
+          .split(" ")
+          .map((word) => word[0])
+          .join("")
+          .toUpperCase()
+          .slice(0, 2);
+        profileImageDisplay.innerHTML = `
+          <div class="profile-initials-display">${initials}</div>
+        `;
+      }
+
+      // Eyesight Information
+      const hasEyeIssuesCheckbox = document.getElementById("hasEyeIssues");
+      if (userData.hasEyeIssues) {
+        hasEyeIssuesCheckbox.checked = true;
+        document.getElementById("eyesightSection").classList.add("active");
+
+        if (userData.eyesight) {
+          document.getElementById("leftEye").value =
+            userData.eyesight.leftEye || "";
+          document.getElementById("rightEye").value =
+            userData.eyesight.rightEye || "";
+          document.getElementById("eyeCondition").value =
+            userData.eyesight.condition || "";
+        }
+      }
+    }
+
+    async function handleImageUpload(e) {
+      const file = e.target.files[0];
+      if (file) {
+        if (!file.type.startsWith("image/")) {
+          alert("Please select an image file");
+          return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+          alert("Image size should be less than 5MB");
+          return;
+        }
+
+        try {
+          const imageBase64 = await AuthManager.convertImageToBase64(file);
+          document.getElementById("profileImageDisplay").innerHTML = `
+            <img src="${imageBase64}" class="profile-image-display" alt="Profile">
+          `;
+
+          // Update userData immediately
+          const userData = AuthManager.getUser();
+          userData.profileImage = imageBase64;
+          AuthManager.saveUser(userData);
+        } catch (error) {
+          console.error("Error loading image:", error);
+          alert("Error loading image. Please try again.");
+        }
+      }
+    }
+
+    function toggleEyesightSection(e) {
+      const eyesightSection = document.getElementById("eyesightSection");
+      if (e.target.checked) {
+        eyesightSection.classList.add("active");
+      } else {
+        eyesightSection.classList.remove("active");
+      }
+    }
+
+    function handleLogout() {
+      if (confirm("Are you sure you want to logout?")) {
+        AuthManager.logout();
+        alert("Logged out successfully!");
+        window.location.href = "../index.html";
+      }
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+
+      const userData = {
+        fullName: document.getElementById("fullName").value,
+        phone: document.getElementById("phone").value,
+        age: document.getElementById("age").value,
+        email: document.getElementById("email").value,
+        hasEyeIssues: document.getElementById("hasEyeIssues").checked,
+        leftEye: document.getElementById("leftEye").value || "0.00",
+        rightEye: document.getElementById("rightEye").value || "0.00",
+        eyeCondition: document.getElementById("eyeCondition").value || "None"
+      };
+
+      try {
+        // This sends the data to your Flask "Eye Care Prediction API"
+        const response = await fetch('http://127.0.0.1:5000/save_profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData)
+        });
+
+        if (response.ok) {
+          AuthManager.saveUser(userData); // Keep local copy
+          alert("Success! Profile stored in Database.");
+        }
+      } catch (error) {
+        console.error("Database Error:", error);
+        alert("Server is running, but couldn't save data. Check app.py routes.");
+      }
+    }
+    
+  </script>
+</body>
+
+</html>

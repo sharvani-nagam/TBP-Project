@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Progress Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #D1FAE5 0%, #FFFFFF 50%, #E0F2FE 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #E5E7EB;
+            padding: 1.5rem 0;
+            padding-top: 70px;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-icon {
+            background: #D1FAE5;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+        }
+
+        .header-icon i {
+            color: #059669;
+            font-size: 2rem;
+        }
+
+        .header-title h1 {
+            color: #1F2937;
+            font-size: 2rem;
+        }
+
+        .header-title p {
+            color: #6B7280;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .time-filters {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            background: #F3F4F6;
+            color: #6B7280;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: #059669;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(5,150,105,0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .insight-card {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            border-left: 4px solid;
+            transition: all 0.3s;
+        }
+
+        .insight-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+        }
+
+        .insight-card.warning {
+            border-color: #F97316;
+        }
+
+        .insight-card.success {
+            border-color: #10B981;
+        }
+
+        .insight-card.info {
+            border-color: #3B82F6;
+        }
+
+        .insight-icon {
+            display: inline-flex;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .insight-card.warning .insight-icon {
+            background: #FFEDD5;
+            color: #EA580C;
+        }
+
+        .insight-card.success .insight-icon {
+            background: #D1FAE5;
+            color: #059669;
+        }
+
+        .insight-card.info .insight-icon {
+            background: #DBEAFE;
+            color: #2563EB;
+        }
+
+        .insight-icon i {
+            font-size: 1.5rem;
+        }
+
+        .insight-card h3 {
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+
+        .insight-card p {
+            color: #6B7280;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .chart-card {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-header h2 {
+            color: #1F2937;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-header p {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .table-card h2 {
+            color: #1F2937;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead tr {
+            border-bottom: 2px solid #E5E7EB;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #F3F4F6;
+            transition: background 0.3s;
+        }
+
+        tbody tr:hover {
+            background: #D1FAE5;
+        }
+
+        tbody tr.latest {
+            background: #D1FAE5;
+            font-weight: 500;
+        }
+
+        td {
+            padding: 1rem;
+            color: #1F2937;
+        }
+
+        .date-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .date-cell i {
+            color: #6B7280;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #059669;
+            color: white;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .power-cell {
+            font-family: monospace;
+            font-size: 1.125rem;
+        }
+
+        .acuity-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .acuity-cell i {
+            color: #059669;
+        }
+
+        .acuity-cell span {
+            font-weight: 600;
+        }
+
+        .recommendations-card {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .recommendations-card h2 {
+            color: #1F2937;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .recommendation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .recommendation-item {
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid;
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+
+        .recommendation-item:hover {
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .recommendation-item.high {
+            background: #FEF2F2;
+            border-color: #DC2626;
+        }
+
+        .recommendation-item.medium {
+            background: #FFFBEB;
+            border-color: #F59E0B;
+        }
+
+        .recommendation-item.low {
+            background: #EFF6FF;
+            border-color: #3B82F6;
+        }
+
+        .recommendation-content h3 {
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .priority-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .recommendation-item.high .priority-badge {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .recommendation-item.medium .priority-badge {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .recommendation-item.low .priority-badge {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .recommendation-content p {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .recommendation-arrow {
+            color: #9CA3AF;
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+
+        .action-buttons-bottom {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(5,150,105,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(5,150,105,0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #059669;
+            border: 2px solid #059669;
+        }
+
+        .btn-secondary:hover {
+            background: #D1FAE5;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons-bottom {
+                grid-template-columns: 1fr;
+            }
+        }
+        nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: 700;
+        color: #2ecc71;
+        letter-spacing: 1px;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+      }
+
+      nav ul li {
+        position: relative;
+      }
+
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #2ecc71;
+      }
+
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        background: #fff;
+        min-width: 200px;
+        border-radius: 8px;
+        padding: 15px 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .dropdown a {
+        display: block;
+        padding: 10px 20px;
+        color: #333;
+        font-size: 13px;
+        transition: all 0.3s;
+      }
+
+      .dropdown a:hover {
+        background: #f5f5f5;
+        color: #2ecc71;
+        padding-left: 25px;
+      }
+
+      nav ul li:hover .dropdown {
+        display: block;
+      }
+
+      .menu-btn {
+        display: none;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+    <nav>
+      <div class="logo">Optiplus.</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="#about">About Us ▾</a>
+          <div class="dropdown">
+            <a href="faq.html">FAQ</a>
+            <a href="docter2.html">Our Doctors</a>
+            <a href="#footer">Contact Us</a>
+            <a href="#guide">Guide / Help</a>
+          </div>
+        </li>
+        <li>
+          <a href="#features">Features ▾</a>
+          <div class="dropdown">
+            <a href="#eye-test">Eye Test</a>
+            <a href="#results">Results</a>
+            <a href="shop.html">Shop</a>
+            <a href="#appoint">Make Appointments</a>
+          </div>
+        </li>
+      </ul>
+      <div class="menu-btn">☰</div>
+    </nav>
+    <div class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="header-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="header-title">
+                    <h1>Vision Progress</h1>
+                    <p>Track your eye health journey over time</p>
+                </div>
+            </div>
+            <div class="time-filters">
+                <button class="filter-btn" onclick="setTimeRange('3months')">3 Months</button>
+                <button class="filter-btn active" onclick="setTimeRange('6months')">6 Months</button>
+                <button class="filter-btn" onclick="setTimeRange('1year')">1 Year</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="insights-grid">
+            <div class="insight-card warning">
+                <div class="insight-icon">
+                    <i class="fas fa-trending-down"></i>
+                </div>
+                <h3>Vision Deterioration Detected</h3>
+                <p>Your myopia has increased by 12.5% since your last test. Consider scheduling an eye exam.</p>
+            </div>
+
+            <div class="insight-card info">
+                <div class="insight-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Consistent Testing</h3>
+                <p>You've completed 6 vision tests over the past year. Regular monitoring helps track changes early.</p>
+            </div>
+
+            <div class="insight-card success">
+                <div class="insight-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Regular Monitoring</h3>
+                <p>Your approximate refractive power is being tracked consistently. Consider a professional exam for precise measurements of each eye.</p>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="chart-header">
+                <h2>Visual Acuity Trends</h2>
+                <p>Tracking your vision clarity over time</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="acuityChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="chart-header">
+                <h2>Refractive Power Progression</h2>
+                <p>Monitor changes in your approximate prescription</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="powerChart"></canvas>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <h2>Test History</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Distance</th>
+                            <th>Lines Completed</th>
+                            <th>Approximate Power</th>
+                            <th>Visual Acuity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="testHistoryBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="recommendations-card">
+            <h2>Personalized Recommendations</h2>
+            <div class="recommendation-list">
+                <div class="recommendation-item high">
+                    <div class="recommendation-content">
+                        <h3>
+                            Schedule Professional Exam
+                            <span class="priority-badge">HIGH</span>
+                        </h3>
+                        <p>Based on your progression, we recommend a comprehensive eye exam every 6 months.</p>
+                    </div>
+                    <i class="fas fa-arrow-right recommendation-arrow"></i>
+                </div>
+
+                <div class="recommendation-item high">
+                    <div class="recommendation-content">
+                        <h3>
+                            Update Prescription
+                            <span class="priority-badge">HIGH</span>
+                        </h3>
+                        <p>Your prescription has changed. Consider getting new lenses for optimal vision clarity.</p>
+                    </div>
+                    <i class="fas fa-arrow-right recommendation-arrow"></i>
+                </div>
+
+                <div class="recommendation-item medium">
+                    <div class="recommendation-content">
+                        <h3>
+                            Reduce Screen Time
+                            <span class="priority-badge">MEDIUM</span>
+                        </h3>
+                        <p>Limit continuous digital device usage to 2-hour intervals with regular breaks.</p>
+                    </div>
+                    <i class="fas fa-arrow-right recommendation-arrow"></i>
+                </div>
+
+                <div class="recommendation-item medium">
+                    <div class="recommendation-content">
+                        <h3>
+                            Outdoor Activities
+                            <span class="priority-badge">MEDIUM</span>
+                        </h3>
+                        <p>Spend at least 2 hours daily outdoors. Natural light exposure may help slow myopia progression.</p>
+                    </div>
+                    <i class="fas fa-arrow-right recommendation-arrow"></i>
+                </div>
+
+                <div class="recommendation-item low">
+                    <div class="recommendation-content">
+                        <h3>
+                            Continue Eye Exercises
+                            <span class="priority-badge">LOW</span>
+                        </h3>
+                        <p>Keep practicing the recommended eye exercises to reduce strain and maintain eye health.</p>
+                    </div>
+                    <i class="fas fa-arrow-right recommendation-arrow"></i>
+                </div>
+            </div>
+
+            <div class="action-buttons-bottom">
+                <a href="index.html" class="btn btn-primary">
+                    <i class="fas fa-calendar"></i>
+                    Schedule Eye Exam
+                </a>
+                <a href="services.html" class="btn btn-secondary">
+                    <i class="fas fa-chart-line"></i>
+                    Take New Vision Test
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const testHistory = [
+            { date: '2024-12-04', approximatePower: -2.25, visualAcuity: '20/40', distance: '20 feet', linesCompleted: 7 },
+            { date: '2024-09-15', approximatePower: -2.00, visualAcuity: '20/35', distance: '20 feet', linesCompleted: 8 },
+            { date: '2024-06-10', approximatePower: -1.75, visualAcuity: '20/30', distance: '20 feet', linesCompleted: 8 },
+            { date: '2024-03-20', approximatePower: -1.50, visualAcuity: '20/30', distance: '20 feet', linesCompleted: 9 },
+            { date: '2023-12-15', approximatePower: -1.25, visualAcuity: '20/25', distance: '20 feet', linesCompleted: 9 },
+            { date: '2023-09-05', approximatePower: -1.00, visualAcuity: '20/25', distance: '20 feet', linesCompleted: 10 }
+        ];
+
+        function acuityToNumeric(acuity) {
+            const [numerator, denominator] = acuity.split('/').map(Number);
+            return (numerator / denominator) * 100;
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        function formatFullDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        // Prepare chart data
+        const chartData = [...testHistory].reverse();
+        const dates = chartData.map(t => formatDate(t.date));
+        const acuityData = chartData.map(t => acuityToNumeric(t.visualAcuity));
+        const powerData = chartData.map(t => Math.abs(t.approximatePower));
+
+        // Visual Acuity Chart
+        const acuityCtx = document.getElementById('acuityChart').getContext('2d');
+        const acuityChart = new Chart(acuityCtx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Visual Acuity',
+                    data: acuityData,
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    borderWidth: 3,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#10B981',
+                    pointHoverRadius: 7,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Power Chart
+        const powerCtx = document.getElementById('powerChart').getContext('2d');
+        const powerChart = new Chart(powerCtx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Approximate Power (D)',
+                    data: powerData,
+                    borderColor: '#F59E0B',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    borderWidth: 3,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#F59E0B',
+                    pointHoverRadius: 7,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Populate table
+        const tableBody = document.getElementById('testHistoryBody');
+        testHistory.forEach((test, index) => {
+            const row = document.createElement('tr');
+            if (index === 0) row.classList.add('latest');
+            
+            row.innerHTML = `
+                <td>
+                    <div class="date-cell">
+                        <i class="fas fa-calendar"></i>
+                        <span>${formatFullDate(test.date)}</span>
+                        ${index === 0 ? '<span class="badge">Latest</span>' : ''}
+                    </div>
+                </td>
+                <td>${test.distance}</td>
+                <td>${test.linesCompleted}/10</td>
+                <td class="power-cell">${test.approximatePower} D</td>
+                <td>
+                    <div class="acuity-cell">
+                        <i class="fas fa-eye"></i>
+                        <span>${test.visualAcuity}</span>
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        function setTimeRange(range) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            console.log('Time range set to:', range);
+        }
+
+    </script>
+</body>
+</html>

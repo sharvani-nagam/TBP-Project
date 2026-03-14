@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optiplus - Premium Eyewear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background-color: #faf9f6;
+            color: #222;
+            overflow-x: hidden;
+            padding-top: 70px;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2ecc71;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #2ecc71;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            left: 0;
+            background: #fff;
+            min-width: 200px;
+            border-radius: 8px;
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dropdown::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 0;
+            height: 10px;
+            width: 100%;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .dropdown a:hover {
+            background: #f5f5f5;
+            color: #2ecc71;
+            padding-left: 25px;
+        }
+
+        nav ul li:hover .dropdown {
+            display: block;
+        }
+
+        .menu-btn {
+            display: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            padding: 60px 0;
+        }
+
+        /* CAROUSEL SECTION - Matching second page box styling */
+        .carousel-section {
+            max-width: 1400px;
+            margin: 0 auto 60px;
+            padding: 0 40px;
+        }
+
+        .carousel-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .carousel-item {
+            min-width: 400px;
+            margin: 0 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .carousel-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border: 3px solid #03110c;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f5f5f5;
+            margin-bottom: 20px;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .drag-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: grab;
+            user-select: none;
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .drag-btn:hover {
+            background: rgba(0, 0, 0, 0.95);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .carousel-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .carousel-details {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .carousel-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .carousel-icons span {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .carousel-icons span:hover {
+            transform: scale(1.2);
+        }
+
+        /* Carousel Arrows */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            border: 2px solid #f0f0f0;
+            user-select: none;
+        }
+
+        .carousel-arrow:hover {
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .carousel-arrow.left {
+            left: 10px;
+        }
+
+        .carousel-arrow.right {
+            right: 10px;
+        }
+
+        /* VIDEO SECTION */
+        .video-section-wrapper {
+            max-width: 1400px;
+            margin: 0 auto 60px;
+            padding: 0 40px;
+        }
+
+        .content-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .video-section {
+            position: relative;
+            cursor: pointer;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-player {
+            width: 100%;
+            height: auto;
+            display: none;
+            border-radius: 15px;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-button::after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 20px solid #333;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 5px;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            background: #fff;
+        }
+
+        .content-section {
+            padding: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 8px 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .description {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .feature-box {
+            border-left: 3px solid #000;
+            padding-left: 25px;
+        }
+
+        .feature-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            width: 140px;
+            height: auto;
+        }
+
+        /* FLOATING ICONS */
+        .floating-icons {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+
+        .icon-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .icon-button.heart {
+            background: #ff1744;
+            color: #fff;
+        }
+
+        .icon-button.cart {
+            background: #fff;
+            color: #ff1744;
+            border: 2px solid #f0f0f0;
+        }
+
+        .icon-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* SCROLL TO TOP */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #2ecc71;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 3px 15px rgba(46, 204, 113, 0.3);
+            z-index: 999;
+        }
+
+        .scroll-top:hover {
+            background: #27ae60;
+            transform: translateY(-5px);
+        }
+
+        .scroll-top.visible {
+            display: flex;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, #0a1f1a 0%, #000 100%);
+            color: #fff;
+            padding: 60px 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(46, 204, 113, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-section h2 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-section .dot {
+            color: #2ecc71;
+        }
+
+        .logo-section p {
+            color: #b8b8b8;
+            line-height: 1.8;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item h3 {
+            color: #888;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-item a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #2ecc71;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .footer-section h3::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #2ecc71;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #d0d0d0;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-block;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .footer-section ul li a::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #2ecc71;
+            font-size: 18px;
+        }
+
+        .footer-section ul li a:hover {
+            color: #2ecc71;
+            padding-left: 25px;
+        }
+
+        .newsletter-section p {
+            color: #b8b8b8;
+            line-height: 1.7;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #666;
+        }
+
+        .newsletter-form button {
+            background: #2ecc71;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .newsletter-form button:hover {
+            background: #27ae60;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 50px auto 0;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .footer-bottom a {
+            color: #2ecc71;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom a:hover {
+            color: #27ae60;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .carousel-item {
+                min-width: 350px;
+            }
+
+            .content-container {
+                padding: 50px 40px;
+                gap: 50px;
+            }
+
+            .carousel-container {
+                padding: 50px 40px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            nav {
+                padding: 0 30px;
+            }
+
+            nav ul {
+                gap: 25px;
+            }
+
+            .content-container {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+                gap: 40px;
+            }
+
+            .carousel-container {
+                padding: 40px 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            nav {
+                padding: 0 20px;
+                height: 60px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .main-content {
+                padding: 40px 0;
+            }
+
+            .carousel-section {
+                padding: 0 20px;
+            }
+
+            .carousel-container {
+                padding: 40px 20px;
+            }
+
+            .carousel-item {
+                min-width: 300px;
+                margin: 0 10px;
+            }
+
+            .carousel-image-wrapper {
+                height: 250px;
+            }
+
+            .carousel-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .carousel-arrow.left {
+                left: 5px;
+            }
+
+            .carousel-arrow.right {
+                right: 5px;
+            }
+
+            .video-section-wrapper {
+                padding: 0 20px;
+            }
+
+            .content-container {
+                padding: 30px 20px;
+                gap: 30px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .floating-icons {
+                right: 15px;
+                gap: 12px;
+            }
+
+            .icon-button {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .scroll-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .footer {
+                padding: 40px 20px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-container {
+                padding: 30px 15px;
+            }
+
+            .carousel-item {
+                min-width: 260px;
+            }
+
+            .carousel-image-wrapper {
+                height: 200px;
+            }
+
+            .carousel-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .badge {
+                font-size: 10px;
+                padding: 6px 15px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+        }
+        /* ==================== DROPDOWN FIX ==================== */
+
+/* Ensure nav has highest z-index */
+nav {
+  z-index: 10000 !important;
+  position: fixed;
+}
+
+/* Dropdown improvements for all screen sizes */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  min-width: 180px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10001 !important;
+}
+
+/* Desktop hover behavior */
+@media (min-width: 1025px) {
+  nav ul li:hover .dropdown {
+    display: block;
+  }
+}
+
+/* Mobile dropdown behavior */
+@media (max-width: 1024px) {
+  nav ul li {
+    position: relative;
+  }
+
+  .dropdown {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: 10px;
+    width: 100%;
+    z-index: 10001 !important;
+  }
+
+  .dropdown.show {
+    display: block;
+  }
+
+  /* Make parent link clickable area larger on mobile */
+  nav ul li > a {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  /* Ensure dropdown links are fully clickable */
+  .dropdown a {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    color: #333;
+    position: relative;
+    z-index: 10002;
+    pointer-events: auto;
+  }
+}
+
+/* Ensure hero and other sections don't overlap nav */
+.hero,
+.hero::before,
+.hero-content,
+.hero-text,
+.hero-image {
+  z-index: 1 !important;
+}
+
+/* Fix for mobile menu */
+nav ul {
+  z-index: 10000 !important;
+}
+
+nav ul.active {
+  display: flex;
+  z-index: 10000 !important;
+}
+
+/* Clickable dropdown links - ensure pointer events work */
+.dropdown a {
+  pointer-events: auto;
+  cursor: pointer;
+  position: relative;
+  z-index: 10002;
+}
+
+.dropdown a:active {
+  opacity: 0.7;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Optiplus.</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#about">About Us ▾</a>
+                <div class="dropdown">
+                    <a href="faq.html">FAQ</a>
+                    <a href="docter2.html">Our Doctors</a>
+                    <a href="#footer">Contact Us</a>
+                    <a href="#guide">Guide / Help</a>
+                </div>
+            </li>
+            <li>
+                <a href="#features">Features ▾</a>
+                <div class="dropdown">
+                    <a href="#eye-test">Eye Test</a>
+                    <a href="#results">Results</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="#appoint">Make Appointments</a>
+                </div>
+            </li>
+        </ul>
+        <div class="menu-btn">☰</div>
+    </nav>
+
+    <div class="main-content">
+        <div class="carousel-section">
+            <div class="carousel-container">
+                <div class="carousel-wrapper" id="carouselWrapper">
+                    <div class="carousel-item">
+                        <div class="carousel-image-wrapper">
+                            <img class="carousel-image" src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/09/Eyewear-home-product-04.jpg" alt="Dark Pilot Glasses">
+                            <div class="drag-btn">DRAG</div>
+                        </div>
+                        <div class="carousel-title">DARK PILOT</div>
+                        <div class="carousel-details">Cat-Eye / New / Round</div>
+                        <div class="carousel-icons">
+                            <span>❤</span>
+                            <span>👓</span>
+                            <span>🛒</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image-wrapper">
+                            <img class="carousel-image" src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/08/Eyewear-home-product-01.jpg" alt="Art Eyeglasses">
+                        </div>
+                        <div class="carousel-title">ART EYEGLASSES</div>
+                        <div class="carousel-details">Cat-Eye / New / Round</div>
+                        <div class="carousel-icons">
+                            <span>❤</span>
+                            <span>👓</span>
+                            <span>🛒</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image-wrapper">
+                            <img class="carousel-image" src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/09/Eyewear-home-product-03.jpg" alt="Slim Sunglasses">
+                        </div>
+                        <div class="carousel-title">SLIM SUNGLASSES</div>
+                        <div class="carousel-details">Cat-Eye / New / Round</div>
+                        <div class="carousel-icons">
+                            <span>❤</span>
+                            <span>👓</span>
+                            <span>🛒</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image-wrapper">
+                            <img class="carousel-image" src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/10/Eyewear-home-product-05.jpg" alt="Silver Aviators">
+                        </div>
+                        <div class="carousel-title">SILVER AVIATORS</div>
+                        <div class="carousel-details">Cat-Eye / New / Round</div>
+                        <div class="carousel-icons">
+                            <span>❤</span>
+                            <span>👓</span>
+                            <span>🛒</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image-wrapper">
+                            <img class="carousel-image" src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/08/test-h4-product.jpg" alt="Summer Sunglasses">
+                        </div>
+                        <div class="carousel-title">SUMMER SUNGLASSES</div>
+                        <div class="carousel-details">Cat-Eye / New / Round</div>
+                        <div class="carousel-icons">
+                            <span>❤</span>
+                            <span>👓</span>
+                            <span>🛒</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-arrow left" onclick="slideCarousel(-1)" aria-label="Previous slide">‹</button>
+                <button class="carousel-arrow right" onclick="slideCarousel(1)" aria-label="Next slide">›</button>
+            </div>
+        </div>
+
+        <div class="video-section-wrapper">
+            <div class="content-container">
+                <div class="video-section">
+                    <img src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/07/H4-video-button.jpg" alt="Aviator Glasses Model" class="video-thumbnail" id="thumbnail">
+                </div>
+
+                <div class="content-section">
+                    <span class="badge">NEW</span>
+                    <h1>NEW AVIATOR GLASSES</h1>
+                    <p class="description">
+                        Designed for clarity, comfort, and confidence, our new Aviator glasses blend timeless
+        style with modern optical precision. Crafted using lightweight materials and refined
+        detailing, they deliver all-day comfort without compromising on durability or elegance.
+
+                    </p>
+
+                    <div class="feature-box">
+                        <h3 class="feature-title">Brand of the Year</h3>
+                        <p class="feature-text">
+                            Recognized for innovation and quality, our eyewear is trusted by thousands for
+            its superior lens accuracy, premium build, and commitment to eye health.
+            Each frame is engineered to meet both style and performance standards.
+                        </p>
+                        <svg class="signature" xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50">
+                            <path d="M10 25 Q 20 15, 35 25 T 65 25 Q 80 30, 100 25 L 130 28" stroke="#000" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-icons">
+        <div class="icon-button heart">❤</div>
+        <div class="icon-button cart">🛒</div>
+    </div>
+
+    <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+            <div class="logo-section">
+                <h2>Optiplus<span class="dot">.</span></h2>
+                <p>
+                    Proper eye care is important for preventing vision problems, diagnosing conditions early, and preserving eye health throughout life. Good eye care can help reduce the risk of eye diseases.
+                </p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Call Us</h3>
+                        <a href="tel:+5284567592">+(528) 456-7592</a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Email Us</h3>
+                        <a href="mailto:example@optiplus.com">example@optiplus.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Our Services</h3>
+                <ul>
+                    <li><a href="#">Investment Advisory</a></li>
+                    <li><a href="#">Financial Planning</a></li>
+                    <li><a href="#">Corporate Finance</a></li>
+                    <li><a href="#">Tax Planning</a></li>
+                    <li><a href="#">Risk Management</a></li>
+                    <li><a href="#">Account & Audit</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quicklinks</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Latest Articles</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Refund & Returns</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section newsletter-section">
+                <h3>Newsletter</h3>
+                <p>
+                    Eye exams should be scheduled at least once every two years, or more frequently if there are risk factors such as a family history of eye disease.
+                </p>
+                <form class="newsletter-form" onsubmit="return false;">
+                    <input type="email" placeholder="Email Address" required>
+                    <button type="submit">✉</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © Copyright 2025. All rights reserved <a href="#">Optiplus</a>. Designed by <a href="#">Zozothemes</a>
+        </div>
+    </footer>
+                
+                
+                
+                <div class="footer-bottom">
+        © Copyright 2025. All rights reserved <a href="#">Optiplus</a>. Designed by <a href="#">Zozothemes</a>
+    </div>
+</footer>
+
+<script>
+    // ===== CAROUSEL FUNCTIONALITY =====
+    let currentIndex = 0;
+    const wrapper = document.getElementById('carouselWrapper');
+    const items = document.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
+    let itemWidth = 440; // Default: 400px item + 40px margins
+
+    // Calculate item width based on screen size
+    function calculateItemWidth() {
+        if (window.innerWidth <= 480) {
+            return 280; // 260px + 20px margin
+        } else if (window.innerWidth <= 768) {
+            return 320; // 300px + 20px margin
+        } else if (window.innerWidth <= 1200) {
+            return 390; // 350px + 40px margin
+        } else {
+            return 440; // 400px + 40px margin
+        }
+    }
+
+    // Update carousel position
+    function updateCarousel() {
+        itemWidth = calculateItemWidth();
+        const offset = -currentIndex * itemWidth;
+        wrapper.style.transform = `translateX(${offset}px)`;
+    }
+
+    // Slide carousel left or right
+    function slideCarousel(direction) {
+        currentIndex += direction;
+        
+        // Boundary checks
+        if (currentIndex < 0) {
+            currentIndex = 0;
+        } else if (currentIndex > totalItems - 3) {
+            currentIndex = totalItems - 3;
+        }
+        
+        updateCarousel();
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            slideCarousel(-1);
+        } else if (e.key === 'ArrowRight') {
+            slideCarousel(1);
+        }
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    wrapper.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    wrapper.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        if (touchStartX - touchEndX > 50) {
+            slideCarousel(1); // Swipe left
+        } else if (touchEndX - touchStartX > 50) {
+            slideCarousel(-1); // Swipe right
+        }
+    }
+
+    // Update on window resize
+    window.addEventListener('resize', updateCarousel);
+    
+    // Initialize carousel
+    updateCarousel();
+
+    // ===== VIDEO FUNCTIONALITY =====
+    function playVideo() {
+        const thumbnail = document.getElementById('thumbnail');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const playOverlay = document.getElementById('playOverlay');
+        
+        thumbnail.style.display = 'none';
+        playOverlay.style.display = 'none';
+        videoPlayer.style.display = 'block';
+        videoPlayer.play();
+    }
+
+    // ===== SCROLL TO TOP FUNCTIONALITY =====
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+    // ==================== DROPDOWN MENU FIX ====================
+
+// Toggle dropdown on mobile when clicking parent link
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Get all nav items with dropdowns
+  const dropdownParents = document.querySelectorAll('nav ul li:has(.dropdown)');
+  
+  dropdownParents.forEach(parent => {
+    const parentLink = parent.querySelector('a');
+    const dropdown = parent.querySelector('.dropdown');
+    
+    if (parentLink && dropdown) {
+      // Prevent default only on mobile
+      parentLink.addEventListener('click', function(e) {
+        if (window.innerWidth <= 1024) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Close all other dropdowns
+          document.querySelectorAll('.dropdown').forEach(d => {
+            if (d !== dropdown) {
+              d.classList.remove('show');
+            }
+          });
+          
+          // Toggle current dropdown
+          dropdown.classList.toggle('show');
+        }
+      });
+    }
+  });
+  
+  // Ensure dropdown links work correctly
+  const dropdownLinks = document.querySelectorAll('.dropdown a');
+  dropdownLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.stopPropagation(); // Prevent parent toggle
+      
+      // Get href and navigate
+      const href = this.getAttribute('href');
+      if (href && href !== '#' && !href.startsWith('#')) {
+        window.location.href = href;
+      } else if (href && href.startsWith('#')) {
+        // For anchor links, scroll to section
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+          // Close mobile menu
+          document.getElementById('navMenu').classList.remove('active');
+          // Close dropdown
+          this.closest('.dropdown').classList.remove('show');
+        }
+      }
+    });
+  });
+  
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('nav')) {
+      document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('show');
+      });
+    }
+  });
+  
+  // Close dropdowns when resizing to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 1024) {
+      document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('show');
+      });
+    }
+  });
+});
+
+// Update existing toggleMenu function to close dropdowns
+function toggleMenu() {
+  const navMenu = document.getElementById('navMenu');
+  const isActive = navMenu.classList.contains('active');
+  
+  navMenu.classList.toggle('active');
+  
+  // If closing menu, also close all dropdowns
+  if (isActive) {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
+  }
+}
+</script>

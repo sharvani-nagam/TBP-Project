@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - Optiplus</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #0a1f1a 0%, #000000 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .profile-container {
+        background: white;
+        border-radius: 20px;
+        max-width: 800px;
+        width: 100%;
+        padding: 50px 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .profile-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .profile-header h1 {
+        font-size: 36px;
+        color: #1a1a1a;
+        margin-bottom: 10px;
+      }
+
+      .profile-header p {
+        color: #666;
+        font-size: 15px;
+      }
+
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #2ecc71;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 30px;
+        transition: gap 0.3s ease;
+      }
+
+      .back-btn:hover {
+        gap: 12px;
+      }
+
+      .alert {
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+
+      .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .alert-error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .profile-image-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .profile-image-display {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 4px solid #2ecc71;
+        object-fit: cover;
+        margin-bottom: 20px;
+      }
+
+      .profile-initials-display {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2ecc71, #27ae60);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 48px;
+        border: 4px solid #2ecc71;
+        margin-bottom: 20px;
+      }
+
+      .change-photo-btn {
+        padding: 10px 24px;
+        background: #2ecc71;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .change-photo-btn:hover {
+        background: #27ae60;
+        transform: translateY(-2px);
+      }
+
+      #profileImageInput {
+        display: none;
+      }
+
+      .form-section {
+        margin-bottom: 30px;
+      }
+
+      .form-section h2 {
+        font-size: 20px;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .info-display {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .info-row:last-child {
+        border-bottom: none;
+      }
+
+      .info-label {
+        font-weight: 600;
+        color: #555;
+      }
+
+      .info-value {
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        outline: none;
+        color: #333;
+        background: #f8f9fa;
+      }
+
+      .form-input::placeholder {
+        color: #999;
+      }
+
+      .form-input:focus {
+        border-color: #2ecc71;
+        background: #ffffff;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        accent-color: #2ecc71;
+      }
+
+      .checkbox-group label {
+        margin: 0;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .eyesight-section {
+        display: none;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .eyesight-section.active {
+        display: block;
+      }
+
+      .eyesight-section h4 {
+        font-size: 16px;
+        color: #2ecc71;
+        margin-bottom: 15px;
+      }
+
+      .eyesight-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 40px;
+      }
+
+      .save-btn,
+      .logout-btn {
+        flex: 1;
+        padding: 16px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .save-btn {
+        background: #2ecc71;
+        color: white;
+      }
+
+      .save-btn:hover {
+        background: #27ae60;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+      }
+
+      .logout-btn {
+        background: #ff6b6b;
+        color: white;
+      }
+
+      .logout-btn:hover {
+        background: #e74c3c;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .profile-container {
+          padding: 40px 25px;
+        }
+
+        .profile-header h1 {
+          font-size: 28px;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .eyesight-inputs {
+          grid-template-columns: 1fr;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-container">
+      <a href="{{ url_for('index') }}" class="back-btn">← Back to Home</a>
+
+      <div class="profile-header">
+        <h1>My Profile</h1>
+        <p>Update your personal information and eyesight details</p>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <!-- Profile Image -->
+      <div class="profile-image-section">
+        <div id="profileImageDisplay">
+          {% if user.profile_image %}
+          <img
+            src="{{ user.profile_image }}"
+            class="profile-image-display"
+            alt="Profile"
+          />
+          {% else %} {% set initials = user.full_name.split()[0][0] +
+          (user.full_name.split()[1][0] if user.full_name.split()|length > 1
+          else '') %}
+          <div class="profile-initials-display">{{ initials.upper() }}</div>
+          {% endif %}
+        </div>
+        <button
+          class="change-photo-btn"
+          onclick="document.getElementById('profileImageInput').click()"
+        >
+          Change Photo
+        </button>
+        <input type="file" id="profileImageInput" accept="image/*" />
+      </div>
+
+      <!-- Account Information (Read-only) -->
+      <div class="form-section">
+        <h2>Account Information</h2>
+        <div class="info-display">
+          <div class="info-row">
+            <span class="info-label">Username:</span>
+            <span class="info-value">{{ user.username }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Member Since:</span>
+            <span class="info-value">{{ user.created_at[:10] }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Form -->
+      <form
+        id="profileForm"
+        action="{{ url_for('update_profile') }}"
+        method="POST"
+      >
+        <input
+          type="hidden"
+          id="profileImageBase64"
+          name="profileImage"
+          value="{{ user.profile_image or '' }}"
+        />
+
+        <!-- Personal Information -->
+        <div class="form-section">
+          <h2>Personal Information</h2>
+
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              class="form-input"
+              placeholder="Enter your full name"
+              value="{{ user.full_name }}"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone *</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-input"
+                placeholder="Phone number"
+                value="{{ user.phone }}"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="age">Age *</label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                class="form-input"
+                placeholder="Your age"
+                min="1"
+                max="120"
+                value="{{ user.age }}"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="your.email@example.com"
+              value="{{ user.email }}"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Eyesight Information -->
+        <div class="form-section">
+          <h2>Eyesight Information</h2>
+
+          <div class="checkbox-group">
+            <input
+              type="checkbox"
+              id="hasEyeIssues"
+              name="hasEyeIssues"
+              {%
+              if
+              user.has_eye_issues
+              %}checked{%
+              endif
+              %}
+            />
+            <label for="hasEyeIssues">I have eyesight issues</label>
+          </div>
+
+          <div
+            class="eyesight-section {% if user.has_eye_issues %}active{% endif %}"
+            id="eyesightSection"
+          >
+            <h4>Eye Prescription Details</h4>
+            <div class="eyesight-inputs">
+              <div class="form-group">
+                <label for="leftEye">Left Eye (OD)</label>
+                <input
+                  type="text"
+                  id="leftEye"
+                  name="leftEye"
+                  class="form-input"
+                  placeholder="e.g., -2.50"
+                  value="{{ user.left_eye or '' }}"
+                />
+              </div>
+              <div class="form-group">
+                <label for="rightEye">Right Eye (OS)</label>
+                <input
+                  type="text"
+                  id="rightEye"
+                  name="rightEye"
+                  class="form-input"
+                  placeholder="e.g., -2.00"
+                  value="{{ user.right_eye or '' }}"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="eyeCondition">Eye Condition/Notes</label>
+              <input
+                type="text"
+                id="eyeCondition"
+                name="eyeCondition"
+                class="form-input"
+                placeholder="e.g., Myopia, Astigmatism"
+                value="{{ user.eye_condition or '' }}"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button type="submit" class="save-btn">Save Changes</button>
+          <a
+            href="{{ url_for('logout') }}"
+            class="logout-btn"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-decoration: none;
+            "
+            >Logout</a
+          >
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // Toggle eyesight section
+      document
+        .getElementById("hasEyeIssues")
+        .addEventListener("change", function (e) {
+          const eyesightSection = document.getElementById("eyesightSection");
+          if (e.target.checked) {
+            eyesightSection.classList.add("active");
+          } else {
+            eyesightSection.classList.remove("active");
+          }
+        });
+
+      // Handle image upload
+      document
+        .getElementById("profileImageInput")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            if (!file.type.startsWith("image/")) {
+              alert("Please select an image file");
+              return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+              alert("Image size should be less than 5MB");
+              return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              const base64 = event.target.result;
+              document.getElementById("profileImageBase64").value = base64;
+              document.getElementById(
+                "profileImageDisplay"
+              ).innerHTML = `<img src="${base64}" class="profile-image-display" alt="Profile">`;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+    </script>
+  </body>
+</html>

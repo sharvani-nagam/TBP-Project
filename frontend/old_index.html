@@ -1,0 +1,2482 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Optiplus - Expert Eye Care Solutions</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* ==================== NAVBAR ==================== */
+      nav {
+        width: 100%;
+        padding: 25px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.9);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav .logo {
+        font-size: 32px;
+        font-weight: 700;
+        color: #c7f9cc;
+        cursor: pointer;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+        align-items: center;
+      }
+
+      nav ul li {
+        position: relative;
+        cursor: pointer;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      nav ul li a:hover {
+        color: #c7f9cc;
+      }
+
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        background-color: white;
+        padding: 15px;
+        border-radius: 8px;
+        min-width: 180px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      nav ul li:hover .dropdown {
+        display: block;
+      }
+
+      .dropdown a {
+        display: block;
+        padding: 8px 0;
+        font-size: 14px;
+        color: #333;
+        transition: color 0.3s ease;
+      }
+
+      .dropdown a:hover {
+        color: #27ae60;
+      }
+
+      .login-btn {
+        padding: 10px 24px;
+        background-color: #2ecc71;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .login-btn:hover {
+        background-color: #27ae60;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+      }
+
+      .menu-btn {
+        display: none;
+        cursor: pointer;
+        font-size: 28px;
+        color: white;
+        font-weight: bold;
+      }
+
+      /* ==================== HERO SECTION ==================== */
+      .hero {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 120px 60px 60px;
+        background-image: url("https://wordpress.zozothemes.com/optiplus/wp-content/uploads/sites/29/2024/09/blog-4-1-768x456.webp");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.75);
+        z-index: 1;
+      }
+
+      .hero-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        gap: 60px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-text {
+        flex: 1;
+        max-width: 600px;
+      }
+
+      .hero-text h4 {
+        color: #72f2a6;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .hero-text h1 {
+        font-size: 70px;
+        line-height: 1.1;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 25px;
+      }
+
+      .hero-text p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 35px;
+        max-width: 500px;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        padding: 16px 40px;
+        background-color: #2ecc71;
+        border-radius: 30px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);
+      }
+
+      .cta-btn:hover {
+        background-color: #27ae60;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(46, 204, 113, 0.4);
+      }
+
+      .hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      #specs {
+        width: 100%;
+        max-width: 550px;
+        height: auto;
+        opacity: 0;
+        animation: fadeInUp 1.2s ease forwards;
+        animation-delay: 0.3s;
+        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ==================== PROCESS SECTION ==================== */
+      .process-container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 100px 60px;
+        background: linear-gradient(135deg, #03110c 0%, #0a1f1a 100%);
+        color: white;
+        overflow: hidden;
+        gap: 80px;
+      }
+
+      .ring-group {
+        position: absolute;
+        left: -200px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      .ring {
+        position: absolute;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+
+      .ring1 {
+        width: 600px;
+        height: 600px;
+      }
+
+      .ring2 {
+        width: 750px;
+        height: 750px;
+        top: -75px;
+        left: -75px;
+      }
+
+      .ring3 {
+        width: 900px;
+        height: 900px;
+        top: -150px;
+        left: -150px;
+      }
+
+      .process-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        gap: 80px;
+      }
+
+      .left-side {
+        flex: 1;
+        max-width: 500px;
+        z-index: 10;
+      }
+
+      .sub-title {
+        font-size: 14px;
+        letter-spacing: 2px;
+        color: #77b37d;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .main-heading {
+        font-size: 52px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        color: white;
+        line-height: 1.2;
+      }
+
+      .main-description {
+        font-size: 16px;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 35px;
+      }
+
+      .learn-btn {
+        display: inline-block;
+        background: #2ecc71;
+        padding: 14px 35px;
+        border-radius: 28px;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .learn-btn:hover {
+        background: #27ae60;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);
+      }
+
+      .rating-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 45px;
+      }
+
+      .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid #2ecc71;
+        object-fit: cover;
+      }
+
+      .rating-info {
+        margin-left: 10px;
+      }
+
+      .stars {
+        color: #ffc54d;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      .rating-text {
+        font-size: 13px;
+        opacity: 0.7;
+      }
+
+      .right-side {
+        flex: 1;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+      }
+
+      .point {
+        position: relative;
+        padding-left: 80px;
+        transition: transform 0.3s ease;
+      }
+
+      .point:hover {
+        transform: translateX(10px);
+      }
+
+      .big-number {
+        position: absolute;
+        left: 0;
+        top: -20px;
+        font-size: 90px;
+        opacity: 0.08;
+        font-weight: 700;
+        pointer-events: none;
+        color: #2ecc71;
+      }
+
+      .point h3 {
+        font-size: 26px;
+        margin-bottom: 12px;
+        color: white;
+      }
+
+      .point p {
+        opacity: 0.75;
+        line-height: 1.7;
+        font-size: 15px;
+      }
+
+      /* ==================== SERVICES SECTION ==================== */
+      .services-section {
+        padding: 100px 60px;
+        position: relative;
+        background: #f8f9fa;
+      }
+
+      .top-semicircle {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 300px;
+        border: 3px solid rgba(144, 186, 163, 0.2);
+        border-bottom: none;
+        border-radius: 300px 300px 0 0;
+        z-index: 1;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 80px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .section-label {
+        color: #90baa3;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .section-title {
+        font-size: 48px;
+        font-weight: 700;
+        color: #1a1a1a;
+        line-height: 1.3;
+      }
+
+      .services-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .cards-column {
+        flex: 0 0 380px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .cards-column.left {
+        align-items: flex-end;
+      }
+
+      .cards-column.right {
+        align-items: flex-start;
+      }
+
+      .main-image-container {
+        position: relative;
+        z-index: 2;
+        flex-shrink: 0;
+      }
+
+      .main-image {
+        max-width: 450px;
+        height: auto;
+        border-radius: 20px;
+        display: block;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .service-card {
+        width: 100%;
+        background: white;
+        border-radius: 20px;
+        padding: 40px 35px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s ease;
+        opacity: 1;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .service-card.hidden {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      .card-icon {
+        width: 65px;
+        height: 65px;
+        background: #e8f4ee;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        font-size: 30px;
+      }
+
+      .card-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #90baa3;
+        margin-bottom: 15px;
+        line-height: 1.3;
+      }
+
+      .card-description {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+
+      .read-more {
+        color: #90baa3;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: gap 0.3s ease;
+      }
+
+      .read-more:hover {
+        gap: 14px;
+      }
+
+      .arrow-container {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 25px;
+      }
+
+      .arrow-btn {
+        width: 50px;
+        height: 50px;
+        background: #90baa3;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: white;
+      }
+
+      .arrow-btn:hover {
+        background: #7da892;
+        transform: scale(1.1);
+      }
+
+      .arrow-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+      }
+
+      /* ==================== APPOINTMENT SECTION ==================== */
+      .appointment-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      .testimonial-side {
+        position: relative;
+        background: url("https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=800")
+          center/cover;
+        padding: 80px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+      }
+
+      .testimonial-side::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.85),
+          rgba(0, 0, 0, 0.65)
+        );
+        z-index: 1;
+      }
+
+      .testimonial-content {
+        position: relative;
+        z-index: 2;
+        max-width: 600px;
+      }
+
+      .quote-icon {
+        font-size: 80px;
+        color: #80c99d;
+        opacity: 0.4;
+        line-height: 1;
+        margin-bottom: 30px;
+      }
+
+      .testimonial-slider {
+        position: relative;
+        min-height: 280px;
+      }
+
+      .testimonial-slide {
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        pointer-events: none;
+      }
+
+      .testimonial-slide.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .testimonial-text {
+        font-size: 18px;
+        line-height: 1.8;
+        margin-bottom: 40px;
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .author-image {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 3px solid #80c99d;
+        object-fit: cover;
+      }
+
+      .author-info h3 {
+        font-size: 22px;
+        color: #80c99d;
+        margin-bottom: 5px;
+      }
+
+      .author-info p {
+        font-size: 14px;
+        opacity: 0.8;
+      }
+
+      .slider-dots {
+        display: flex;
+        gap: 12px;
+        margin-top: 40px;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .dot.active {
+        background: #80c99d;
+        width: 40px;
+        border-radius: 6px;
+      }
+
+      .form-side {
+        background: #1a1a1a;
+        padding: 80px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .form-container {
+        max-width: 550px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .form-header {
+        margin-bottom: 40px;
+      }
+
+      .form-header h2 {
+        font-size: 48px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+
+      .form-header p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .appointment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .form-group {
+        position: relative;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 16px 20px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: white;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        outline: none;
+      }
+
+      .form-input::placeholder,
+      .form-select::placeholder,
+      .form-textarea::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: #80c99d;
+      }
+
+      .form-select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 20px center;
+        padding-right: 45px;
+      }
+
+      .form-select option {
+        background: #1a1a1a;
+        color: white;
+      }
+
+      .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+        font-family: inherit;
+      }
+
+      .form-input[type="date"] {
+        color-scheme: dark;
+      }
+
+      .submit-btn {
+        padding: 18px 40px;
+        background: #80c99d;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .submit-btn:hover {
+        background: #6bb588;
+        transform: translateY(-2px);
+        box-shadow: 0 15px 35px rgba(128, 201, 157, 0.4);
+      }
+
+      /* ==================== GLASSES SIZE SECTION ==================== */
+      .glasses-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 100px 60px;
+        background-color: white;
+      }
+
+      .glasses-title {
+        color: #80c99d;
+        text-align: center;
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 60px;
+        letter-spacing: 1px;
+      }
+
+      .glasses-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+
+      .glasses-section {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .glasses-image {
+        width: 100%;
+        height: auto;
+      }
+
+      .vertical-label {
+        position: absolute;
+        left: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .vertical-line {
+        width: 2px;
+        height: 96px;
+        background-color: #90baa3;
+      }
+
+      .vertical-text {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font-size: 12px;
+        color: #666;
+        font-weight: 600;
+      }
+
+      .bottom-label {
+        position: absolute;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        color: #666;
+        font-weight: 600;
+      }
+
+      .content-section {
+        max-width: 600px;
+      }
+
+      .content-section h1 {
+        font-size: 36px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+        margin-bottom: 24px;
+        color: #1a1a1a;
+        line-height: 1.2;
+      }
+
+      .description {
+        color: #666;
+        margin-bottom: 32px;
+        line-height: 1.8;
+        font-size: 15px;
+      }
+
+      .size-info {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 16px;
+      }
+
+      .size-info strong {
+        font-weight: 600;
+        color: #90baa3;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .size-input {
+        flex: 1;
+        padding: 14px 16px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      .size-input:focus {
+        border-color: #90baa3;
+      }
+
+      .calculate-btn,
+      .shop-btn {
+        padding: 14px 32px;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+      }
+
+      .calculate-btn {
+        background-color: #1a1a1a;
+        color: white;
+      }
+
+      .calculate-btn:hover {
+        background-color: #333;
+        transform: translateY(-2px);
+      }
+
+      .shop-btn {
+        width: 100%;
+        background-color: white;
+        color: #1a1a1a;
+        border: 2px solid #1a1a1a;
+        margin-bottom: 16px;
+      }
+
+      .shop-btn:hover {
+        background-color: #1a1a1a;
+        color: white;
+      }
+
+      .recalculate-btn {
+        background: none;
+        border: none;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: underline;
+        cursor: pointer;
+        color: #1a1a1a;
+        font-weight: 600;
+      }
+
+      .recalculate-btn:hover {
+        text-decoration: none;
+        color: #90baa3;
+      }
+
+      .result-section {
+        display: none;
+      }
+
+      .result-section.active {
+        display: block;
+      }
+
+      .input-section.hidden {
+        display: none;
+      }
+
+      /* ==================== FOOTER ==================== */
+      /* ==================== FOOTER ==================== */
+      .footer {
+        background: linear-gradient(135deg, #0a1f1a 0%, #000000 100%);
+        color: #fff;
+        padding: 80px 60px 30px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(46, 204, 113, 0.15) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: 60px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo-section h1 {
+        font-size: 48px;
+        font-weight: 300;
+        margin-bottom: 30px;
+        letter-spacing: -1px;
+        color: white;
+      }
+
+      .logo-section h1 .dot {
+        color: #2ecc71;
+        font-size: 52px;
+      }
+
+      .logo-section p {
+        color: #b8b8b8;
+        line-height: 1.8;
+        font-size: 15px;
+        margin-bottom: 40px;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .contact-item h3 {
+        color: #888;
+        font-size: 13px;
+        font-weight: 400;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .contact-item a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 400;
+        transition: color 0.3s;
+      }
+
+      .contact-item a:hover {
+        color: #2ecc71;
+      }
+
+      .footer-section h2 {
+        font-size: 20px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        position: relative;
+        padding-left: 15px;
+      }
+
+      .footer-section h2::before {
+        content: "●";
+        position: absolute;
+        left: 0;
+        color: #2ecc71;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 15px;
+      }
+
+      .footer-section ul li a {
+        color: #d0d0d0;
+        text-decoration: none;
+        font-size: 15px;
+        transition: all 0.3s;
+        display: inline-block;
+        position: relative;
+        padding-left: 18px;
+      }
+
+      .footer-section ul li a::before {
+        content: "›";
+        position: absolute;
+        left: 0;
+        color: #2ecc71;
+        font-size: 18px;
+        transition: transform 0.3s;
+      }
+
+      .footer-section ul li a:hover {
+        color: #2ecc71;
+        padding-left: 25px;
+      }
+
+      .footer-section ul li a:hover::before {
+        transform: translateX(3px);
+      }
+
+      .newsletter-section p {
+        color: #b8b8b8;
+        line-height: 1.7;
+        font-size: 14px;
+        margin-bottom: 25px;
+      }
+
+      .newsletter-form {
+        display: flex;
+        gap: 0;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        padding: 15px 20px;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .newsletter-form input::placeholder {
+        color: #666;
+      }
+
+      .newsletter-form button {
+        background: #2ecc71;
+        border: none;
+        padding: 15px 25px;
+        cursor: pointer;
+        transition: background 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .newsletter-form button:hover {
+        background: #27ae60;
+      }
+
+      .newsletter-form button::after {
+        content: "✉";
+        color: #fff;
+        font-size: 18px;
+      }
+
+      .footer-bottom {
+        max-width: 1400px;
+        margin: 60px auto 0;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+      }
+
+      .footer-bottom a {
+        color: #2ecc71;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-bottom a:hover {
+        color: #27ae60;
+      }
+
+      /* ==================== SCROLL TO TOP ==================== */
+      .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: #2ecc71;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        z-index: 999;
+      }
+
+      .scroll-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .scroll-top:hover {
+        background: #27ae60;
+        transform: translateY(-5px);
+      }
+
+      .scroll-top::before {
+        content: "↑";
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      /* ==================== RESPONSIVE ==================== */
+      @media (max-width: 1200px) {
+        .hero-content {
+          gap: 40px;
+        }
+
+        .hero-text h1 {
+          font-size: 56px;
+        }
+
+        .main-heading {
+          font-size: 42px;
+        }
+
+        .services-content {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cards-column {
+          max-width: 500px;
+          width: 100%;
+        }
+
+        .cards-column.left,
+        .cards-column.right {
+          align-items: center;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        nav {
+          padding: 20px 40px;
+        }
+
+        nav ul {
+          position: absolute;
+          top: 70px;
+          right: 0;
+          background: rgba(0, 0, 0, 0.95);
+          width: 70%;
+          max-width: 280px;
+          flex-direction: column;
+          gap: 20px;
+          padding: 30px 20px;
+          border-radius: 10px;
+          display: none;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul.active {
+          display: flex;
+        }
+
+        .menu-btn {
+          display: block;
+        }
+
+        .hero {
+          padding: 120px 40px 60px;
+        }
+
+        .hero-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .hero-text {
+          max-width: 100%;
+        }
+
+        .hero-text h1 {
+          font-size: 48px;
+        }
+
+        .hero-image {
+          width: 100%;
+        }
+
+        #specs {
+          max-width: 450px;
+        }
+
+        .process-container {
+          padding: 80px 40px;
+        }
+
+        .process-content {
+          flex-direction: column;
+          gap: 60px;
+        }
+
+        .left-side,
+        .right-side {
+          max-width: 100%;
+        }
+
+        .services-section {
+          padding: 80px 40px;
+        }
+
+        .appointment-section {
+          grid-template-columns: 1fr;
+        }
+
+        .testimonial-side,
+        .form-side {
+          min-height: 60vh;
+          padding: 60px 40px;
+        }
+
+        .glasses-container {
+          padding: 80px 40px;
+        }
+
+        .glasses-grid {
+          gap: 60px;
+        }
+
+        .footer {
+          padding: 60px 40px 20px;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          padding: 15px 25px;
+        }
+
+        nav .logo {
+          font-size: 26px;
+        }
+
+        .hero {
+          padding: 100px 25px 40px;
+          min-height: auto;
+        }
+
+        .hero-text h4 {
+          font-size: 12px;
+        }
+
+        .hero-text h1 {
+          font-size: 38px;
+          line-height: 1.2;
+        }
+
+        .hero-text p {
+          font-size: 14px;
+        }
+
+        .cta-btn {
+          padding: 14px 32px;
+          font-size: 14px;
+        }
+
+        #specs {
+          max-width: 350px;
+        }
+
+        .process-container {
+          padding: 60px 25px;
+        }
+
+        .main-heading {
+          font-size: 36px;
+        }
+
+        .point {
+          padding-left: 60px;
+        }
+
+        .big-number {
+          font-size: 70px;
+        }
+
+        .services-section {
+          padding: 60px 25px;
+        }
+
+        .section-title {
+          font-size: 32px;
+        }
+
+        .top-semicircle {
+          width: 400px;
+          height: 200px;
+        }
+
+        .main-image {
+          max-width: 100%;
+        }
+
+        .service-card {
+          padding: 30px 25px;
+        }
+
+        .arrow-btn {
+          width: 45px;
+          height: 45px;
+        }
+
+        .testimonial-side,
+        .form-side {
+          padding: 50px 25px;
+        }
+
+        .quote-icon {
+          font-size: 60px;
+        }
+
+        .testimonial-text {
+          font-size: 16px;
+        }
+
+        .form-header h2 {
+          font-size: 36px;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .glasses-container {
+          padding: 60px 25px;
+        }
+
+        .glasses-title {
+          font-size: 32px;
+          margin-bottom: 40px;
+        }
+
+        .glasses-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .content-section h1 {
+          font-size: 28px;
+          text-align: center;
+        }
+
+        .description {
+          text-align: center;
+        }
+
+        .input-group {
+          flex-direction: column;
+        }
+
+        .calculate-btn {
+          width: 100%;
+        }
+
+        .vertical-label {
+          left: 0;
+        }
+
+        .bottom-label {
+          bottom: 15px;
+          font-size: 12px;
+        }
+
+        .footer {
+          padding: 50px 25px 20px;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .logo-section h1 {
+          font-size: 36px;
+        }
+
+        .scroll-top {
+          width: 45px;
+          height: 45px;
+          bottom: 20px;
+          right: 20px;
+        }
+
+        .scroll-top::before {
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-text h1 {
+          font-size: 32px;
+        }
+
+        .main-heading {
+          font-size: 28px;
+        }
+
+        .section-title {
+          font-size: 26px;
+        }
+
+        .form-header h2 {
+          font-size: 28px;
+        }
+
+        .glasses-title {
+          font-size: 26px;
+        }
+
+        .content-section h1 {
+          font-size: 24px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+          padding: 14px 16px;
+          font-size: 13px;
+        }
+
+        .submit-btn {
+          padding: 16px 30px;
+          font-size: 12px;
+        }
+        /* Make dropdown appear ABOVE everything on mobile */
+        .dropdown {
+          position: relative;
+          z-index: 99999;
+          background: white;
+        }
+
+        /* Ensure the full nav menu is above hero section */
+        nav ul {
+          z-index: 9999 !important;
+          position: absolute;
+        }
+
+        /* The hero section was overlapping the menu */
+        .hero,
+        .hero-content,
+        .hero-text {
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Fix overlapping on mobile */
+        @media (max-width: 1024px) {
+          .dropdown {
+            position: relative;
+            z-index: 999999 !important;
+          }
+
+          nav {
+            z-index: 999999 !important;
+            position: relative;
+          }
+
+          nav ul {
+            position: absolute;
+            z-index: 999999 !important;
+          }
+        }
+      }
+
+      /* ==================== DROPDOWN FIX ==================== */
+
+      /* Ensure nav has highest z-index */
+      nav {
+        z-index: 10000 !important;
+        position: fixed;
+      }
+
+      /* Dropdown improvements for all screen sizes */
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        background-color: white;
+        padding: 15px;
+        border-radius: 8px;
+        min-width: 180px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        z-index: 10001 !important;
+      }
+
+      /* Desktop hover behavior */
+      @media (min-width: 1025px) {
+        nav ul li:hover .dropdown {
+          display: block;
+        }
+      }
+
+      /* Mobile dropdown behavior */
+      @media (max-width: 1024px) {
+        nav ul li {
+          position: relative;
+        }
+
+        .dropdown {
+          position: relative;
+          top: 0;
+          left: 0;
+          margin-top: 10px;
+          width: 100%;
+          z-index: 10001 !important;
+        }
+
+        .dropdown.show {
+          display: block;
+        }
+
+        /* Make parent link clickable area larger on mobile */
+        nav ul li > a {
+          display: block;
+          width: 100%;
+          padding: 10px 0;
+        }
+
+        /* Ensure dropdown links are fully clickable */
+        .dropdown a {
+          display: block;
+          width: 100%;
+          padding: 10px 15px;
+          color: #333;
+          position: relative;
+          z-index: 10002;
+          pointer-events: auto;
+        }
+      }
+
+      /* Ensure hero and other sections don't overlap nav */
+      .hero,
+      .hero::before,
+      .hero-content,
+      .hero-text,
+      .hero-image {
+        z-index: 1 !important;
+      }
+
+      /* Fix for mobile menu */
+      nav ul {
+        z-index: 10000 !important;
+      }
+
+      nav ul.active {
+        display: flex;
+        z-index: 10000 !important;
+      }
+
+      /* Clickable dropdown links - ensure pointer events work */
+      .dropdown a {
+        pointer-events: auto;
+        cursor: pointer;
+        position: relative;
+        z-index: 10002;
+      }
+
+      .dropdown a:active {
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==================== NAVBAR ==================== -->
+    <nav>
+      <div class="logo">Optiplus.</div>
+      <ul id="navMenu">
+        <li><a href="#">Home</a></li>
+        <li>
+          <a href="#">About Us ▾</a>
+          <div class="dropdown">
+            <a href="#faq.html">FAQ</a>
+            <a href="#docter2.html">Our Doctors</a>
+            <a href="#footer">Contact Us</a>
+            <a href="guide">Guide / Help</a>
+          </div>
+        </li>
+        <li>
+          <a href="#">Features ▾</a>
+          <div class="dropdown">
+            <a href="eye_test">Eye Test</a>
+            <a href="results">Results</a>
+            <a href="#shop.html">Shop</a>
+            <a href="#appoint">Make Appointments</a>
+          </div>
+        </li>
+        <li><a class="login-btn" href="#">Login</a></li>
+      </ul>
+      <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h4>FOCUSED ON EYE HEALTH</h4>
+          <h1>See the World<br />Clearly with<br />Expert Care.</h1>
+          <p>
+            Experience comprehensive eye care with our advanced diagnostic tools
+            and expert optometrists dedicated to preserving your vision health.
+          </p>
+          <a href="#" class="cta-btn">Check Eye Sight</a>
+        </div>
+        <div class="hero-image">
+          <img
+            id="specs"
+            src="https://wordpress.zozothemes.com/optiplus/wp-content/uploads/sites/29/2024/12/glass-with-cloth.webp"
+            alt="Premium Eyewear"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROCESS SECTION ==================== -->
+    <section class="process-container">
+      <div class="ring-group">
+        <div class="ring ring1"></div>
+        <div class="ring ring2"></div>
+        <div class="ring ring3"></div>
+      </div>
+
+      <div class="process-content">
+        <div class="left-side">
+          <h5 class="sub-title">OUR PROCESS</h5>
+          <h1 class="main-heading">What's Unique About Our Website</h1>
+          <p class="main-description">
+            Discover cutting-edge eye care solutions designed to provide
+            personalized treatment plans and exceptional visual health outcomes
+            for every patient.
+          </p>
+          <a href="#" class="learn-btn">LEARN MORE ➜</a>
+
+          <div class="rating-row">
+            <img src="testimonial-2.png" class="avatar" alt="Patient" />
+            <img src="Dr.-Ethan-Carter.png" class="avatar" alt="Doctor" />
+            <img src="Pediatric-Eye-Care.png" class="avatar" alt="Care" />
+            <div class="rating-info">
+              <div class="stars">★★★★★</div>
+              <div class="rating-text">4.45 (768k Reviews)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-side">
+          <div class="point">
+            <div class="big-number">01</div>
+            <h3>Personalized Experience</h3>
+            <p>
+              Every user receives a tailored vision-care plan created just for
+              them, ensuring optimal eye health and personalized attention.
+            </p>
+          </div>
+
+          <div class="point">
+            <div class="big-number">02</div>
+            <h3>Advanced Technology</h3>
+            <p>
+              Modern diagnostics ensure accurate vision results and better
+              clarity, utilizing state-of-the-art equipment for precise
+              assessments.
+            </p>
+          </div>
+
+          <div class="point">
+            <div class="big-number">03</div>
+            <h3>Trusted by Thousands</h3>
+            <p>
+              Thousands of happy users rely on our platform for quality care,
+              making us a leader in online eye health services.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section class="services-section">
+      <div class="top-semicircle"></div>
+
+      <div class="section-header">
+        <div class="section-label">OUR SERVICES</div>
+        <h2 class="section-title">
+          Learn About our Featured<br />Cases and Patients
+        </h2>
+      </div>
+
+      <div class="services-content">
+        <div class="cards-column left">
+          <div class="service-card left-card" data-index="0">
+            <div class="card-icon">👁️</div>
+            <h3 class="card-title">Long-Term Eye Health</h3>
+            <p class="card-description">
+              Affordable Glasses and Lenses Deals. We understand that quality
+              eye care can be expensive, which is why we offer comprehensive
+              solutions.
+            </p>
+            <a href="#" class="read-more">READ MORE →</a>
+          </div>
+
+          <div class="service-card left-card hidden" data-index="1">
+            <div class="card-icon">🔍</div>
+            <h3 class="card-title">Detailed Eye Evaluation</h3>
+            <p class="card-description">
+              Affordable Glasses and Lenses Deals. We understand that quality
+              eye care can be expensive, which is why we provide thorough
+              examinations.
+            </p>
+            <a href="#" class="read-more">READ MORE →</a>
+          </div>
+
+          <div class="service-card left-card hidden" data-index="2">
+            <div class="card-icon">👓</div>
+            <h3 class="card-title">Premium Eyewear Collection</h3>
+            <p class="card-description">
+              Affordable Glasses and Lenses Deals. We understand that quality
+              eye care can be expensive, which is why we offer stylish frames.
+            </p>
+            <a href="#" class="read-more">READ MORE →</a>
+          </div>
+        </div>
+
+        <div class="main-image-container">
+          <img
+            src="https://wordpress.zozothemes.com/optiplus/wp-content/uploads/sites/29/2024/12/women-with-smile.webp"
+            alt="Happy Patient"
+            class="main-image"
+          />
+        </div>
+
+        <div class="cards-column right">
+          <div class="service-card right-card" data-index="3">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">Contact Lens Fitting</h3>
+            <p class="card-description">
+              Affordable Glasses and Lenses Deals. We understand that quality
+              eye care can be expensive, which is why we provide expert fitting
+              services.
+            </p>
+            <a href="#" class="read-more">READ MORE →</a>
+          </div>
+
+          <div class="service-card right-card hidden" data-index="4">
+            <div class="card-icon">🏥</div>
+            <h3 class="card-title">Emergency Eye Care</h3>
+            <p class="card-description">
+              Affordable Glasses and Lenses Deals. We understand that quality
+              eye care can be expensive, which is why we offer immediate care.
+            </p>
+            <a href="#" class="read-more">READ MORE →</a>
+          </div>
+
+          <div class="service-card right-card hidden" data-index="5">
+            <div class="card-icon">👶</div>
+            <h3 class="card-title">Pediatric Eye Care</h3>
+            <p class="card-description">
+              Affordable Glasses and Lenses Deals. We understand that quality
+              eye care can be expensive, which is why we specialize in gentle
+              care.
+            </p>
+            <a href="#" class="read-more">READ MORE →</a>
+          </div>
+
+          <div class="arrow-container">
+            <button
+              class="arrow-btn"
+              onclick="slideCards('left')"
+              aria-label="Previous"
+            >
+              <svg viewBox="0 0 24 24">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+              </svg>
+            </button>
+            <button
+              class="arrow-btn"
+              onclick="slideCards('right')"
+              aria-label="Next"
+            >
+              <svg viewBox="0 0 24 24">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== APPOINTMENT SECTION ==================== -->
+    <section id="appoint" class="appointment-section">
+      <div class="testimonial-side">
+        <div class="testimonial-content">
+          <div class="quote-icon">"</div>
+
+          <div class="testimonial-slider">
+            <div class="testimonial-slide active" data-slide="0">
+              <p class="testimonial-text">
+                I had always taken my vision for granted until I started
+                noticing things getting blurry over the years. At first, I
+                thought it was just part of getting older, but I soon realized
+                it was affecting my daily life significantly.
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150"
+                  alt="Kennedy"
+                  class="author-image"
+                />
+                <div class="author-info">
+                  <h3>Kennedy</h3>
+                  <p>Chief Doctor</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-slide" data-slide="1">
+              <p class="testimonial-text">
+                The pediatric optometrist was fantastic with Emily, making her
+                feel comfortable and explaining each test as they went along.
+                After the eye exam, we found out that Emily had nearsightedness.
+                We were given options for glasses.
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150"
+                  alt="Sarah"
+                  class="author-image"
+                />
+                <div class="author-info">
+                  <h3>Sarah Mitchell</h3>
+                  <p>Parent</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-slide" data-slide="2">
+              <p class="testimonial-text">
+                The eye care specialists were kind and patient, making sure I
+                was comfortable with my new glasses. Now, I feel so much more
+                confident. I can see clearly again and it has improved my
+                quality of life tremendously.
+              </p>
+              <div class="testimonial-author">
+                <img
+                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150"
+                  alt="Jessica"
+                  class="author-image"
+                />
+                <div class="author-info">
+                  <h3>Jessica Thompson</h3>
+                  <p>Patient</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-side">
+        <div class="form-container">
+          <div class="form-header">
+            <h2>Book An<br />Appointment</h2>
+            <p>
+              Visual acuity test sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+
+          <form class="appointment-form" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="First Name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Last Name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <input
+                  type="tel"
+                  class="form-input"
+                  placeholder="Phone"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="date"
+                  class="form-input"
+                  placeholder="dd/mm/yyyy"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <select class="form-select" required>
+                  <option value="">—Please choose—</option>
+                  <option value="general">General Checkup</option>
+                  <option value="pediatric">Pediatric Care</option>
+                  <option value="emergency">Emergency Care</option>
+                  <option value="contact">Contact Lens Fitting</option>
+                  <option value="surgery">Surgery Consultation</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Subject"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <textarea
+                class="form-textarea"
+                placeholder="Text Your Message"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">APPOINTMENT</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GLASSES SIZE SECTION ==================== -->
+    <div class="glasses-container">
+      <h1 class="glasses-title">KEEP YOUR EYES HEALTHY</h1>
+      <div class="glasses-grid">
+        <div class="glasses-section">
+          <div class="vertical-label">
+            <div class="vertical-line"></div>
+            <span class="vertical-text">Find your fit</span>
+          </div>
+          <img
+            src="https://neoocular.qodeinteractive.com/wp-content/plugins/neoocular-core/assets/img/glasses.png"
+            alt="Glasses size guide"
+            class="glasses-image"
+          />
+          <div class="bottom-label">Find your fit</div>
+        </div>
+
+        <div class="content-section">
+          <h1>GET PERFECT SIZE:<br />FIND GLASSES NOW</h1>
+
+          <p class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna minim veniam
+            amet quis
+          </p>
+
+          <div class="input-section" id="inputSection">
+            <div class="input-group">
+              <input
+                type="number"
+                id="sizeInput"
+                class="size-input"
+                placeholder="Enter size in mm"
+                min="1"
+              />
+              <button class="calculate-btn" id="calculateBtn">Calculate</button>
+            </div>
+          </div>
+
+          <div class="result-section" id="resultSection">
+            <p class="size-info">
+              <span id="userSize"></span>mm is closest to our
+              <strong id="calculatedSize"></strong>
+            </p>
+            <button class="shop-btn" id="shopBtn">SHOP THIS SIZE</button>
+            <button class="recalculate-btn" id="recalculateBtn">
+              RECALCULATE SIZE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer id="footer" class="footer">
+      <div class="footer-content">
+        <div class="logo-section">
+          <h1>Optiplus<span class="dot">.</span></h1>
+          <p>
+            Proper eye care is important for preventing vision problems,
+            diagnosing conditions early, and preserving eye health throughout
+            life. Good eye care can help reduce the risk of eye diseases
+          </p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <h3>Call Us</h3>
+              <a href="tel:+5284567592">+(528) 456-7592</a>
+            </div>
+            <div class="contact-item">
+              <h3>Email Us</h3>
+              <a href="mailto:example@optiplus.com">example@optiplus.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h2>Our Services</h2>
+          <ul>
+            <li><a href="#">Investment Advisory</a></li>
+            <li><a href="#">Financial Planning</a></li>
+            <li><a href="#">Corporate Finance</a></li>
+            <li><a href="#">Tax Planning</a></li>
+            <li><a href="#">Risk Management</a></li>
+            <li><a href="#">Account & Audit</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h2>Quicklinks</h2>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Latest Articles</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Refund & Returns</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section newsletter-section">
+          <h2>Newsletter</h2>
+          <p>
+            Eye exams should be scheduled at least once every two years, or more
+            frequently if there are risk factors such as a family history of eye
+            disease
+          </p>
+          <form class="newsletter-form" onsubmit="return false;">
+            <input type="email" placeholder="Email Address" required />
+            <button type="submit"></button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © Copyright 2025. All rights reserved <a href="#">Optiplus</a>. Designed
+        by <a href="#">Zozothemes</a>
+      </div>
+    </footer>
+
+    <!-- ==================== SCROLL TO TOP BUTTON ==================== -->
+    <button class="scroll-top" id="scrollTopBtn"></button>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+      // Toggle Mobile Menu
+      function toggleMenu() {
+        document.getElementById("navMenu").classList.toggle("active");
+      }
+
+      // Services Slider
+      let currentIndex = 0;
+
+      function slideCards(direction) {
+        const leftCards = document.querySelectorAll(".left-card");
+        const rightCards = document.querySelectorAll(".right-card");
+
+        if (direction === "right") {
+          currentIndex = (currentIndex + 1) % 3;
+        } else {
+          currentIndex = (currentIndex - 1 + 3) % 3;
+        }
+
+        leftCards.forEach((card) => card.classList.add("hidden"));
+        rightCards.forEach((card) => card.classList.add("hidden"));
+
+        leftCards[currentIndex].classList.remove("hidden");
+        rightCards[currentIndex].classList.remove("hidden");
+      }
+
+      // Testimonial Slider
+      let currentSlide = 0;
+      const totalSlides = 3;
+      let autoSlideInterval;
+
+      function goToSlide(index) {
+        document.querySelectorAll(".testimonial-slide").forEach((slide) => {
+          slide.classList.remove("active");
+        });
+
+        document.querySelectorAll(".dot").forEach((dot) => {
+          dot.classList.remove("active");
+        });
+
+        document
+          .querySelector(`[data-slide="${index}"]`)
+          .classList.add("active");
+        document.querySelectorAll(".dot")[index].classList.add("active");
+
+        currentSlide = index;
+
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        goToSlide(currentSlide);
+      }
+
+      function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 5000);
+      }
+
+      // Appointment Form
+      function handleSubmit(event) {
+        event.preventDefault();
+        alert("Appointment request submitted! We will contact you soon.");
+        event.target.reset();
+      }
+
+      // Glasses Size Calculator
+      const sizeInput = document.getElementById("sizeInput");
+      const calculateBtn = document.getElementById("calculateBtn");
+      const shopBtn = document.getElementById("shopBtn");
+      const recalculateBtn = document.getElementById("recalculateBtn");
+      const inputSection = document.getElementById("inputSection");
+      const resultSection = document.getElementById("resultSection");
+      const userSizeSpan = document.getElementById("userSize");
+      const calculatedSizeSpan = document.getElementById("calculatedSize");
+
+      sizeInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          calculateSize();
+        }
+      });
+
+      calculateBtn.addEventListener("click", calculateSize);
+      shopBtn.addEventListener("click", shopThisSize);
+      recalculateBtn.addEventListener("click", recalculate);
+
+      function calculateSize() {
+        const userSize = parseInt(sizeInput.value);
+
+        if (isNaN(userSize) || userSize <= 0) {
+          alert("Please enter a valid size in mm");
+          return;
+        }
+
+        let calculatedSize = "";
+
+        if (userSize < 42) {
+          calculatedSize = "XXS";
+        } else if (userSize >= 42 && userSize < 45) {
+          calculatedSize = "XS";
+        } else if (userSize >= 45 && userSize < 48) {
+          calculatedSize = "S";
+        } else if (userSize >= 48 && userSize < 51) {
+          calculatedSize = "M";
+        } else if (userSize >= 51 && userSize < 54) {
+          calculatedSize = "L";
+        } else if (userSize >= 54 && userSize < 57) {
+          calculatedSize = "XL";
+        } else {
+          calculatedSize = "XXL";
+        }
+
+        userSizeSpan.textContent = userSize;
+        calculatedSizeSpan.textContent = calculatedSize;
+
+        inputSection.classList.add("hidden");
+        resultSection.classList.add("active");
+      }
+
+      function shopThisSize() {
+        window.location.href = "/lens-page.html";
+      }
+
+      function recalculate() {
+        sizeInput.value = "";
+        inputSection.classList.remove("hidden");
+        resultSection.classList.remove("active");
+      }
+
+      // Scroll to Top Button
+      const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+      window.addEventListener("scroll", function () {
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.classList.add("visible");
+        } else {
+          scrollTopBtn.classList.remove("visible");
+        }
+      });
+
+      scrollTopBtn.addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Start testimonial auto-slide on load
+      startAutoSlide();
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const nav = document.querySelector("nav");
+        const menu = document.getElementById("navMenu");
+        const menuBtn = document.querySelector(".menu-btn");
+
+        if (!nav.contains(event.target) && menu.classList.contains("active")) {
+          menu.classList.remove("active");
+        }
+      });
+      // ==================== DROPDOWN MENU FIX ====================
+
+      // Toggle dropdown on mobile when clicking parent link
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get all nav items with dropdowns
+        const dropdownParents = document.querySelectorAll(
+          "nav ul li:has(.dropdown)"
+        );
+
+        dropdownParents.forEach((parent) => {
+          const parentLink = parent.querySelector("a");
+          const dropdown = parent.querySelector(".dropdown");
+
+          if (parentLink && dropdown) {
+            // Prevent default only on mobile
+            parentLink.addEventListener("click", function (e) {
+              if (window.innerWidth <= 1024) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Close all other dropdowns
+                document.querySelectorAll(".dropdown").forEach((d) => {
+                  if (d !== dropdown) {
+                    d.classList.remove("show");
+                  }
+                });
+
+                // Toggle current dropdown
+                dropdown.classList.toggle("show");
+              }
+            });
+          }
+        });
+
+        // Ensure dropdown links work correctly
+        const dropdownLinks = document.querySelectorAll(".dropdown a");
+        dropdownLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.stopPropagation(); // Prevent parent toggle
+
+            // Get href and navigate
+            const href = this.getAttribute("href");
+            if (href && href !== "#" && !href.startsWith("#")) {
+              window.location.href = href;
+            } else if (href && href.startsWith("#")) {
+              // For anchor links, scroll to section
+              const targetId = href.substring(1);
+              const targetElement = document.getElementById(targetId);
+              if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: "smooth" });
+                // Close mobile menu
+                document.getElementById("navMenu").classList.remove("active");
+                // Close dropdown
+                this.closest(".dropdown").classList.remove("show");
+              }
+            }
+          });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!e.target.closest("nav")) {
+            document.querySelectorAll(".dropdown").forEach((dropdown) => {
+              dropdown.classList.remove("show");
+            });
+          }
+        });
+
+        // Close dropdowns when resizing to desktop
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 1024) {
+            document.querySelectorAll(".dropdown").forEach((dropdown) => {
+              dropdown.classList.remove("show");
+            });
+          }
+        });
+      });
+
+      // Update existing toggleMenu function to close dropdowns
+      function toggleMenu() {
+        const navMenu = document.getElementById("navMenu");
+        const isActive = navMenu.classList.contains("active");
+
+        navMenu.classList.toggle("active");
+
+        // If closing menu, also close all dropdowns
+        if (isActive) {
+          document.querySelectorAll(".dropdown").forEach((dropdown) => {
+            dropdown.classList.remove("show");
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
